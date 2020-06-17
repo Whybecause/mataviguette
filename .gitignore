@@ -2,6 +2,7 @@
 node_modules/
 todo.txt
 memo.txt
+
 npm-debug.log
 
 /client/.env
