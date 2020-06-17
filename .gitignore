@@ -1,0 +1,16 @@
+.env
+node_modules/
+todo.txt
+memo.txt
+
+google-credentials.json
+token.json
+
+/client/.env
+/client/node_modules
+/client/node_modules/
+
+.DS_Store
+*.orig
+.idea/
+.vscode/

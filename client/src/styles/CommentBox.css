@@ -1,0 +1,101 @@
+.presentation-comments-container{
+  width: 100%;
+}
+
+.comments-container {
+  padding: 8px 16px 8px!important; 
+
+
+}
+
+.comment-author-text {
+  font-size: 1.1rem;
+  margin-bottom : 0px;
+}
+    
+.singleComment {
+  padding: 10px 20px;
+  margin-bottom: 10px;
+  display: flex;
+}
+
+.singleCommentContent {
+  min-width: 7rem;
+  border-radius: 25px;
+}
+
+.singleCommentContent h3 {
+  margin: 0;
+  padding-right: 0.2rem;
+  font-size: 1.1rem;
+  color: #385997;
+}
+.singleCommentContent p {
+  font-size: 1rem;
+  margin: 0;
+    background-color: #fff;
+}
+
+
+
+.comment-form-container, .comments-container {
+  background-color: #f7f7f7;
+  padding: 0.5rem 1rem 1rem 1rem;
+  margin: 0.5rem 0 1rem 0;
+  border-radius: 1rem;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.userImage {
+  height: 2rem;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+
+.time {
+  font-size: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #999;
+}
+
+.form-control {
+  background-color: white;
+}
+
+.form-submit-btn {
+  width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem 30% 0 30%;
+  box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem rgba(0, 0, 0, 0.3);
+  border-radius: 1rem;
+}
+
+.btn-show-comments-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-afficher-commentaires {
+  margin-bottom : 0rem!important;
+}
+
+  
+/* SI AJOUT DES BOUTONS DELETE ET UPDATE-------------------------------------- */
+  
+  /* .singleCommentButtons {
+    padding-top: 5px;
+  }
+  
+  .singleCommentButtons a {
+    margin: 0px 3px;;
+    padding-top: 10px;
+    cursor: pointer;
+    font-size: 10px;
+    color: #385997;
+    letter-spacing: 0.05em;
+  } */
+  

@@ -1,0 +1,96 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.h1 {
+  font-size: 2rem;
+  margin-top: 1.5rem;
+}
+
+.h2 {
+  font-size: 1.5rem;
+}
+
+.h3 {
+  font-size: 1rem;
+}
+.m-top-1 {
+  margin-top: 1rem;
+}
+.m-top-3 {
+  margin-top: 3rem;
+}
+
+.m-top-4 {
+  margin-top: 3.5rem;
+}
+
+.m-top-5 {
+  margin-top: 6rem;
+}
+
+.w-20 {
+  width: 20%;
+  margin-left: 60%;
+  margin-top: 35rem;
+  margin-bottom: 10rem;
+}
+
+.fixedContainer {
+  position: fixed;
+  padding: 2em;
+  left: 60%;
+  top: 10%;
+  transform: translateX(-50%, -50%);
+}
+
+.lg-booking-form {
+  position: absolute;
+  left: 60%;
+  top: 80%;
+}
+
+.bg-white {
+  background-color: white;
+}
+
+.font-size-1 {
+  font-size: 0.9rem;
+}
+
+.font-size-2 {
+  font-size: 1.2rem;
+}
+
+/* a:hover {
+  background-color: red;
+}
+
+a:link {
+  background-color: green;
+}
+
+a:visited {
+  background-color: grey;
+}
+
+a:active {
+  background-color: yellow;
+} */
+
+.btn-light {
+  border-radius: 10px 100px / 120px ;
+  margin-bottom: 1rem;
+    }
+

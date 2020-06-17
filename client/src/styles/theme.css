@@ -1,0 +1,53 @@
+body {
+    background-color: white;
+}
+
+.pic, .img-tableau {
+    border: 0.2rem solid white;
+}
+
+.img-radius-left {
+    border-top-left-radius: 20px; 
+    border-bottom-left-radius: 20px; 
+}
+
+.img-radius-top-right {
+    border-top-right-radius: 20px; 
+}
+
+.img-radius-bottom-right {
+    border-bottom-right-radius: 20px; 
+}
+
+.border-styled {
+    box-shadow: 0 2px 5px rgb(51, 51, 51);
+}
+
+.border-bottom {
+    border-bottom: 0.1rem solid rgb(173, 173, 173);
+}
+
+.p-discret {
+    color: rgb(143, 143, 143);
+  }
+.p-chambre {
+    font-size: 0.9rem;
+    color: rgb(104, 103, 103)
+}
+
+  .aws-btn {
+    --slider-height-percentage: 60%;
+    --slider-transition-duration: 424ms;
+    --organic-arrow-thickness: 4px;
+    --organic-arrow-border-radius: 0px;
+    --organic-arrow-height: 40px;
+    --organic-arrow-color: #ffffff;
+    --control-button-width: 10%;
+    --control-button-height: 25%;
+    --control-button-background: transparent;
+    --control-bullet-color: #2d5182;
+    --control-bullet-active-color: #26456f;
+    --loader-bar-color: #851515;
+    --loader-bar-height: 6px;
+    }
+

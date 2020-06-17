@@ -1,0 +1,125 @@
+@media only screen and (max-width : 991px) {
+    .imgs-container {
+        display: none;
+    }
+}
+
+@media only screen and (max-width : 991px) {
+.presentation-container {
+    width: 100%;
+}
+}
+
+@media only screen and (max-width : 990px) {
+    .col-lg-6 {
+        padding: 0 0 0 0;
+    }
+}
+
+@media only screen and (max-width : 990px) {
+    .col {
+        padding: 0 15px 0 15px;
+    }
+}
+
+@media only screen and (max-width : 1200px) {
+.my-CarouselImage{
+    height: 100%;
+}
+}
+
+@media only screen and (max-width : 991px) {
+.button-on-img{
+    display: none;
+}
+}
+
+@media only screen and (max-width : 1200px) {
+    .button-on-img{
+    right: 20rem;
+    top: 15rem;
+    left: 8rem;
+    }
+}
+
+@media only screen and (min-width : 991px) {
+.btn-number-of-imgs{
+    display: none;
+    }
+}
+
+
+@media only screen and (min-width : 600px) {
+.chambres-container {
+    display: flex;
+}
+}
+
+@media only screen and (min-width : 768px) {
+.btn-carousel {
+    font-size: 1rem;
+}
+}
+
+@media only screen and (max-width : 768px) {
+    .navbar-item{
+        flex-direction: column;
+    }
+}
+
+@media only screen and (max-width : 700px) {
+    .img-propose-par-valerie-container{
+    width: 40%;
+    padding: 0 0 0 0.8rem;
+    align-items: center;
+
+}
+.img-title-propose-par {
+    flex-direction: column;
+}
+}
+
+@media only screen and (max-width: 991px) {
+    .lg-booking-form {
+        position: relative;
+        left: 0;
+        top: 0;
+        align-items: center;
+    }
+}
+
+@media only screen and (max-width: 395px) {
+    .nav-link {
+        padding: 0 0.8rem 0.2rem 0.2rem;
+    }
+    .small-scroll-nav {
+        padding: 0;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .resp-mg {
+        /* max-width: 30%; */
+        /* width: 50%; */
+
+        margin-top : 1rem;
+    }
+    .resp-center {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+
+@media only screen and (max-width: 1200px) {
+    .big-screen {
+        display: none;
+    }
+}
+    
+@media only screen and (min-width: 1201px) {
+    .small-screen {
+        display: none;
+    }
+}
