@@ -380,11 +380,13 @@ export default class Home extends Component {
                       <Col>
                           <article>
                               <h2 className="h2"><strong>Disponibilité</strong></h2>
-                              {/* <BigCalendar /> */}
                           </article>
                       </Col>
                       <div>
                         <iframe title="calendar" className=" google-calendar" src="https://calendar.google.com/calendar/embed?src=mataviguette%40gmail.com&ctz=Europe%2FParis"></iframe>
+                        </div>
+                        <div>
+                        <iframe title="calendar" className="google-calendar" src="https://calendar.google.com/calendar/embed?src=t6irs8vvh0l88mqt7m0ok36hil2t88fk%40import.calendar.google.com&ctz=Europe%2FParis"></iframe>
                         </div>
                   </main>
                     {/* ------------------------------------COMMENTAIRES--------------------------------------------------------- */}

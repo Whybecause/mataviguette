@@ -129,7 +129,7 @@ exports.deleteGoogleCalEvent = (startAt) => {
             }
           );
         } else {
-          return console.log("Nos upcoming booking");
+          return console.log("No upcoming booking");
         }
       }
     );

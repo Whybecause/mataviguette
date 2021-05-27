@@ -1,6 +1,7 @@
 import axios from 'axios';
 import authHeader from '../services/auth-header';
 import { trackPromise } from 'react-promise-tracker';
+import moment from 'moment';
 
 const API_URL = "api/test/bookings";
 

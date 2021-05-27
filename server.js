@@ -14,8 +14,7 @@ const path = require("path");
 
 db.mongoose
   .connect(
-    process.env.MONGODB_URI ||
-      `mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`,
+    process.env.MONGODB_URI,
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -96,3 +95,10 @@ function initial() {
     }
   });
 }
+
+
+
+
+
+    
+    

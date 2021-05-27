@@ -80,10 +80,11 @@ class Booking extends Component {
         }));
     }
 
+    //Récupère les dates réservées pour empêcher de les sélectionner dans le datepicker
     getGoogleCalBookedEvents = async () => {
         const res = await axios.get(API_URL + "/rentals/booked");
         const data = await res.data;
-         const bookedRangeDays = [];
+        const bookedRangeDays = [];
         const addDays = (date, days = 1) => {
             const result = new Date(date);
             result.setDate(result.getDate() + days);
@@ -96,6 +97,7 @@ class Booking extends Component {
                         const getBookedEnd = new Date(await event.bookedEnd);
                         const next = addDays(getBookedStart, 1);
                         bookedRangeDays.push(next, getBookedEnd, getBookedStart);
+                        console.log(bookedRangeDays);
                     })
             );
         } catch(e) {

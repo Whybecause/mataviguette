@@ -1,9 +1,5 @@
-const fs = require('fs');
-const readline = require('readline');
 const { google } = require('googleapis');
-const moment = require('moment');
 const daysController = require ('./days.controller');
-const SCOPES = ['https://www.googleapis.com/auth/calendar.readonly'];
 
 exports.getGoogleCalListEvents = (req, res) => {
     // OAUTH2 AUTHENTIFICATION
@@ -17,44 +13,51 @@ exports.getGoogleCalListEvents = (req, res) => {
       }
       
       //CALL API
-    function listEvents(auth) {
+    async function listEvents(auth) {
         const calendar = google.calendar({
             version: 'v3',
             auth
         });
-        // Call google to fetch events for today on our calendar
-        calendar.events.list({
-            calendarId: 'primary',
-            timeMin: (new Date()).toISOString(),
-            singleEvents: true,
-            orderBy: 'startTime',
-        }, (err, events) => {
-            if (err) {
-                return console.log('The API returned an error: ' + err);
-            }  
-            const allEvents = events.data.items;
-            if (allEvents.length) {
-                getEvents(allEvents, function(response) {
-                    res.send(response);
-                 });
-            }
-            else {
-                res.send({ message: "No upcoming booking"});
-            }           
-        });
+
+        let allBookedDates = [];
+
+        //récupération des réservations du google calendar pour mataviguette.fr
+        await listEventsFromCalId('primary', calendar, function(response) {
+            allBookedDates.push.apply(allBookedDates, response);
+            // Récupération des réservations de airbnb (depuis la synchro sur le google calendar)
+            listEventsFromCalId('t6irs8vvh0l88mqt7m0ok36hil2t88fk@import.calendar.google.com', calendar, function(response) {
+                allBookedDates.push.apply(allBookedDates, response);
+                return res.send(allBookedDates)
+            })
+        })  
     }
+}
+
+listEventsFromCalId = async (calendarId, calendar, callback) => {
+    await calendar.events.list({
+        calendarId: calendarId,
+        timeMin: (new Date()).toISOString(),
+        singleEvents: true,
+        orderBy: 'startTime',
+    }, async (err, events) => {
+        if (err) {
+            return console.log('The API returned an error: ' + err);
+        }  
+        else {
+            getEvents(events.data.items, function(response) {
+                return callback(response);
+            })
+        }       
+    });
 }
 
 getEvents = async (allEvents, callback) => {
     const result = await allEvents.map( (event, i) => {
-        const bookedStart = event.start.dateTime;
-        const bookedEnd = event.end.dateTime;
+        const bookedStart = event.start.dateTime || event.start.date;
+        const bookedEnd = event.end.dateTime || event.end.date;
         const bookedDays = daysController.getRangeOfDates(bookedStart, bookedEnd).length - 1;
 
         return ({ bookedStart: bookedStart, bookedEnd: bookedEnd, bookedDays: bookedDays});
     });
     return callback(result);
 }
-
-    
-    

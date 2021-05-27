@@ -81,12 +81,6 @@ function getUserName(user, callback) {
               message: "Invalid User! Cannot create booking on your own rental!"
             });
           }
-          booking.days = daysController.getRangeOfDates(startAt, endAt).length - 1;
-          if (booking.days === 0) {
-            return res.status(422).send({ message: 'Booking must be at least for 1 day'});
-          }
-          const totalDays = daysController.getRangeOfDates(startAt, endAt).length - 1;
-          const totalPrice = foundRental.dailyRate * totalDays;
   
            const googleResponse = await googleFunc.googleAuthAndCheckDates(booking, function(response) {
             if (response === true && isValidBooking(booking, foundRental)) {
