@@ -3,7 +3,9 @@ const readline = require("readline");
 const { google } = require("googleapis");
 const SCOPES = ["https://www.googleapis.com/auth/calendar"];
 
-exports.googleAuthAndCheckDates = (booking, callBack) => {
+// Vérification des dates pour éviter que des réservations se chevauchent + push dans google calendar si ok
+
+exports.googleAuthAndCheckDates = (booking, username, finalPrice, callBack) => {
   //LA CEST LAUTHENTIFICATION POUR L'API
   authorize(JSON.parse(process.env.GOOGLE_CREDENTIALS), pushToGoogleCalendar);
   function authorize(credentials, callback) {
@@ -28,8 +30,8 @@ exports.googleAuthAndCheckDates = (booking, callBack) => {
     const eventEndTime = booking.endAt;
     eventEndTime.setMinutes(eventEndTime.getMinutes() + 45);
     const event = {
-      summary: "Reserved",
-      description: "Reserved Booking",
+      summary: `${username}, ${finalPrice}€`,
+      description: "Mataviguette Booking",
       start: {
         dateTime: eventStartTime,
         timeZone: "GMT",
@@ -70,8 +72,65 @@ exports.googleAuthAndCheckDates = (booking, callBack) => {
             }
           );
         }
-        console.log("Dates are not available in Google Calendar");
+        console.log("Dates are not available in Mataviguette Google Calendar");
         return callBack(!isValidDates);
+      }
+    );
+  }
+};
+
+//Vérification de la plage de dates sur le calendrier AirBnb
+
+exports.checkAirBnbDates = (booking, callBack) => {
+  //LA CEST LAUTHENTIFICATION POUR L'API
+  authorize(JSON.parse(process.env.GOOGLE_CREDENTIALS), checkAirbnb);
+  function authorize(credentials, callback) {
+    const { client_secret, client_id, redirect_uris } = credentials.installed;
+    const oAuth2Client = new google.auth.OAuth2(
+      client_id,
+      client_secret,
+      redirect_uris[0]
+    );
+    oAuth2Client.setCredentials(JSON.parse(process.env.GOOGLE_TOKEN));
+    callback(oAuth2Client);
+  }
+
+  //   CALL API ----------------------------------
+  function checkAirbnb(auth) {
+    const calendar = google.calendar({
+      version: "v3",
+      auth,
+    });
+    const eventStartTime = booking.startAt;
+    const eventEndTime = booking.endAt;
+    eventEndTime.setMinutes(eventEndTime.getMinutes() + 45);
+    calendar.freebusy.query(
+      {
+        resource: {
+          timeMin: eventStartTime,
+          timeMax: eventEndTime,
+          timeZone: "GMT",
+          items: [
+            {
+              id: "t6irs8vvh0l88mqt7m0ok36hil2t88fk@import.calendar.google.com",
+              busy: "Active",
+            },
+          ],
+        },
+      },
+      
+      (err, res) => {
+        if (err) return console.error("FB query error on AirBnb: ", err);
+        const eventsArr = res.data.calendars["t6irs8vvh0l88mqt7m0ok36hil2t88fk@import.calendar.google.com"].busy;
+        const isValidDates = true;
+        if (eventsArr.length === 0) {
+          console.log('Dates dispo dans Airbnb')
+            return callBack(isValidDates);
+          }
+        else {
+          console.log('Dates pas dispo dans Airbnb');
+          return callBack(!isValidDates);
+        }
       }
     );
   }

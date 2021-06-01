@@ -39,20 +39,6 @@ export default class ScrollNav extends Component {
                                 <Link
                                     className="nav-link btn btn-light"
                                     activeClass="active"
-                                    to="disponibilité"
-                                    spy={true}
-                                    smooth={true}
-                                    offset={-70}
-                                    duration={500}
-                                    >
-                                    Disponibilité
-                                </Link>
-                            </NavItem>
-                            {/* <NavItem className="nav-link">|</NavItem> */}
-                            <NavItem>
-                                <Link
-                                    className="nav-link btn btn-light"
-                                    activeClass="active"
                                     to="commentaires"
                                     spy={true}
                                     smooth={true}

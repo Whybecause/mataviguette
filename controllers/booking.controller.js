@@ -11,6 +11,7 @@ const isEmpty = require('is-empty');
 const daysController = require('./days.controller');
 const googleFunc = require('../middlewares/googleCalendarValidator');
 const sendEmail = require('../middlewares/automaticEmail');
+const dayjs = require('dayjs');
 
 exports.createBooking = async (req, res) => {
   const {
@@ -19,9 +20,10 @@ exports.createBooking = async (req, res) => {
     totalPrice,
     guests,
     days
-  } = req.body;
-
+  } = req.body;    
   const user = req.userId;
+  const totalDays = daysController.getRangeOfDates(startAt, endAt).length - 1
+  
   const booking = new Booking({
     startAt,
     endAt,
@@ -32,18 +34,17 @@ exports.createBooking = async (req, res) => {
 
   if (Validator.isEmpty(req.body.startAt)) {
     return res.status(400).send({
-      message: "You must select a starting date !"
+      message: "Vous devez sélectionner une date de début!"
     });
   }
 
   if (Validator.isEmpty(req.body.endAt)) {
-    // return res.status(400).send ({ message: "You must select an ending date !"});
-    message.endAt = "You must select ending date";
+    message.endAt = "Vous devez sélectionner une date de fin";
   }
 
   if (Validator.isEmpty(req.body.guests)) {
     return res.status(400).send({
-      message: "You must select the number of guests!"
+      message: "Indiquez le nombre de personnes!"
     });
   }
 
@@ -63,6 +64,13 @@ function getUserName(user, callback) {
   })
 }
 
+getUserName(user, function(response) {
+  username = response;
+})
+getUserEmail(user, function(response) {
+  userEmail = response;
+})
+
   Rental.findOne({
       title: 'Mataviguette'
     })
@@ -81,23 +89,28 @@ function getUserName(user, callback) {
               message: "Invalid User! Cannot create booking on your own rental!"
             });
           }
-  
-           const googleResponse = await googleFunc.googleAuthAndCheckDates(booking, function(response) {
-            if (response === true && isValidBooking(booking, foundRental)) {
-              console.log("Event created in DB")
-              // getUserEmail(user, function(email) {
-              //   getUserName(user, function(username) {
-              //   sendEmail(email, username, booking, foundRental);
-              //   })
-              // })
-              return pushBookingToDb(booking, foundRental, user, startAt, endAt, res);
+          const finalPrice = foundRental.dailyRate * totalDays
+          const airBnbResponse = await googleFunc.checkAirBnbDates(booking, function(response) {
+            if (response === true) {
+                const googleResponse = googleFunc.googleAuthAndCheckDates(booking, username, finalPrice, async function(response) {
+                 if (response === true && isValidBooking(booking, foundRental)) {
+                       console.log("Event created in DB")
+                       return pushBookingToDb(booking, foundRental, user, totalDays, finalPrice, res);
+                   }
+                   else {
+                     return res.status(422).json({message: "Désolé, ces dates ne sont pas disponibles ! "});
+                   }
+                 })
             }
-            return res.status(422).json({message: "Invalid Booking ! These dates are not available ! "});
-        })
+            else {
+              return res.status(422).json({message: "Désolé, ces dates ne sont pas disponibles ! "});
+            }
+          })
+        
         }
         catch(e) {
             console.log("Error in Booking Creation");
-            res.status(422).json({ message: "Error in booking creation"});
+            res.status(422).json({ message: "Une erreur est survenue, réessayez plus tard"});
 
         }
     });
@@ -105,13 +118,15 @@ function getUserName(user, callback) {
 
 
 
-exports.getUserBookings = (req, res) => {
+exports.getAllUserBookings = (req, res) => {
   const user = req.userId;
-
   Booking.where({
       user
     })
-    .populate("rental")
+    .populate("rental", '-bookings' )
+    .sort({
+      "startAt": 'desc'
+    })
     .exec((err, foundBookings) => {
       if (err) {
         return res.status(422).send({
@@ -130,13 +145,28 @@ exports.getUserBookings = (req, res) => {
 
 exports.getAllBookings = (req, res) => {
   Booking.find()
-  .populate('user')
-  .populate('rental')
+  .populate('user', '-comments -password -bookings -rentals -roles -isVerified -_id -__v') 
+  .sort({
+    "startAt": 'desc'
+  })
   .exec(function(err, bookings) {
     if (err) return handleError(err);
     res.send(bookings);
   })
 };
+
+exports.getCurrentBookings = (req, res) => {
+  Booking.find({
+      endAt: { 
+        $gte: dayjs().startOf('day')
+      }
+  })
+  .populate('user', '-comments -password -bookings -rentals -roles -isVerified -_id -__v') 
+  .exec(function(err, bookings) {
+    if (err) return handleErors(err);
+    res.send(bookings);
+  })
+}
 
 function isValidBooking(proposedBooking, rental) {
   let isValid = true;
@@ -157,10 +187,10 @@ function isValidBooking(proposedBooking, rental) {
   return isValid;
 }
 
-function pushBookingToDb(booking, foundRental, user, startAt, endAt, res) {
-  booking.days = daysController.getRangeOfDates(startAt, endAt).length - 1;
+function pushBookingToDb(booking, foundRental, user, totalDays, finalPrice, res) {
+  booking.days = totalDays;
   booking.user = user;
-  booking.totalPrice = foundRental.dailyRate * booking.days;
+  booking.totalPrice = finalPrice;
   booking.rental = foundRental;
 
   foundRental.bookings.push(booking);

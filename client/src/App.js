@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { ChakraProvider } from "@chakra-ui/react"
 
 import {
   Collapse,
@@ -17,10 +18,11 @@ import authHeader from './services/auth-header';
 import Login from "./components/login/login.component";
 import Register from "./components/register/register.component";
 import Home from "./components/home/home.component";
-import Profile from "./components/user/profile.component";
-import BoardUser from "./components/board-user.component";
+import Profile from "./components/user/profile/profile.component";
+// import BoardUser from "./components/board-user.component";
+import UserDashboard from './components/user/dashboard/user-dashboard.component';
 import BoardModerator from "./components/board-moderator.component";
-import BoardAdmin from "./components/board-admin.component";
+import BoardAdmin from "./components/admin/board-admin.component";
 import Caroussel from './components/home/Caroussel';
 import Equippements from './components/home/Equippements.component';
 import ScrollToTopRoute from './components/home/ScrollTop';
@@ -117,7 +119,8 @@ class App extends Component {
       const { currentUser, showModeratorBoard, showAdminBoard, isValidToken } = this.state;
       return (
         <Elements stripe={stripePromise}>
-        <Router>
+          <ChakraProvider>
+            <Router>
           <div>
             <div className="border-styled">
                 <Navbar color="white" light expand="md">
@@ -177,7 +180,8 @@ class App extends Component {
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/register" component={Register} />
                 <Route exact path="/profile" component={Profile} />
-                <Route path="/user" component={BoardUser} />
+                {/* <Route path="/user" component={BoardUser} /> */}
+                <Route path="/user" component={UserDashboard} />
                 <Route path="/mod" component={BoardModerator} />
                 <Route path="/admin" component={BoardAdmin} />
                 <Route path="/confirmation/:token" component={RegisterConfirm} />
@@ -189,6 +193,9 @@ class App extends Component {
             
         </div>
       </Router>
+
+
+          </ChakraProvider>
       </Elements>
     );
   }

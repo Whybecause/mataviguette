@@ -373,35 +373,6 @@ export default class Home extends Component {
                   </main>
       
       
-                  {/* ---------------------------CALENDRIER A SYNCHRONISER AVEC API--------------------------- */}
-      
-      
-                  <main id="disponibilité" className="border-bottom">
-                      <Col>
-                          <article>
-                              <h2 className="h2"><strong>Disponibilité</strong></h2>
-                          </article>
-                      </Col>
-                      <div>
-                        <iframe title="calendar" className=" google-calendar" src="https://calendar.google.com/calendar/embed?src=mataviguette%40gmail.com&ctz=Europe%2FParis"></iframe>
-                        </div>
-                        <div>
-                        <iframe title="calendar" className="google-calendar" src="https://calendar.google.com/calendar/embed?src=t6irs8vvh0l88mqt7m0ok36hil2t88fk%40import.calendar.google.com&ctz=Europe%2FParis"></iframe>
-                        </div>
-                  </main>
-                    {/* ------------------------------------COMMENTAIRES--------------------------------------------------------- */}
-
-                  <main id="commentaires" className="presentation-comments-container border-bottom m-top-1">
-                      <Col>
-                          <article>
-                              <h2 className="h2"><strong>Commentaires</strong></h2>
-                              <CommentBox/>
-                          </article>
-                      </Col>
-                  </main>
-
-
-
                         {/* ---------------------------------------GOOGLE MAP------------------------------------------------ */}
 
                   <main id="emplacement" className="presentation-container">
@@ -489,7 +460,17 @@ Je reste disponible cependant avant et tout au long de votre séjour pour répon
                           </article>
                       </Col>
                   </main>
-                  
+            
+            {/* ------------------------------------COMMENTAIRES--------------------------------------------------------- */}
+
+            <main id="commentaires" className="presentation-comments-container border-bottom m-top-1">
+                <Col>
+                    <article>
+                        <h2 className="h2"><strong>Commentaires</strong></h2>
+                        <CommentBox/>
+                    </article>
+                </Col>
+            </main>
 
             </div>
 

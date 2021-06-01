@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Container } from 'reactstrap';
-import AuthService from "../../services/auth.service";
+import AuthService from "../../../services/auth.service";
 import UpdatePassModal from './profile.updatePassModal';
 
 export default class Profile extends Component {

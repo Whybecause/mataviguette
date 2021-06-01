@@ -9,9 +9,9 @@ module.exports = function(app) {
         );
         next();
       });
-      app.post('/api/test/comment', [authJwt.verifyToken], controller.createComment);
+      app.post('/api/test/comment/:id', [authJwt.verifyToken], controller.createComment);
       app.get('/api/test/comment/:id', controller.getComment);
-      app.put('/api/test/comment/update/:id', [authJwt.verifyToken, authJwt.isAdmin], controller.updateComment);
-      app.delete('/api/test/comment/delete/:id', [authJwt.verifyToken, authJwt.isAdmin], controller.deleteComment);
+      app.patch('/api/test/comment/update/:id', [authJwt.verifyToken], controller.updateComment);
+      app.delete('/api/test/comment/delete/:id', [authJwt.verifyToken], controller.deleteComment);
       app.get('/api/test/comment', controller.getAllComments);
 }

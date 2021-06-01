@@ -10,7 +10,8 @@ module.exports = function(app) {
         next();
       });
       app.post("/api/test/bookings/Mataviguette",[authJwt.verifyToken], controller.createBooking);
-      app.get("/api/test/bookings/manage", [authJwt.verifyToken], controller.getUserBookings);
+      app.get("/api/test/bookings/user/all", [authJwt.verifyToken], controller.getAllUserBookings);
       app.get("/api/test/bookings/all", [authJwt.verifyToken, authJwt.isAdmin], controller.getAllBookings);
+      app.get("/api/test/bookings/current", [authJwt.verifyToken, authJwt.isAdmin], controller.getCurrentBookings);
       app.delete("/api/test/booking/delete/:id", [authJwt.verifyToken], controller.deleteBookingWhenPaymentFails);
 }

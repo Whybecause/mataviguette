@@ -9,7 +9,10 @@ class formContactService {
     }
 
     sendEmailToBooker(message, id) {
-        return axios.post(`api/test/booker/send/${id}`, (message), { headers: authHeader() } );
+        return axios.post(`api/test/booker/send/${id}`, { message }, { headers: authHeader() } );
+    }
+    sendEmailToHost(message, id) {
+        return axios.post(`api/test/host/send/${id}`, { message }, { headers: authHeader() } );
     }
 }
 

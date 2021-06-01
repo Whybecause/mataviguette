@@ -15,7 +15,9 @@ import CheckButton from "react-validation/build/button";
 
 import moment from 'moment';
 import DatePicker from "react-datepicker";
-import { getRangeOfDates } from "../../helpers/index";
+import { getRangeOfDates } from "../../../helpers/index";
+import addDays from "date-fns/addDays";
+
 import BookingModal from './BookingModal';
 import AuthService from "../../../services/auth.service";
 
@@ -80,25 +82,36 @@ class Booking extends Component {
         }));
     }
 
-    //Récupère les dates réservées pour empêcher de les sélectionner dans le datepicker
+
+    //Récupère les dates réservées ou bloquées pour empêcher de les sélectionner dans le datepicker
     getGoogleCalBookedEvents = async () => {
         const res = await axios.get(API_URL + "/rentals/booked");
         const data = await res.data;
-        const bookedRangeDays = [];
-        const addDays = (date, days = 1) => {
-            const result = new Date(date);
-            result.setDate(result.getDate() + days);
-            return result;
+        let bookedRangeDays = [];
+        const getDates = (startDate, endDate) => {
+            let dates = [];
+            let currentDate = startDate;
+            const addDays = function(days) {
+                let date = new Date(this.valueOf());
+                date.setDate(date.getDate() + days);
+                return date;
+            };
+            while (currentDate <= endDate) {
+                dates.push(currentDate);
+                currentDate = addDays.call(currentDate, 1);
+            }
+            return dates;
         };
         try {
             await Promise.all(
-                    data.map(async event => {
-                        const getBookedStart = new Date(await event.bookedStart);
-                        const getBookedEnd = new Date(await event.bookedEnd);
-                        const next = addDays(getBookedStart, 1);
-                        bookedRangeDays.push(next, getBookedEnd, getBookedStart);
-                        console.log(bookedRangeDays);
+                data.map(async event => {
+                    const startDate = new Date (await event.bookedStart);
+                    const endDate = new Date(await event.bookedEnd);
+                    const dates = getDates(startDate, endDate);
+                    dates.forEach(function(date) {
+                        bookedRangeDays.push(date);
                     })
+                })
             );
         } catch(e) {
             return console.log('No booking dates');
@@ -137,6 +150,9 @@ class Booking extends Component {
         this.setState({
             startAt: date
         });
+        this.setState({
+            endAt: addDays(date, 1)
+        })
     };
 
     onChangeEnd = date => {
@@ -215,8 +231,6 @@ class Booking extends Component {
         const totalPrice = this.state.dailyRate * days;
         const { bookedRangeDays, isValidToken } = this.state;
 
-    
-
         return (
             <div>
                  <div className="card-bodytext-center">
@@ -238,30 +252,28 @@ class Booking extends Component {
                     {!this.state.successful && (
                     <div>
                         <div className="form-group">
-                            <label htmlFor="dates">Start Date</label>
+                            <label htmlFor="dates">Début</label>
                             <DatePicker
-                                dateFormat={moment(this.state.startAt).format('YYYY-MM-DD')}
-                                selected={this.state.startAt}
+                                dateFormat='dd MMMM yy'
                                 isClearable
+                                selected = {this.state.startAt}
                                 minDate={new Date()}
                                 onChange={this.onChangeStart}
                                 className="form-control"
                                 customInput={<Input validations={[ required ]}/>}
-                                placeholderText="Click to select starting date"
+                                placeholderText="Date de début"
                                 excludeDates = {bookedRangeDays}
-                                
-                                
                             >
                             </DatePicker>  
                         </div>
                         <div className="form-group">
-                            <label htmlFor="dates">End Date</label>
+                            <label htmlFor="dates">Fin</label>
                             <DatePicker
-                                dateFormat={moment(this.state.endAt).format('YYYY-MM-DD')}
-                                selected={this.state.endAt}
-                                minDate={new Date()}
+                                dateFormat='dd MMMM yy'
+                                selected = {this.state.endAt}
+                                minDate= {addDays(this.state.startAt, 1)}
                                 isClearable
-                                placeholderText="Click to select ending date"
+                                placeholderText="Date de fin"
                                 className="form-control"
                                 onChange={this.onChangeEnd}
                                 customInput={<Input validations={[ required ]}/>}
@@ -270,14 +282,14 @@ class Booking extends Component {
                             </DatePicker>
                         </div>
                         <div className="form-group">
-                            <label htmlFor="guests">Guests</label>
+                            <label htmlFor="guests">Nombre de personnes</label>
                             <Input
                                 type="number"
                                 className="form-control"
                                 name="guests"
                                 value={this.state.guests}
                                 onChange={this.onChangeGuests}
-                                placeholder="How many people?"
+                                placeholder="Combien de personnes?"
                                 validations={[ required ]}
                             />
                         </div>

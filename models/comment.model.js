@@ -5,6 +5,11 @@ const Comment = mongoose.model(
   new mongoose.Schema({
     author: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     text: { type : String },
+    booking: 
+      {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Booking"
+      }
   }, { timestamps: true })
 );
 

@@ -2,14 +2,20 @@ import axios from 'axios';
 import authHeader from './auth-header';
 import { trackPromise } from 'react-promise-tracker';
 
-// const API_URL = "http://localhost:8080/api/test";
-const API_URL = "api/test";
-
-// const API_URL = "https://mataviguette.herokuapp.com/api/test";
-
 class CommentService {
-    submitComment(text) {
-        return trackPromise(axios.post(API_URL + "/comment", {text}, {headers: authHeader()} ));
+    async submitComment(id, text) {
+        return await trackPromise(axios.post(`/api/test/comment/${id}`, {text}, {headers: authHeader()} ));
+    }
+
+    async getUserComment(id) {
+        return await trackPromise(axios.get(`/api/test/comment/${id}`, { headers: authHeader()}))
+    }
+
+    async updateUserComment(id, text) {
+        return await trackPromise(axios.patch(`/api/test/comment/update/${id}`, {text}, { headers : authHeader() }))
+    }
+    async deleteUserComment(id) {
+        return await trackPromise(axios.delete(`/api/test/comment/delete/${id}`, { headers : authHeader() }))
     }
 }
 

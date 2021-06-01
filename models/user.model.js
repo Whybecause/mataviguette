@@ -9,7 +9,8 @@ const User = mongoose.model(
     isVerified: { type: Boolean, default: false },
     createDate : {
       type: Date,
-      default: Date.now
+      default: Date.now,
+      select: false
     },
     rentals: [
       {

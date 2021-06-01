@@ -32,7 +32,13 @@ const Booking = mongoose.model(
         rental: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Rental"
-        }
+        },
+        comment: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Comment"
+            }
+        ]
     })
 );
 

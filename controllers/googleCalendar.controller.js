@@ -1,6 +1,7 @@
 const { google } = require('googleapis');
 const daysController = require ('./days.controller');
 
+//Utilisé pour le front pour désactiver les dates indisponibles dans le datepicker
 exports.getGoogleCalListEvents = (req, res) => {
     // OAUTH2 AUTHENTIFICATION
     authorize(JSON.parse(process.env.GOOGLE_CREDENTIALS), listEvents);

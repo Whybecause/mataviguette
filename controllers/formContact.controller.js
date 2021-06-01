@@ -37,7 +37,7 @@ exports.sendContactForm = (req, res, next) => {
     const mailOptions = {
     from : name,
     to : process.env.ADMIN_EMAIL,
-    subject: 'New message from Contact Form',
+    subject: 'Nouveau message depuis le formulaire de contact',
     text: content
     };
 
@@ -55,9 +55,9 @@ exports.sendContactForm = (req, res, next) => {
 
     transporter.sendMail(mailOptions, function(error, info) {
     if (error) {
-        return res.status(400).send({ error: "Sorry the message can not been sent" })
+        return res.status(400).send({ error: "Le message n\'a pas pu être envoyé'" })
     } else {
-        return res.status(200).send({ message: 'You message has been sent' });
+        return res.status(200).send({ message: 'Votre message a été envoyé !' });
     }
     });
 }
@@ -65,24 +65,45 @@ exports.sendContactForm = (req, res, next) => {
 exports.sendEmailToBooker = (req, res) => {
     const bookingId = req.params.id
     const message = req.body.message
-
     Booking.findOne({ _id: bookingId})
     .populate('user')
     .then( booking => {
         const mailOptions = {
             from: process.env.ADMIN_EMAIL,
             to: booking.user.email,
-            subject: 'Message from mataviguette',
+            subject: 'Message de lamataviguette.fr',
             text: message
         };
         transporter.sendMail(mailOptions, function(error, info) {
             if (error) {
-                return res.status(400).send({ error: 'Message could not been sent'})
+                return res.status(400).send({ error: 'Le message n\'a pas pu être envoyé'})
             } else {
-            return res.status(200).send({ message: 'Message has been sent'});
+            return res.status(200).send({ message: 'Votre message a été envoyé !'});
             }
         })
     })
-    .catch(error => res.status(500).send({ error:'Someting went wrong...'}));
+    .catch(error => res.status(500).send({ error:'Une erreur est survenue...'}));
 }
 
+exports.sendEmailToHost = (req, res) => {
+    const bookingId = req.params.id
+    const message = req.body.message
+    Booking.findOne({ _id: bookingId})
+    .populate('user')
+    .then ( booking => {
+        const mailOptions = {
+            from: booking.user.email, 
+            to : process.env.ADMIN_EMAIL,
+            subject: `Nouveau message d'un locataire`,
+            text: `Envoyé par : ${booking.user.username}, ${booking.user.email} \n ${message}`
+        };
+        transporter.sendMail(mailOptions, function(error, info) {
+            if (error) {
+                return res.status(400).send({ error: 'Le message n\'a pas pu être envoyé' })
+            } else {
+                return res.status(200).send({ message: 'Votre message a été envoyé !'});
+            }
+        })
+    })
+    .catch(error => res.status(500).send({ error: 'Une erreur est survenue...'}))
+}
