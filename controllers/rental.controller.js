@@ -95,27 +95,24 @@ exports.getUserRentals = (req, res) => {
 exports.rentalUpdateMataviguette = (req, res) => {
   const rentalData = req.body;
   const user = req.userId;
-
   Rental.findOne({ title: 'Mataviguette'})
     .populate("user")
     .exec((err, foundRental) => {
       if (err) {
-        return res.status(422).send({ errors: normalizeErrors(err.errors) });
+        return res.status(422).send({ message: normalizeErrors(err.errors) });
       }
       if (foundRental.user.id !== user) {
         return res.status(422).send({
-          errors: [
-            { title: "Invalid User!", detail: "You are not rental owner!" }
-          ]
+          message: 'Tes pas le proprio sorry'
         });
       }
       foundRental.set(rentalData);
       foundRental.save(err => {
         if (err) {
-          return res.status(422).send({ errors: normalizeErrors(err.errors) });
-        }
-
-        return res.status(200).send({ message: 'Rental updated ! ', foundRental});
+          return res.status(422).send({ message: normalizeErrors(err.errors) });
+        } 
+          return res.status(200).send({ message: 'Annonce modifiée ! ', foundRental});
+        
       });
     });
 };
