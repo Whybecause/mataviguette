@@ -4,7 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import { usePromiseTracker } from 'react-promise-tracker';
 import Loader from 'react-loader-spinner';
 
-import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
 import "react-datepicker/dist/react-datepicker.css";
 import './styles/fonts.css';
 import './styles/index.css';

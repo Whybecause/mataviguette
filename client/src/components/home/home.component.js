@@ -156,7 +156,7 @@ export default class Home extends Component {
               ) : ( 
         <Container fluid="lg" >
             <div>
-        <ScrollNav/>
+        {/* <ScrollNav/> */}
 
           <Row>
               <Col id="top">

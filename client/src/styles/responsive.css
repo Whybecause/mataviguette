@@ -1,4 +1,4 @@
-@media only screen and (max-width : 991px) {
+/* @media only screen and (max-width : 991px) {
     .imgs-container {
         display: none;
     }
@@ -99,9 +99,6 @@
 
 @media only screen and (max-width: 767px) {
     .resp-mg {
-        /* max-width: 30%; */
-        /* width: 50%; */
-
         margin-top : 1rem;
     }
     .resp-center {
@@ -122,4 +119,4 @@
     .small-screen {
         display: none;
     }
-}
+} */
