@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
+  useToast,
   NumberInput,
   NumberInputField,
   NumberInputStepper,
@@ -8,11 +9,12 @@ import {
   Box,
   Stack,
   Text,
-  Button,
   HStack,
   Center,
+  Button
 } from "@chakra-ui/react";
 import DatePicker from "react-datepicker";
+import dayjs from 'dayjs';
 import addDays from "date-fns/addDays";
 import axios from 'axios';
 
@@ -20,6 +22,7 @@ import ReservationCheckout from './Reservation-checkout';
 import { getRangeOfDates } from "../../../helpers/index";
 import authService from "../../../services/auth.service";
 import rentalCRUDService from "../../../services/rentalCRUD.service";
+import { subDays } from "date-fns";
 
 const Reservation = () => {
   const [isValidToken, setIsValidToken] = useState(false);
@@ -35,17 +38,48 @@ const Reservation = () => {
   const days = getRangeOfDates(startAt, endAt).length - 1;
   const finalPrice = dailyRate * days;
 
+  // --------------------------------
+
   const handleChangeGuests = (guests) => setGuests(guests);
 
-  function goToCheckout() {
+  async function confirmBooking(e) {
+      e.preventDefault();
+
   }
+
+  const getFirstDateAvailable = async () => {
+    let today = new Date()
+    let testDate = new Date();
+    // testDate.setDate(today.getDate() -1);
+
+    testDate = addDays(testDate, 10);
+    for (let i=0; i < bookedRangeDays.length; i++) {
+      if (dayjs(bookedRangeDays[i]).format('DD/MM/YYYY') < dayjs(testDate).format('DD/MM/YYYY')) {
+        console.log('inférieur')
+      }
+      if (dayjs(bookedRangeDays[i]).format('DD/MM/YYYY') === dayjs(testDate).format('DD/MM/YYYY')) {
+        console.log('already booked');
+      //   testDate = addDays(testDate, 1);
+      }
+      // } else { 
+      //   console.log(testDate);
+      //   return testDate;
+      // }
+    }
+  }
+    
+
+  
+
+// ---------------------------------------
 
   useEffect(() => {
     rentalCRUDService.getMataviguettePrice(setDailyRate)
 
     authService.isValidToken(setIsValidToken)
 
-      rentalCRUDService.getGoogleCalBookedEvents(setBookedRangeDays);    
+    rentalCRUDService.getGoogleCalBookedEvents(setBookedRangeDays);
+
   }, []);
 
   let ReservationContent = null;
@@ -111,7 +145,7 @@ const Reservation = () => {
             days={days}
             guests={guests}
             finalPrice={finalPrice}
-            confirmBooking={goToCheckout}
+            confirmBooking={confirmBooking}
           />
         </Center>
       </>
@@ -128,6 +162,7 @@ const Reservation = () => {
       >
         <Center>
           <h3>Choisissez vos dates : {dailyRate}€/nuit</h3>
+          <Button onClick={getFirstDateAvailable}>clique enfoiré</Button>
         </Center>
         
         {ReservationContent}

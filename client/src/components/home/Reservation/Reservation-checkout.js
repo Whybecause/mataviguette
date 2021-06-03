@@ -36,7 +36,8 @@ const ReservationCheckout = (props) => {
 
   return (
     <>
-      <Button onClick={onOpen}>Valider</Button>
+      <Button onClick={onOpen}
+      >Valider</Button>
       <Modal isOpen={isOpen} onClose={onClose} >
                 <ModalOverlay/>
                     <ModalContent>
