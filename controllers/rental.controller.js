@@ -64,7 +64,7 @@ exports.getMataviguette = (req, res) => {
       bedrooms: rental.bedrooms,
       dailyRate: rental.dailyRate,
       category: rental.category,
-      bookings: rental.bookings,
+      // bookings: rental.bookings,
     });
   }
   ).catch(

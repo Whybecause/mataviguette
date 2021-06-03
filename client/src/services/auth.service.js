@@ -36,8 +36,30 @@ class AuthService {
     }));
   }
 
-  getCurrentUser() {
-    return JSON.parse(localStorage.getItem('user'));
+  isValidToken = async (setIsValidToken) => {
+    try {
+      const res = await trackPromise(axios.get("api/token", { headers: authHeader() }))
+      setIsValidToken(res.data)
+    }
+    catch (error) {
+      console.log(error)
+    }
+  }
+
+  getCurrentUser = async (setUser, setIsAdmin) => {
+    try {
+      const user = await JSON.parse(localStorage.getItem('user'))
+      if (user) {
+        console.log(user)
+        setUser(user.username);
+        if (user.roles.includes("ROLE_ADMIN")) {
+          setIsAdmin(true);
+        }
+    }
+  }
+    catch (error) {
+      console.log(error)
+    }
   }
 
   confirmAccount(token, email) {

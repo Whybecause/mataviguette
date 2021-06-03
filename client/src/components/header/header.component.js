@@ -1,25 +1,20 @@
 import React, { useState, useEffect } from "react";
 import {
-    Icon,
-  Center,
+  Icon,
   Box,
   Menu,
   MenuButton,
   MenuList,
   MenuItem,
   Button,
-  Flex,
-  Spacer,
   Heading,
   Container
 } from "@chakra-ui/react";
 import { ChevronDownIcon, SettingsIcon, CalendarIcon } from "@chakra-ui/icons";
 import { MdExitToApp, MdBuild} from 'react-icons/md';
-import axios from "axios";
 
 import history from '../../helpers/history';
 import authService from "../../services/auth.service";
-import authHeader from "../../services/auth-header";
 
 function Header() {
   const [user, setUser] = useState("");
@@ -27,20 +22,9 @@ function Header() {
   const [isValidToken, setIsValidToken] = useState(false);
 
   useEffect(() => {
-    const user = authService.getCurrentUser();
-    if (user) {
-      setUser(user.username);
-      if (user.roles.includes("ROLE_ADMIN")) {
-        setIsAdmin(true);
-      }
-    }
+    authService.getCurrentUser(setUser, setIsAdmin);
+    authService.isValidToken(setIsValidToken)
 
-    axios
-      .get("api/token", { headers: authHeader() })
-      .then((res) => {
-        setIsValidToken(res.data);
-      })
-      .catch((err) => console.log(err));
   }, [isValidToken]);
 
   async function logOut() {

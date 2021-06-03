@@ -3,7 +3,7 @@ import { Box, Center, Stack } from "@chakra-ui/react";
 
 import Gallery from './Gallery.component';
 import Description from './Description.component';
-import Reservation from './Reservation.component';
+import Reservation from './Reservation/Reservation.component';
 import EquipppementsIcons from './Equippements-icons.component';
 import GoogleMap from './GoogleMap.component';
 import Presentation from './Presentation.component';
