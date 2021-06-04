@@ -1,55 +1,35 @@
-import React from 'react';
-import useSWR from "swr";
-import dayjs from 'dayjs';
-import addDays from "date-fns/addDays";
+import { useState, useEffect } from 'react';
+import { getDatesBetweenDates, flatten } from '../helpers/index';
 
-import rentalCRUDService from '../services/rentalCRUD.service';
+import axios from 'axios';
 
-// export const useFetchUnavailableDates = (url) => {
-//     const { data } = useSWR(url, rentalCRUDService.getUnavailableDates);
-//     const unavailableDates = data || [];
-//     // const isPending = !data;
-//     // const setUnavailableDates = mutate;
-
-//     return { unavailableDates  };
-// };
-
-// export const useUnavailableDates = async (url) => {
-//     const { unavailableDates } = useFetchUnavailableDates(url);
-//     const [ bookedDates, setBookedDates ] = React.useState([]);
-//     const getDates = (startDate, endDate) => {
-//         let dates = [];
-//         let currentDate = startDate;
-//         const addDaysFunc = function (days) {
-//             let date = new Date(this.valueOf());
-//             date.setDate(date.getDate() + days);
-//             return date;
-//         };
-//         while (currentDate <= endDate) {
-//             dates.push(currentDate);
-//             currentDate = addDaysFunc.call(currentDate, 1);
-//         }
-//         return dates;
-//         };
-//         try {
-//             await Promise.all(
-
-//                 unavailableDates.map(async (event) => {
-//                     const startDate = new Date(await event.bookedStart);
-//                     const endDate = new Date(await event.bookedEnd);
-//                     const dates = getDates(startDate, endDate);
-//                     dates.forEach(function (date) {
-//                         setBookedDates((oldArr) => [...oldArr, date]);
-//                     });   
-//                 })
-//             )
-//         }
-//         catch(e) {
-//                 return console.log('No Booking Dates')
-//             }
+export const useUnavailableDates = (url) => {
+  const [ unavailableDates, setUnavailable ] = useState([]);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const fetchData = async function () {
+      try {
+        setLoading(true);
+        const response = await axios.get(url);
+        if (response.status === 200) {
+          let dateArr = [];
+          for (let i=0; i < response.data.length; i++) {
+            const startDate = new Date(await response.data[i].bookedStart)
+            const endDate = new Date(await response.data[i].bookedEnd)
+            const dates = getDatesBetweenDates(startDate, endDate)
+            dateArr.push(dates)
+        }
+          setUnavailable(flatten(dateArr));
+        }
+      } catch (error) {
+        throw error;
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, [url]);
   
-//     return { bookedDates };
-
-// }
-
+  return { loading, unavailableDates };
+};
 

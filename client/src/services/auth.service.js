@@ -50,7 +50,6 @@ class AuthService {
     try {
       const user = await JSON.parse(localStorage.getItem('user'))
       if (user) {
-        console.log(user)
         setUser(user.username);
         if (user.roles.includes("ROLE_ADMIN")) {
           setIsAdmin(true);

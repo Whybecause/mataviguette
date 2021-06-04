@@ -5,7 +5,6 @@ import dayjs from 'dayjs';
 export const rentalType = isShared => (isShared ? "shared" : "entire");
 export const toUpperCase = value => (value ? titleize(value) : "");
 
-
 export const pretifyDate = date => moment(date).format("MMM Do YY");
 
 export const getRangeOfDates = (startAt, endAt) => {
@@ -22,3 +21,37 @@ export const getRangeOfDates = (startAt, endAt) => {
 
   return tempDates;
 };
+
+export const getDatesBetweenDates = (startDate, endDate) => {
+  let dates = []
+  const theDate = new Date(startDate)
+  while (theDate < endDate) {
+    dates = [...dates, new Date(theDate)]
+    theDate.setDate(theDate.getDate() + 1)
+  }
+  dates = [...dates, endDate]
+  return dates
+}
+
+// transform multiple array in one array
+export const flatten = (arr) => {
+  return arr.reduce(function (flat, toFlatten) {
+    return flat.concat(Array.isArray(toFlatten) ? flatten(toFlatten) : toFlatten);
+  }, []);
+}
+
+// export const getFirstDateAvailable = async (arr, setStartAt) => {
+//   let startAt = new Date();
+
+//   let bookedDates = [];
+//   for (let i=0; i<arr.length; i++ ) {
+//     bookedDates.push(dayjs(arr[i]).format('DD MM YYYY'))
+//   }
+
+//   while (bookedDates.includes(dayjs(startAt).format('DD MM YYYY'))) {
+//     startAt = addDays(startAt, 1)
+//   }
+
+//   return setStartAt(startAt);
+
+// }
