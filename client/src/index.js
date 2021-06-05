@@ -1,10 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from "react-router-dom";
-import { usePromiseTracker } from 'react-promise-tracker';
-import Loader from 'react-loader-spinner';
 
-// import "bootstrap/dist/css/bootstrap.min.css";
+import { UserProvider } from './UserContext';
 import "react-datepicker/dist/react-datepicker.css";
 import './styles/fonts.css';
 import './styles/index.css';
@@ -14,27 +12,11 @@ import './styles/responsive.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-const LoadingIndicator = props => {
-  const { promiseInProgress } = usePromiseTracker();
-  return (
-    promiseInProgress &&
-    <div style={{
-      width: "100%",
-      height: "100%",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center"
-    }}
-    >
-<Loader type="ThreeDots" color="#00BFFF" height={80} width={80} />
-</div>
-  );
-}
-
 ReactDOM.render(
   <BrowserRouter>
+  <UserProvider>
     <App />
-    <LoadingIndicator/>
+  </UserProvider>
   </BrowserRouter>,
   document.getElementById('root'),
 );

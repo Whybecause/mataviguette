@@ -18,5 +18,6 @@ module.exports = function(app) {
   app.post("/api/password/send", controller.sendEmailResetPassword);
   app.post("/api/password/reset", controller.resetPassword )
   app.get("/api/token", [authJwt.verifyToken], controller.isValidToken);
+  app.get("/api/admin", [authJwt.verifyToken, authJwt.isAdmin], controller.isValidAdmin);
   app.patch("/api/auth/password/update", [authJwt.verifyToken], controller.changePassword);
 };

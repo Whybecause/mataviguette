@@ -7,6 +7,8 @@ import {
     Tr,
     Th,
     Td,
+    Box,
+    Center
   } from "@chakra-ui/react"
 
 const Historique = ({allBookings}) => {
@@ -15,7 +17,7 @@ const Historique = ({allBookings}) => {
     if (!allBookings.length) {
         Historique = (
             <>
-            <div><p>Aucune réversation n'a encore été effectuée</p></div>
+            <Box><Center>Aucune réversations à venir</Center></Box>
             </>
         )
     }
@@ -23,7 +25,7 @@ const Historique = ({allBookings}) => {
     if (allBookings.length) {
         Historique = (
             <>
-                <div>
+                <Box overflowX = "auto">
                     <Table>
                         <Thead>
                             <Tr>
@@ -50,7 +52,7 @@ const Historique = ({allBookings}) => {
                             ))}
                         </Tbody>
                     </Table>
-                </div>
+                </Box>
             </>
         )
     }

@@ -118,14 +118,14 @@ exports.signup = (req, res) => {
           const mailOptions = {
             from : process.env.ADMIN_EMAIL,
             to : user.email,
-            subject: 'Account Verification for Mataviguette',
-            text: `Hello, please verify your account by clicking the link: \n` + process.env.CLIENT_ORIGIN + '\/confirmation\/' + token.token
+            subject: 'Vérification de votre compte',
+            text: `Bonjour, veuillez valider votre compte en cliquant sur ce lien : \n` + process.env.CLIENT_ORIGIN + '\/confirmation\/' + token.token
             };
             transporter.sendMail(mailOptions, function(error, info) {
               if (error) {
                   return res.status(500).send({ message: error.message });
               } else {
-                  return res.status(200).send({ message: 'A verification email has been seent to ' + user.email + '.' });
+                  return res.status(200).send({ message: 'Un email de validation a été envoyé à ' + user.email + '.' });
               }
               });
       })
@@ -140,14 +140,14 @@ exports.confirmationPost = (req, res, next) => {
       return console.log
     }
     if (!token) {
-      return res.status(400).send({ type: 'not-verified', message: 'Your confirmation has expired'});
+      return res.status(400).send({ type: 'not-verified', message: 'La validation de votre compte a expirée'});
     }
     User.findOne({ _id: token._userId, email: req.body.email }, function(err, user) {
       if (!user) {
-        return res.status(400).send({ message: 'We are unable to find a user'});
+        return res.status(400).send({ message: 'Aucun utilisateur trouvé'});
       }
       if (user.isVerified) {
-        return res.status(400).send({ type: 'already-verified', message: 'Your account has already been verified'});
+        return res.status(400).send({ type: 'already-verified', message: 'Votre compte a été vérifié !'});
       } else {
       user.isVerified = true;
       Role.findOne({name: "user"}, (err, role) => {
@@ -162,7 +162,7 @@ exports.confirmationPost = (req, res, next) => {
         if (err) {
           return res.status(500).send({ message: err});
         }
-        res.status(200).send({message: "Your account has been verified ! Please log in"});
+        res.status(200).send({message: "Votre compte est validé ! Connectez-vous"});
       });
     });
   }
@@ -175,7 +175,7 @@ exports.resendTokenPost = (req, res, next) => {
     if (req.body.email === undefined) { return res.status(400).send({ message: "Enter your email"}); }
     if (req.body.email.length === 0) { return res.status(400).send({ message: "Enter your email"}); }
     if (!user) return res.status(400).send({ message: "We are unable to find a user with that email"});
-    if (user.isVerified) return res.status(400).send({ message: 'This account has already been verified'});
+    if (user.isVerified) return res.status(400).send({ message: 'Ce compte a déjà été validé'});
     const token = new Token ({ _userId: user.id, token: crypto.randomBytes(16).toString('hex')});
     token.save(function (err) {
       if (err) { return res.status(500).send({ message: err.message}); }
@@ -196,14 +196,14 @@ exports.resendTokenPost = (req, res, next) => {
         const mailOptions = {
           from : process.env.ADMIN_EMAIL,
           to : user.email,
-          subject: 'Account Verification for Mataviguette',
-          text: `Hello, please verify your account by clicking the link: \n` + process.env.CLIENT_ORIGIN + '\/confirmation\/' + token.token
+          subject: 'Validez votre compte',
+          text: `Bonjour, bienvenue sur la mataviguette ! Validez votre compte en cliquant sur ce lien: \n` + process.env.CLIENT_ORIGIN + '\/confirmation\/' + token.token
           };
           transporter.sendMail(mailOptions, function(error, info) {
             if (error) {
                 return res.status(500).send({ message: error.message });
             } else {
-                return res.status(200).send({ message: 'A verification email has been seent to ' + user.email + '.' });
+                return res.status(200).send({ message: 'Un email de validation a été envoyé à ' + user.email + '.' });
             }
             });
 
@@ -234,12 +234,12 @@ exports.signin = (req, res) => {
 
       if (!user) {
         return res.status(404).send({
-          message: "User Not found."
+          message: "Identifiants incorrects"
         });
       }
 
       if(!user.isVerified) {
-        return res.status(401).send({ type: 'not-verified', message: 'Your account has not been verified' });
+        return res.status(401).send({ type: 'not-verified', message: 'Veuillez vérifier votre compte pour vous connecter' });
       }
 
       var passwordIsValid = bcrypt.compareSync(
@@ -250,7 +250,7 @@ exports.signin = (req, res) => {
       if (!passwordIsValid) {
         return res.status(401).send({
           accessToken: null,
-          message: "Invalid Password!"
+          message: "Identifiants incorrects!"
         });
       }
 
@@ -283,7 +283,7 @@ exports.changePassword = async (req, res) => {
 
   bcrypt.hash(req.body.password, 8, async (err, hash) => {
     if (err) {
-      return res.status(400).send({message: 'You must provide new password'});
+      return res.status(400).send({message: 'Entrez un nouveau mot de passe'});
     }
     const newpass = {
       password: hash
@@ -299,13 +299,13 @@ exports.changePassword = async (req, res) => {
         );
         if (err) return res.status(400).send({message: 'Error in update'})
         if (oldPass === undefined) {
-          return res.status(400).send({message: 'You must provide current password'})
+          return res.status(400).send({message: 'Entrez votre mot de passe actuel'})
         }
         if (oldPass.length === 0) {
-          return res.status(400).status(400).send({message: 'You must enter current password'})
+          return res.status(400).status(400).send({message: 'Entrez votre mot de passe actuel'})
         }
         if (req.body.password.length === 0) {
-          return res.status(400).send({message: 'You must enter new password'})
+          return res.status(400).send({message: 'Entrez votre nouveau mot de passe'})
         }
         if (!Validator.isLength(req.body.password, {
           min: 6,
@@ -320,11 +320,11 @@ exports.changePassword = async (req, res) => {
         }
         if (!passwordIsValid) {
           return res.status(401).send({
-            message: "This is not your current password!"
+            message: "Ce n'est pas votre mot de passe actuel!"
           });
         } else {
           return res.status(200).send({
-            message: 'Password Updated ! '
+            message: 'Votre mot de passe a été mis à jour ! '
           })
         }
       }
@@ -341,6 +341,17 @@ exports.isValidToken = async (req, res) => {
     console.log(e);
   }
 }
+exports.isValidAdmin = async (req, res) => {
+  try {
+  const isValid = await true;
+  return res.send(isValid);
+  }
+  catch(e) {
+    console.log(e);
+  }
+}
+
+
 
 exports.sendEmailResetPassword = (req, res) => {
   User.findOne({ email : req.body.email}, function (err, user) {
@@ -351,7 +362,7 @@ exports.sendEmailResetPassword = (req, res) => {
       return res.status(400).send({message: "Email field is required"})
     }
     if(!user) {
-      return res.status(400).send({message: "We are not able to find a user with that email"})
+      return res.status(400).send({message: "Aucun utilisateur trouvé"})
     }
     else {
       const token = new Token ({ _userId: user.id, token: crypto.randomBytes(16).toString('hex')});
@@ -376,14 +387,14 @@ exports.sendEmailResetPassword = (req, res) => {
         const mailOptions = {
           from : process.env.ADMIN_EMAIL,
           to : user.email,
-          subject: 'Password Reset for Mataviguette',
-          text: `Hello, please change your password by clicking the link: \n` + process.env.CLIENT_ORIGIN + '\/reset\/' + token.token
+          subject: 'Changement de mot de passe',
+          text: `Bonjour, vous pouvez changer votre mot de passe en cliquant sur ce lien: \n` + process.env.CLIENT_ORIGIN + '\/reset\/' + token.token
           };
         transporter.sendMail(mailOptions, function(error, info) {
           if (error) {
               return res.status(500).send({ message: error.message });
           } else {
-              return res.status(200).send({ message: 'Please change your password by clicking the link sent to ' + user.email + '.' });
+              return res.status(200).send({ message: 'Changez votre mot de passe en cliquant sur le lien envoyé à ' + user.email + '.' });
           }
         });
       })
@@ -397,12 +408,12 @@ exports.resetPassword = (req, res) => {
       return res.status(400).send(err);
     }
     if (!token) {
-      return res.status(400).send({message: 'Your request for changing password has expired'})
+      return res.status(400).send({message: 'Votre demande de réinitialisation de mot de passe a expirée'})
     }
 
     bcrypt.hash(req.body.password, 8, async(err, hash) => {
       if (err) {
-        return res.status(400).send({message: 'Provide new password'});
+        return res.status(400).send({message: 'Indiquez un nouveau mot de passe'});
       }
       const newpass = {
         password: hash
@@ -410,7 +421,7 @@ exports.resetPassword = (req, res) => {
       User.findOne({ _id: token._userId, email: req.body.email} , async (err, user) => {
         if (err) { return res.status(400).send({message: 'Something went wrong'}); }
         if (!user) {
-          return res.status(400).send({ message: 'We are unable to find a user with that email'});
+          return res.status(400).send({ message: 'Identifiants incorrects'});
         }
         else {
           const result = await User.updateOne({ _id : user.id}, {$set: newpass}, function(err, upUser) {

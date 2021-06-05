@@ -1,6 +1,8 @@
 import React from "react";
 import {
   useToast,
+  FormControl,
+  FormLabel,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -9,7 +11,8 @@ import {
   ModalBody,
   useDisclosure,
   Button,
-  Stack
+  Stack,
+  Spinner
 } from "@chakra-ui/react";
 import {CardElement} from '@stripe/react-stripe-js';
 import dayjs from 'dayjs';
@@ -76,21 +79,25 @@ const ReservationCheckout = (props) => {
                                 <p>{props.days} jours</p>
                                 <p>{props.finalPrice}€</p>
                             </Stack>
-                            <Stack mt='3'>
-                            <label>
+                              <FormControl>
+                            <FormLabel>
                                 Paiement par carte
                                 <CardElement options={CARD_ELEMENT_OPTIONS} />
-                            </label>
-                            </Stack>
+                            </FormLabel>
+                              </FormControl>
                               
                         </ModalBody>
                         <ModalFooter>
                             <Button
-                                type='submit'
+                                disabled={props.disabled}
                                 onClick={() => props.confirmBooking()}
                                 mr='2'
                                 >
-                                    <span>Payer {props.finalPrice}€</span>
+                                    <span>
+                                      {props.loading && (
+                                        <Spinner size='xs'/>
+                                      )}
+                                      Payer {props.finalPrice}€</span>
                             </Button>{' '}
                             <Button onClick={onClose}>Fermer</Button>
                         </ModalFooter>

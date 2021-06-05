@@ -1,11 +1,10 @@
 import axios from 'axios';
 import authHeader from '../services/auth-header';
-import { trackPromise } from 'react-promise-tracker';
 
 const API_URL = "api/test/bookings";
 class BookingService {
-  async createBooking(startAt, endAt, guests) {
-    return trackPromise (axios.post(API_URL + "/Mataviguette", { startAt, endAt, guests}, {headers: authHeader()} ))
+  async createBooking(startAt, endAt, guests, username) {
+    return axios.post(API_URL + "/Mataviguette", { startAt, endAt, guests, username}, {headers: authHeader()} )
   }
 
   async getAllUserBookings() {

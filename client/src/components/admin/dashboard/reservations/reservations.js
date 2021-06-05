@@ -7,6 +7,8 @@ import {
     Tr,
     Th,
     Td,
+    Box,
+    Center
   } from "@chakra-ui/react"
 
 import ContactBooker from './ContactBooker.modal';
@@ -36,45 +38,47 @@ const Reservations = ({currentBookings, setCurrentBookings}) => {
 
     if (!currentBookings.length) {
         Reservations = (
-            <div><p>Aucune réversations à venir</p></div>
+            <Box><Center>Aucune réversations à venir</Center></Box>
         )
     } else {
         Reservations = (
             <>
-                <Table variant="simple">
-                    <Thead>
-                        <Tr>
-                            <Th>Nom</Th>
-                            <Th>Créee le</Th>
-                            <Th>Début</Th>
-                            <Th>Fin</Th>
-                            <Th>Jours</Th>
-                            <Th>Personnes</Th>
-                            <Th>Prix</Th>
-                            <Th>Actions</Th>
-                        </Tr>
-                    </Thead>
-                    <Tbody>
-                        {currentBookings.map((r) => (
-                            <Tr key={r._id}>
-                                <Th>{r.user.username} ({r.user.email})</Th>
-                                <Td>{dayjs(r.createDate).format('D MMM YYYY H:m')}</Td> 
-                                <Td>{dayjs(r.startAt).format('D MMM YYYY')}</Td> 
-                                <Td>{dayjs(r.endAt).format('D MMM YYYY')}</Td> 
-                                <Td>{r.days}</Td> 
-                                <Td>{r.guests}</Td> 
-                                <Td>{r.totalPrice}€</Td> 
-                                <Td>
-                                    <ContactBooker id={r._id} />
-                                    <DeleteBooking 
-                                    deleteBooking = {deleteBooking}
-                                    startAt = {r.startAt}
-                                    />
-                                </Td>
+                <Box overflowX = "auto">
+                    <Table variant="simple">
+                        <Thead>
+                            <Tr>
+                                <Th>Nom</Th>
+                                <Th>Créee le</Th>
+                                <Th>Début</Th>
+                                <Th>Fin</Th>
+                                <Th>Jours</Th>
+                                <Th>Personnes</Th>
+                                <Th>Prix</Th>
+                                <Th>Actions</Th>
                             </Tr>
-                        ))}
-                    </Tbody>
-                </Table>
+                        </Thead>
+                        <Tbody>
+                            {currentBookings.map((r) => (
+                                <Tr key={r._id}>
+                                    <Th>{r.user.username} ({r.user.email})</Th>
+                                    <Td>{dayjs(r.createDate).format('D MMM YYYY H:m')}</Td> 
+                                    <Td>{dayjs(r.startAt).format('D MMM YYYY')}</Td> 
+                                    <Td>{dayjs(r.endAt).format('D MMM YYYY')}</Td> 
+                                    <Td>{r.days}</Td> 
+                                    <Td>{r.guests}</Td> 
+                                    <Td>{r.totalPrice}€</Td> 
+                                    <Td>
+                                        <ContactBooker id={r._id} />
+                                        <DeleteBooking 
+                                        deleteBooking = {deleteBooking}
+                                        startAt = {r.startAt}
+                                        />
+                                    </Td>
+                                </Tr>
+                            ))}
+                        </Tbody>
+                    </Table>
+                </Box>
             </>
         )
     }

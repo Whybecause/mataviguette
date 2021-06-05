@@ -4,8 +4,8 @@ import authHeader from './auth-header';
 const API_URL = "api/test/send";
 
 class formContactService {
-    sendFormContact(name, email, message) {
-        return axios.post(API_URL, {name, email, message});
+    sendFormContact(data) {
+        return axios.post(API_URL, {name : data.name, email : data.email, message: data.message});
     }
 
     sendEmailToBooker(message, id) {

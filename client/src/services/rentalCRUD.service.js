@@ -1,6 +1,5 @@
 import axios from "axios";
 import authHeader from "../services/auth-header";
-import { trackPromise } from "react-promise-tracker";
 
 function httpResponseToJSON(response) {
   if (response.status !== 200) {
@@ -21,16 +20,16 @@ class rentalCRUDService {
   }
 
   async getMataviguette() {
-    return await trackPromise(
+    return await 
       axios.get("/api/test/rentals/current", { headers: authHeader() })
-    );
+    ;
   }
 
   getMataviguettePrice = async (setDailyRate) => {
     try {
-      const res = await trackPromise(
+      const res = await 
         axios.get("/api/test/rentals/current", { headers: authHeader() })
-      );
+      ;
       setDailyRate(res.data.dailyRate);
     } catch (error) {
       console.log(error);

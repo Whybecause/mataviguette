@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext } from "react";
 import {
   Icon,
   Box,
@@ -8,36 +8,26 @@ import {
   MenuItem,
   Button,
   Heading,
-  Container
 } from "@chakra-ui/react";
 import { ChevronDownIcon, SettingsIcon, CalendarIcon } from "@chakra-ui/icons";
 import { MdExitToApp, MdBuild} from 'react-icons/md';
 
+import { UserContext } from '../../UserContext';
 import history from '../../helpers/history';
 import authService from "../../services/auth.service";
 
 function Header() {
-  const [user, setUser] = useState("");
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [isValidToken, setIsValidToken] = useState(false);
-
-  useEffect(() => {
-    authService.getCurrentUser(setUser, setIsAdmin);
-    authService.isValidToken(setIsValidToken)
-
-  }, [isValidToken]);
+  const user = useContext(UserContext);
 
   async function logOut() {
     authService.logout();
-    setUser("");
-    setIsAdmin(false);
-    setIsValidToken(false);
+    user.setUser(null);
     history.push('/login')
   }
 
   let UserContainer = null;
 
-  if (!isValidToken) {
+  if (!user.user) {
     UserContainer = (
       <>
         <a href="/login">
@@ -47,13 +37,13 @@ function Header() {
     );
   }
 
-  if (isValidToken && !isAdmin) {
+  if (user.user && !user.isAdmin) {
     UserContainer = (
       <>
         <Box>
           <Menu>
             <MenuButton as={Button} rightIcon={<ChevronDownIcon />} size="sm">
-              {user}
+              {user.user}
             </MenuButton>
             <MenuList>
               <a href="/user">
@@ -70,13 +60,13 @@ function Header() {
     );
   }
 
-  if (isValidToken && isAdmin) {
+  if (user.user && user.isAdmin) {
     UserContainer = (
       <>
         <Box>
           <Menu>
             <MenuButton as={Button} rightIcon={<ChevronDownIcon />} size="sm">
-              {user}
+              {user.user}
             </MenuButton>
             <MenuList>
               <a href="/admin">

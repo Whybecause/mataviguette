@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Box } from '@chakra-ui/react';
 
 import bookingService from '../../services/booking.service';
 import DashboardNav from './dashboard/dashboard-nav';
@@ -59,16 +60,19 @@ const BoardAdmin = () => {
   
   return (
     <>
-      <DashboardNav
-        setShowReservations = {setShowReservations}
-        numberOfCurrentBookings ={currentBookings.length}
-        setShowCalendar = {setShowCalendar}
-        setShowHistorique = {setShowHistorique}
-        numberOfAllBookings = {allBookings.length}
-        setShowUpdateRental={setShowUpdateRental}
-      >      
-      </DashboardNav>
-      <div>{DashboardContent}</div>
+    <div className="small-page-height">
+
+        <DashboardNav
+          setShowReservations = {setShowReservations}
+          numberOfCurrentBookings ={currentBookings.length}
+          setShowCalendar = {setShowCalendar}
+          setShowHistorique = {setShowHistorique}
+          numberOfAllBookings = {allBookings.length}
+          setShowUpdateRental={setShowUpdateRental}
+          >      
+        </DashboardNav>
+        <Box mt={[40, 20, 20, 20]}>{DashboardContent}</Box>
+      </div>
     </>
   )
 }

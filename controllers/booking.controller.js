@@ -19,7 +19,8 @@ exports.createBooking = async (req, res) => {
     endAt,
     totalPrice,
     guests,
-    days
+    days,
+    username
   } = req.body;    
   const user = req.userId;
   const totalDays = daysController.getRangeOfDates(startAt, endAt).length - 1
@@ -47,29 +48,6 @@ exports.createBooking = async (req, res) => {
       message: "Indiquez le nombre de personnes!"
     });
   }
-
-
-function getUserEmail(user, callback) {
-  User.findById(user, function(err, foundUser) {
-    if (err) return console.log(err);
-    const userEmail = foundUser.email;
-    return callback(userEmail);
-  })
-}
-function getUserName(user, callback) {
-  User.findById(user, function(err, foundUser) {
-    if (err) return console.log(err);
-    const userName = foundUser.username;
-    return callback(userName);
-  })
-}
-
-getUserName(user, function(response) {
-  username = response;
-})
-getUserEmail(user, function(response) {
-  userEmail = response;
-})
 
   Rental.findOne({
       title: 'Mataviguette'
@@ -135,7 +113,7 @@ exports.getAllUserBookings = (req, res) => {
       }
       if (foundBookings.length === 0) {
         return res.status(404).send({
-          message: "You don't have any bookings yet"
+          message: "Vous n'avez aucune réservation"
         });
       } else {
         return res.json(foundBookings);

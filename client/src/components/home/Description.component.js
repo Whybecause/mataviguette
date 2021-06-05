@@ -1,28 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { Box, Avatar, Stack, HStack, SimpleGrid, Divider } from "@chakra-ui/react";
-import profil from "../../assets/profil-valerie.jpg";
+import { Box, Avatar, Stack, HStack, SimpleGrid, Divider, Button } from "@chakra-ui/react";
 
 
-const Description = ({Reservation, EquipppementsIcons}) => {
+const Description = ({ ContactModal }) => {
+const [ isOpened, setIsOpened ] = useState(false);
+const handleToggle = () => setIsOpened(!isOpened)
   return (
     <>
-    <SimpleGrid columns={[1, 2, 2]} mt='5' p='2' >
-
-        <HStack >
-            <Stack p='2'>
-                <h2>Maison entière. Hôte : Valérie</h2>
-                <p>8 voyageurs - 3 chambres - 7 lits - 1,5 salle de bain</p>
-            </Stack>
-            <Avatar src={profil} alt="Profil Valérie" />
-        </HStack>
-
-        {Reservation}
-
-    </SimpleGrid>
-    
-    <SimpleGrid columns={[1, 2, 2]}>
-
         <Box as='section' p='5'>
             <Divider/>
             <Stack mt='3'>
@@ -34,9 +19,12 @@ const Description = ({Reservation, EquipppementsIcons}) => {
                     environnants, le charme de ses murs en pierre et de ses poutres, les
                     objets et meubles chinés en brocante vous donneront la sensation que le
                     temps s'y est arrêté. Bienvenue à La Mataviguette !
-                </p>
+                </p>      
+                <Button variant="outline" w={'30%'} onClick={handleToggle}>{isOpened ? 'Fermer' : 'Lire la suite...'}</Button>
                 <Divider/>
-                <h4>Le logement</h4>
+                {isOpened && (
+                    <>
+                    <h4>Le logement</h4>
                 <p>
                     Maison de caractère-Beau séjour lumineux et confortable avec une
                     grande cheminée - Terrasse de 80 m² divisée en plusieurs coins
@@ -47,6 +35,14 @@ const Description = ({Reservation, EquipppementsIcons}) => {
                     11 hectares de bois privé autour - Et le calme.....pas loin de la
                     ville !
                 </p>
+                <Divider />
+                <h4>Le quartier</h4>
+                <p>La maison est située au bord d'une petite route de campagne très peu fréquentée. Elle est entourée de bois et excentrée du village de Bajamont. Un véhicule est nécessaire pour les courses (Intermarché- boulangerie- pharmacie .... à 10 minutes en voiture)</p>
+                <Divider />
+                <h4>Transports</h4>
+                <p>La gare d'Agen est à 15 minutes</p>
+                <p> Les commerces à 10 min en voiture</p>
+                <p className="p-discret">L'adresse exacte est communiquée lorsque la réservation est confirmée</p>
                 <Divider/>
                 <h4>Accès des voyageurs</h4>
                 <p>
@@ -57,13 +53,17 @@ const Description = ({Reservation, EquipppementsIcons}) => {
                 <Divider/>
                 <h4>Autres remarques</h4>
                 <p>IMPORTANT La maison dispose d'une Box 4G. Il n'y a pas de télé.</p>
+                <Divider />
+                </>
+                    )}
             </Stack>
+
+            <Box p='5'>{ContactModal}</Box>
+            
         </Box>
 
-        {EquipppementsIcons}
 
-    </SimpleGrid>
-    </>
+     </>
   );
 };
 

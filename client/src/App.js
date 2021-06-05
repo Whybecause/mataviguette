@@ -2,6 +2,7 @@ import React from "react";
 import { Router, Route, Switch } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
 
+
 import history from "./helpers/history";
 import Header from "./components/header/header.component";
 import Login from "./components/login/login.component";
@@ -12,10 +13,11 @@ import UserDashboard from "./components/user/dashboard/user-dashboard.component"
 import BoardModerator from "./components/board-moderator.component";
 import BoardAdmin from "./components/admin/board-admin.component";
 import Caroussel from "./components/home/Caroussel";
-import Equippements from "./components/home/Equippements.component";
-import ScrollToTopRoute from "./components/home/ScrollTop";
+import Equippements from "./components/Equippements.component";
 import RegisterConfirm from "./components/register/registerConfirm.component";
 import ResetPassForm from "./components/login/resetPass.component";
+import Footer from './components/footer/Footer.component';
+
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 const stripePromise = loadStripe(
@@ -28,28 +30,27 @@ function App() {
       <Elements stripe={stripePromise}>
         <ChakraProvider>
           <Router history={history}>
-            <Header />
-            <div className="">
-              <Switch>
-                <Route exact path="/" component={Homepage} />
-                <Route exact path="/login" component={Login} />
-                <Route exact path="/register" component={Register} />
-                <Route exact path="/profile" component={Profile} />
-                <Route path="/user" component={UserDashboard} />
-                <Route path="/mod" component={BoardModerator} />
-                <Route path="/admin" component={BoardAdmin} />
-                <Route
-                  path="/confirmation/:token"
-                  component={RegisterConfirm}
-                />
-                <Route path="/reset/:token" component={ResetPassForm} />
-                <Route path="/photos" component={Caroussel} />
-                <ScrollToTopRoute
-                  path="/equippements"
-                  component={Equippements}
-                />
-              </Switch>
-            </div>
+                <Header />
+                <Switch>
+                  <Route exact path="/" component={Homepage} />
+                  <Route exact path="/login" component={Login} />
+                  <Route exact path="/register" component={Register} />
+                  <Route exact path="/profile" component={Profile} />
+                  <Route path="/user" component={UserDashboard} />
+                  <Route path="/mod" component={BoardModerator} />
+                  <Route path="/admin" component={BoardAdmin} />
+                  <Route
+                    path="/confirmation/:token"
+                    component={RegisterConfirm}
+                    />
+                  <Route path="/reset/:token" component={ResetPassForm} />
+                  <Route path="/photos" component={Caroussel} />
+                  <Route
+                    path="/equippements"
+                    component={Equippements}
+                    />
+                </Switch>
+                <Footer />
           </Router>
         </ChakraProvider>
       </Elements>
