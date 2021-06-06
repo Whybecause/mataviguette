@@ -146,27 +146,27 @@ const Login = () => {
                 <Divider />
                 
                 <Box d='flex'mt='5'>
-                    <Stack>
-                <CustomModal 
-                buttonTitle='Mot de passe oublié?' 
-                header='Réinitialisez votre mot de passe'
-                loading={loading}
-                handleConfirm={handleSendResetPassword}
-                />
-                <CustomModal 
-                buttonTitle='Renvoi de la validation du compte' 
-                header='Recevez un nouveau mail de validation'
-                loading={loading}
-                handleConfirm={handleResendConfirm}
-                />
-                  <Link to="/register">                  
-                <Button variant="outline">
-                  <p>
-                    Créer un compte
-                  </p>
-                  </Button>
+                  <Stack>
+                    <CustomModal 
+                    buttonTitle='Mot de passe oublié?' 
+                    header='Réinitialisez votre mot de passe'
+                    loading={loading}
+                    handleConfirm={handleSendResetPassword}
+                    />
+                    <CustomModal 
+                    buttonTitle='Renvoi de la validation du compte' 
+                    header='Recevez un nouveau mail de validation'
+                    loading={loading}
+                    handleConfirm={handleResendConfirm}
+                    />
+                    <Link to="/register">                  
+                    < Button variant="outline">
+                        <p>
+                          Créer un compte
+                        </p>
+                      </Button>
                     </Link>
-                    </Stack>
+                  </Stack>
                 </Box>
    
             </form>

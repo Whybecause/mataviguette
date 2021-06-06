@@ -28,9 +28,7 @@ class AuthService {
 
   isValidToken = async () => {
     try {
-      const res = await axios.get("api/token", { headers: authHeader() })
-      // setIsValidToken(res.data)
-      console.log(res.data);
+      await axios.get("api/token", { headers: authHeader() })
     }
     catch (error) {
       console.log(error)

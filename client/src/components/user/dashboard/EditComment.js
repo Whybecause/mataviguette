@@ -10,9 +10,10 @@ import {
     ModalBody,
     useDisclosure,
     Textarea,
-    Spinner
+    Spinner,
+    Icon
 } from "@chakra-ui/react";
-import { ChatIcon } from '@chakra-ui/icons';
+import { ChatIcon, CloseIcon } from '@chakra-ui/icons';
 
 import commentService from '../../../services/comment.service';
 
@@ -33,30 +34,29 @@ const EditComment = (props) => {
     async function editComment(e) {
         e.preventDefault();
         setLoading(true);
-        await commentService.updateUserComment(props.commentId, text)
-        .then(
-            res => {
-                setLoading(false);
-                props.setRefresh('edit')
-                onClose();
-                toast({
-                    title: res.data.message,
-                    status: "success",
-                    duration: 3000,
-                    isClosable: true,
-                })
-            },
-            error => {
-                setLoading(false);
-                toast({
-                    title: error.response.data.message,
-                    status: "error",
-                    duration: 3000,
-                    isClosable: true,
-                })
-            }
-        )
-        .catch(err => console.log(err), setLoading(false))
+        try {
+            const res = await commentService.updateUserComment(props.commentId, text)
+            setLoading(false);
+            props.setRefresh('edit')
+            onClose();
+            toast({
+                position: 'top',
+                title: res.data.message,
+                status: "success",
+                duration: 3000,
+                isClosable: true,
+            })
+        }
+        catch(error) {
+            setLoading(false);
+            toast({
+                position: 'top',
+                title: error.response.data.message,
+                status: "error",
+                duration: 3000,
+                isClosable: true,
+            })
+        }
     }
 
     return (
@@ -75,13 +75,13 @@ const EditComment = (props) => {
                         />
                     </ModalBody>
                     <ModalFooter>
-                        <Button type='submit' colorScheme='teal' disabled={loading} onClick={(e) => editComment(e)}>
+                        <Button mr='2' type='submit' colorScheme='teal' variant="outline" disabled={loading} onClick={(e) => editComment(e)}>
                             {loading && (
                                 <Spinner size='xs' />
                             )}
                             Envoyer
                         </Button>
-                        <Button onClick={onClose}>Fermer</Button>
+                        <Button colorScheme='red' onClick={onClose}><Icon as={CloseIcon}/></Button>
                     </ModalFooter>
                 </ModalContent>
             </form>

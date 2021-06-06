@@ -1,13 +1,8 @@
-import React, { Component } from 'react';
-import {
-    Carousel,
-    CarouselItem,
-    CarouselControl,
-    CarouselIndicators,
-    CarouselCaption,
-} from 'reactstrap';
-import { Button } from 'reactstrap';
-import { HashLink as Link} from 'react-router-hash-link';
+import React from 'react';
+import {  Box, Image } from '@chakra-ui/react';
+
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
 
 import pic1 from '../../assets/pic1.jpg';
 import piscine from '../../assets/piscine.jpg';
@@ -54,13 +49,6 @@ import fleur from '../../assets/fleur.jpg';
 import anes from '../../assets/anes.jpg';
 import batisse from '../../assets/batisse.jpg';
 import canal from '../../assets/canal.jpg';
-
-
-
-export const Caroussel = () => (
-      <MyCarousel />
-)
-export default Caroussel;
 
 const items = [
   {
@@ -343,104 +331,25 @@ const items = [
 
 ];
 
+const Caroussel = () => {
 
+  return (
+    <>
+    <Box pr='5' pl='5' className="form-container">
 
-class MyCarousel extends Component {
-  constructor(props) {
-      super(props);
-      this.state = { activeIndex: 0 };
-      this.next = this.next.bind(this);
-      this.previous = this.previous.bind(this);
-      this.goToIndex = this.goToIndex.bind(this);
-      this.onExiting = this.onExiting.bind(this);
-      this.onExited = this.onExited.bind(this);
-  }
-
-  onExiting() {
-      this.animating = true;
-  }
-
-  onExited() {
-      this.animating = false;
-  }
-
-  next() {
-      if (this.animating) return;
-      const nextIndex = this.state.activeIndex === items.length - 1 ? 0 : this.state.activeIndex + 1;
-      this.setState({ activeIndex: nextIndex });
-  }
-
-  previous() {
-      if (this.animating) return;
-      const nextIndex = this.state.activeIndex === 0 ? items.length - 1 : this.state.activeIndex - 1;
-      this.setState({ activeIndex: nextIndex });
-  }
-
-  goToIndex(newIndex) {
-      if (this.animating) return;
-      this.setState({ activeIndex: newIndex });
-  }
-
-
-
-  render() {
-      const { activeIndex } = this.state;
-      const slides = items.map((item) => {    
-          return (
-              <CarouselItem
-                  className="my-Carousel"
-                  tag="div"
-                  key={item.id}
-                  onExiting={this.onExiting}
-                  onExited={this.onExited}
-              >
-              <div className="carousel-container">
-                <div className="carousel-img-container">
-                  <img className="my-CarouselImage"
-                    src={item.src} alt={item.altText}/>
-                </div>
-                <div className="carousel-text-container">
-                <CarouselCaption 
-                  className="carousel-caption"
-                  captionHeader={item.caption} 
-                  captionText={item.id}/>
-                </div>
-              </div>
-              <div className="btn-carousel-container">
-                <Link to="/">
-                  <Button className="btn-carousel" color="secondary">Fermer
-                  </Button>{' '}
-                </Link>
-              </div>
-              </CarouselItem>
-          );
-      });
-      const insta = items.map( (item) => {
-        return (
-          <img className="col-md-4 m-top-1" src={item.src} alt={item.altText} key={item.id}/>
-        );
-      });
-      
-      return (
-          <div>
-            <div  className="carousel-return-container big-screen">
-              <Carousel className="trustedMechCarousel"
-                  activeIndex={activeIndex}
-                  next={this.next}
-                  previous={this.previous}
-              >
-                  <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={this.goToIndex} />
-                  {slides}
-                  <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
-                  <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />
-              </Carousel>
-            </div>
-              <div className="container small-screen">
-                <div className="row">
-                    {insta}
-                </div>
-              </div>
-          </div>
-      );
-  }
+    <Carousel>
+      {items.map( (item) => (
+        <>
+          <Box key={item.id}>
+            <Image src={item.src} className="slider-img" h={["200px", "400px", "600px", "750px"]}/>
+          <Box>{item.caption}</Box>
+          </Box>
+        </>
+      ))}
+    </Carousel>
+      </Box>
+    </>
+  )
 }
+
+export default Caroussel;

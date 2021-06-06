@@ -55,7 +55,7 @@ exports.signup = (req, res) => {
   }
   if (!Validator.equals(req.body.password, req.body.password2)) {
     return res.status(400).send({
-      message: "Password must match."
+      message: "Les mots de passe sont différents."
     });
   }
 
@@ -147,7 +147,7 @@ exports.confirmationPost = (req, res, next) => {
         return res.status(400).send({ message: 'Aucun utilisateur trouvé'});
       }
       if (user.isVerified) {
-        return res.status(400).send({ type: 'already-verified', message: 'Votre compte a été vérifié !'});
+        return res.status(400).send({ type: 'already-verified', message: 'Votre compte a déjà été validé !'});
       } else {
       user.isVerified = true;
       Role.findOne({name: "user"}, (err, role) => {
@@ -276,60 +276,35 @@ exports.signin = (req, res) => {
 };
 
 exports.changePassword = async (req, res) => {
-    //for the front form, need ton enter Oldpass, password, confirmNewPass
   const userId = req.userId;
-  const oldPass = req.body.oldPass
+  const oldPass = req.body.oldPass;
+  const password = req.body.password;
   const confirmNewPass = req.body.confirmNewPass;
 
-  bcrypt.hash(req.body.password, 8, async (err, hash) => {
-    if (err) {
-      return res.status(400).send({message: 'Entrez un nouveau mot de passe'});
-    }
-    const newpass = {
-      password: hash
-    }
-    const result = await User.findByIdAndUpdate(
-      userId, {
-        $set: newpass
-      },
-      function (err, user) {
-        var passwordIsValid = bcrypt.compareSync(
-          oldPass,
-          user.password
-        );
-        if (err) return res.status(400).send({message: 'Error in update'})
-        if (oldPass === undefined) {
-          return res.status(400).send({message: 'Entrez votre mot de passe actuel'})
+  try {
+    await bcrypt.hash(password, 8, async (err, hash) => {
+      if (err) { return res.status(400).send({ message: 'Entrez un nouveau mot de passe'})}
+      const newpass = { password : hash }
+      if (oldPass === undefined) { return res.status(400).send({ message: 'Entrez votre mot de passe actuel'})}
+      if (oldPass.length === 0) {  return res.status(400).send({ message: 'Entrez votre mot de passe actuel'}) }
+      if (password.length === 0) {  return res.status(400).send({ message: 'Entrez votrenouvau  mot de passe'}) }
+      if (!Validator.isLength(password, { min: 6, max: 40})) { return res.status(400).send({message:"Le mot de passe doit contenir au moins 6 caractères."});}
+      if (!Validator.equals(password, confirmNewPass)) { return res.status(400).send({ message: "Les mots de passe sont différents." }); }
+  
+      const user = await User.findById({ _id: userId })
+      const passwordIsValid = await bcrypt.compareSync(oldPass, user.password);
+      if (!passwordIsValid) { return res.status(401).send({ message: "Ce n'est pas votre mot de passe actuel!"});}   
+      user.set(newpass)
+      user.save(err => {
+        if (err) {
+          return res.status(400).send({ message: 'Erreur dans la mise à jour'})
         }
-        if (oldPass.length === 0) {
-          return res.status(400).status(400).send({message: 'Entrez votre mot de passe actuel'})
-        }
-        if (req.body.password.length === 0) {
-          return res.status(400).send({message: 'Entrez votre nouveau mot de passe'})
-        }
-        if (!Validator.isLength(req.body.password, {
-          min: 6,
-          max: 40
-        })) {
-        return res.status(400).send({message:"Password must be at least 6 characters."});
-        }
-        if (!Validator.equals(req.body.password, req.body.confirmNewPass)) {
-          return res.status(400).send({
-            message: "Password must match."
-          });
-        }
-        if (!passwordIsValid) {
-          return res.status(401).send({
-            message: "Ce n'est pas votre mot de passe actuel!"
-          });
-        } else {
-          return res.status(200).send({
-            message: 'Votre mot de passe a été mis à jour ! '
-          })
-        }
-      }
-    )
-  })
+        return res.status(200).send({ message: 'Votre mot de passe a été mis à jour !'})
+      })
+    })
+    } catch(error) {
+    console.log(error);
+  }
 }
 
 exports.isValidToken = async (req, res) => {
@@ -435,10 +410,10 @@ exports.resetPassword = (req, res) => {
             return res.status(400).send({message:"Password must be at least 6 characters."});
             }
             if (!Validator.equals(req.body.password, req.body.password2)) {
-              return res.status(400).send({ message : 'Password must match'});
+              return res.status(400).send({ message : 'Les mots de passe sont différents'});
             }
             else {
-              return res.status(200).send({ message: 'Password Updated ! '});
+              return res.status(200).send({ message: 'Votre mot de passe a été mis à jour ! '});
             }
           });
         }

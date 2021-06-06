@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useForm } from "react-hook-form";
 import {
     useToast,
     Button,
@@ -10,45 +11,48 @@ import {
     ModalBody,
     useDisclosure,
     Textarea,
-    Spinner
+    Spinner,
+    Icon,
+    FormControl,
+    FormLabel,
+    FormErrorMessage
 } from "@chakra-ui/react";
-import { ChatIcon } from '@chakra-ui/icons';
+import { ChatIcon, CloseIcon } from '@chakra-ui/icons';
 
 import commentService from '../../../services/comment.service';
 
 const AddComment = (props) => {
+    const { register, handleSubmit, reset, formState: { errors }, } = useForm()
     const toast = useToast()
-
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [ loading, setLoading ] = useState(false);
-    const [ message, setMessage ] = useState('');
 
-    async function submitComment(e) {
-        e.preventDefault();
+    async function submitComment(data) {
         setLoading(true);
-        await commentService.submitComment(props.id, message)
-        .then(
-            res => {
-                setLoading(false);
-                props.setRefresh('add')
-                toast({
-                    title: res.data.message,
-                    status: "success",
-                    duration: 2000,
-                    isClosable: true,
-                })
-            },
-            error => {
-                setLoading(false);
-                toast({
-                    title: error.response.data.message,
-                    status: "error",
-                    duration: 2000,
-                    isClosable: true,
-                })
-            }
-        )
-        .catch(err => console.log(err), setLoading(false))
+        try {
+            const res = await commentService.submitComment(props.id, data.message)
+            props.setRefresh('add');
+            setLoading(false);
+            toast({
+                position: 'top',
+                title: res.data.message,
+                status: "success",
+                duration: 2000,
+                isClosable: true
+            })
+            onClose();
+            reset();
+        }
+        catch(error) {
+            setLoading(false);
+            toast({
+                position: 'top',
+                title: error.response.data.message,
+                status: "error",
+                duration: 2000,
+                isClosable: true
+            })
+        }
     }
 
     return (
@@ -57,23 +61,33 @@ const AddComment = (props) => {
         </Button>
         <Modal isOpen={isOpen} onClose={onClose} >
             <ModalOverlay/>
-            <form>
+            <form onSubmit={handleSubmit(submitComment)}>
                 <ModalContent>
                     <ModalHeader>Laissez vos impresions sur votre séjour</ModalHeader>
                     <ModalBody>
-                        <Textarea
-                        value={message}
-                        onChange={(e) => setMessage((e.target.value))}
-                        />
+                        <FormControl id="message">
+                            <FormLabel htmlFor="message"></FormLabel>
+                            <Textarea
+                            {...register("message", {required: true,})}
+                            type="text"
+                            id="message"
+                            name="message"
+                            placeholder="Entrez notre message"
+                            required
+                            />
+                            <FormErrorMessage>
+                                {errors.message && errors.message.message}
+                            </FormErrorMessage>
+                        </FormControl>
                     </ModalBody>
                     <ModalFooter>
-                        <Button type='submit' colorScheme='teal' disabled={loading} onClick={(e) => submitComment(e)}>
+                        <Button mr='2' type='submit' colorScheme='teal' variant="outline" disabled={loading}>
                             {loading && (
                                 <Spinner size='xs' />
                             )}
                             Envoyer
                         </Button>
-                        <Button onClick={onClose}>Fermer</Button>
+                        <Button colorScheme="red" onClick={onClose}><Icon as={CloseIcon}/></Button>
                     </ModalFooter>
                 </ModalContent>
             </form>

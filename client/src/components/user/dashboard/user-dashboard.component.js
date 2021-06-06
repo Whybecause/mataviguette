@@ -42,13 +42,15 @@ const UserDashboard = () => {
 
     return (
     <>
-    <DashboardNav
-        setShowCurrentBookings = {setShowCurrentBookings}
-        setShowAllBookings = {setShowAllBookings}
-        numberOfCurrentBookings={currentBookings.length}
-        numberOfAllBookings={allBookings.length}
-    ></DashboardNav>
-    {DashboardContent}
+        <div className="small-page-height">
+            <DashboardNav
+                setShowCurrentBookings = {setShowCurrentBookings}
+                setShowAllBookings = {setShowAllBookings}
+                numberOfCurrentBookings={currentBookings.length}
+                numberOfAllBookings={allBookings.length}
+                ></DashboardNav>
+            {DashboardContent}
+        </div>
     </>)
 }
 

@@ -12,5 +12,5 @@ module.exports = function(app) {
 
     app.post("/api/test/send", controller.sendContactForm);
     app.post("/api/test/booker/send/:id", [authJwt.verifyToken, authJwt.isAdmin], controller.sendEmailToBooker);
-    app.post("/api/test/host/send/:id", [authJwt.verifyToken, authJwt.isAdmin], controller.sendEmailToHost);
+    app.post("/api/test/host/send/:id", [authJwt.verifyToken], controller.sendEmailToHost);
 }

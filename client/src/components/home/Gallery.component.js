@@ -18,7 +18,6 @@ const Gallery = () => {
   return (
     <>
     <section onClick={() => history.push('/photos')} className="pointer">
-
       <SimpleGrid columns={[2, 2, 2]} p="5">
         <Box d="flex" mr="5px">
           <Image
@@ -51,7 +50,7 @@ const Gallery = () => {
           </SimpleGrid>
         </Box>
       </SimpleGrid>
-                </section>
+       </section>
     </>
   );
 };

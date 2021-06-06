@@ -1,80 +1,118 @@
 import React, { useState } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { useForm } from "react-hook-form";
+import { useToast, Modal, Icon, useDisclosure, Button, Spinner,  Input, FormControl, FormLabel, FormErrorMessage, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody } from '@chakra-ui/react';
+import { CloseIcon } from '@chakra-ui/icons';
 
-const UpdatePassModal = (props) => {
-    const {
-        buttonLabel,
-        onChangeOldPass,
-        onChangePassword,
-        onChangeConfirmNewPass,
-        handleUpdatePassword,
-        className
-    } = props;
+import authService from "../../../services/auth.service";
 
-    const [modal, setModal]= useState(false);
-    const toggle=() => setModal(!modal);
+const UpdatePassModal = () => {
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const { register, handleSubmit, reset, formState: { errors }, } = useForm()
+    const toast = useToast()
+
+    const [ loading, setLoading ] = useState(false);
+
+    async function handleUpdatePassword(data) {
+        setLoading(true);
+        try {
+            const res = await authService.updatePassword(data);
+            setLoading(false);
+            onClose();
+            reset();
+            toast({
+                position: 'top',
+                title: res.data.message,
+                status: "success",
+                duration: 3000,
+                isClosable: true,
+            })   
+        }
+        catch (error) {
+            setLoading(false);
+            toast({
+                position: 'top',
+                title: error.response.data.message,
+                status: "error",
+                duration: 3000,
+                isClosable: true,
+            })
+        }
+    }
 
     return (
-        <div>
-        <Button color="primary" onClick={toggle}>{buttonLabel}</Button>
-        <Modal isOpen={modal} toggle={toggle} >
-            <ModalHeader toggle={toggle}>Change Password</ModalHeader>
-            <form
-                id="updatePassword-form"
-                methode= "PATCH"
-                >
-                <ModalBody>
-                    <div className="form-group">
-                        <label htmlFor="oldPass">Current Password</label>
-                        <input
-                            type="password"
-                            className="form-control"
-                            name="oldPass"
-                            value={props.oldPass}
-                            onChange={onChangeOldPass}
-                        />
-                    </div> 
-                    <div className="form-group">
-                        <label htmlFor="password">New Password</label>
-                        <input
-                            type="password"
-                            className="form-control"
-                            name="password"
-                            value={props.password}
-                            onChange={onChangePassword}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="confirmNewPass">Confirm New Password</label>
-                        <input
-                            type="password"
-                            className="form-control"
-                            name="confirmNewPass"
-                            value={props.confirmNewPass}
-                            onChange={onChangeConfirmNewPass}
-                        />
-                    </div>
-                    <div>
-                        {props.alert && (
-                        <div className={className ? "alert alert-success" : "alert alert-danger"} role="alert">
-                        {props.alert}
-                        </div>
-                        )}
-                    </div>
-                </ModalBody>
-                <ModalFooter>
-                    <Button color="primary" type="submit" onClick={handleUpdatePassword} disabled={props.loading}>
-                        {props.loading && (
-                            <span className="spinner-border spinner-border-sm"></span>
-                        )}
-                            <span>Send</span>
-                    </Button>{' '}
-                    <Button color="danger" onClick={toggle} >Cancel</Button>
-                </ModalFooter>
-            </form>
-        </Modal>
-    </div>
+        <>
+            <Button onClick={onOpen}>Modifiez votre mot de passe</Button>
+            <Modal isOpen={isOpen} onClose={onClose}>
+            <ModalOverlay />
+                <ModalContent>
+                    <ModalHeader>Modifiez votre mot de passe</ModalHeader>
+                        <form onSubmit={handleSubmit(handleUpdatePassword)}>
+                    <ModalBody>
+                            <FormControl id="oldPass">
+                                <FormLabel htmlFor="oldPass"></FormLabel>
+                                <Input
+                                    {...register("oldPass", {
+                                        required: true
+                                    })}
+                                    type="password"
+                                    id="oldPass"
+                                    name="oldPass"
+                                    placeholder="Votre mot de passe actuel"
+                                    required
+                                />
+                                <FormErrorMessage>
+                                    {errors.oldPass && errors.oldPass.message}
+                                </FormErrorMessage>
+                            </FormControl>
 
+                            <FormControl id="password">
+                                <FormLabel htmlFor="password"></FormLabel>
+                                <Input
+                                    {...register("password", {
+                                        required: true
+                                    })}
+                                    type="password"
+                                    id="password"
+                                    name="password"
+                                    placeholder="Votre nouveau mot de passe"
+                                    required
+                                />
+                                <FormErrorMessage>
+                                    {errors.password && errors.password.message}
+                                </FormErrorMessage>
+                            </FormControl>
+
+                            <FormControl id="confirmNewPass">
+                                <FormLabel htmlFor="confirmNewPass"></FormLabel>
+                                <Input
+                                    {...register("confirmNewPass", {
+                                        required: true
+                                    })}
+                                    type="password"
+                                    id="confirmNewPass"
+                                    name="confirmNewPass"
+                                    placeholder="Confirmez votre nouveau mot de passe"
+                                    required
+                                />
+                                <FormErrorMessage>
+                                    {errors.confirmNewPass && errors.confirmNewPass.message}
+                                </FormErrorMessage>
+                            </FormControl>
+
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button mr='2' colorScheme="teal" type="submit" variant="outline" disabled={loading} alignItems='center'>
+                            {loading && (
+                                <Spinner size='xs'/>
+                                )}
+                            Valider</Button>
+                        <Button colorScheme='red' onClick={onClose}><Icon as ={CloseIcon}/></Button>
+                    </ModalFooter>
+                                </form>
+                </ModalContent>
+            </Modal>
+
+        </>
     )
 }
 

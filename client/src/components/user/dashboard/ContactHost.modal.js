@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { useForm } from "react-hook-form";
 
-import { EmailIcon } from '@chakra-ui/icons';
+import { EmailIcon, CloseIcon } from '@chakra-ui/icons';
 import {
     useToast,
     Button,
@@ -11,50 +12,50 @@ import {
     ModalFooter,
     ModalBody,
     useDisclosure,
+    FormControl,
+    FormLabel,
+    FormErrorMessage,
+    Spinner,
+    Input,
+    Textarea,
+    Icon
 } from "@chakra-ui/react";
 
-import { Button1, Button2 } from '../../styledComponents/Button-Wrapper';
 import formContactService from '../../../services/formContact.service';
 
 const ContactHost = (props) => {
+    const { register, handleSubmit, reset, formState: { errors }, } = useForm()
     const { isOpen, onOpen, onClose } = useDisclosure()
     const toast = useToast()
 
     const [ loading, setLoading ] = useState(false);
-    const [ message, setMessage ] = useState('');
 
-    function resetForm() { setMessage('');}
-
-    async function contactHost(e) {
-        e.preventDefault();
+    async function contactHost(data) {
         setLoading(true);
-        await formContactService.sendEmailToHost(message, props.id)
-        .then(res => {
+        try {
+            const res = await formContactService.sendEmailToHost(data.message, props.id)
             setLoading(false);
-            resetForm();
             toast({
+                position: 'top',
                 title: res.data.message,
                 status: "success",
                 duration: 2000,
-                isClosable: true,
+                isClosable: true
             })
-        },
-        error => {
+            onClose();
+            reset();
+        }
+        catch (error) {
             setLoading(false);
             toast({
+                position: 'top',
                 title: error.response.data.message,
                 status: "error",
                 duration: 2000,
-                isClosable: true,
+                isClosable: true
             })
-        })
-        .catch(err => {
-            console.log(err);
-        })
+        }
     }
-
-
-
     
     return (
         <>
@@ -62,36 +63,40 @@ const ContactHost = (props) => {
             </Button>
             <Modal isOpen={isOpen} onClose={onClose} >
                 <ModalOverlay/>
-                <form>
+                <form onSubmit={handleSubmit(contactHost)}>
                     <ModalContent>
                         <ModalHeader>Contactez moi pour plus d'informations</ModalHeader>
                         <ModalBody>
-                            <div className="form-group">
-                                <label htmlFor="message">Message</label>
-                                <textarea
+                            <FormControl id="message">
+                                <FormLabel htmlFor="message"></FormLabel>
+                                <Textarea 
+                                    {...register("message", {
+                                    required: true,
+                                    })}
                                     type="text"
-                                    className="form-control"
+                                    id="message"
                                     name="message"
-                                    id='message'
-                                    value={message}
-                                    onChange={(e) => setMessage(e.target.value)}
-                                    placeholder="Message"
+                                    placeholder="Entrez notre message"
                                     required
-                                    />
-                            </div>
+                                />
+                                <FormErrorMessage>
+                                    {errors.message && errors.message.message}
+                                </FormErrorMessage>
+                            </FormControl>
                         </ModalBody>
                         <ModalFooter>
-                            <Button1
+                            <Button
+                                mr="2"
                                 type='submit'
-                                onClick={(e) => contactHost(e)}
+                                variant="outline"
                                 disabled={loading}
                                 >
                                 {loading && (
-                                    <span className="spinner-border spinner-border-sm"></span>
+                                    <Spinner size='xs' />
                                     )}
-                                    <span>Envoyer</span>
-                            </Button1>{' '}
-                            <Button2 onClick={onClose}>Fermer</Button2>
+                                <span>Envoyer</span>
+                            </Button>
+                            <Button colorScheme="red" onClick={onClose}><Icon as={CloseIcon}/></Button>
                         </ModalFooter>
                     </ModalContent>
                 </form>
