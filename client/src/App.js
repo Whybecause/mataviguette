@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Router, Route, Switch } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
 import { Elements } from "@stripe/react-stripe-js";
@@ -19,12 +19,31 @@ import RegisterConfirm from "./components/register/registerConfirm.component";
 import ResetPassForm from "./components/login/resetPass.component";
 import Footer from './components/footer/Footer.component';
 
-
 const stripePromise = loadStripe(
   "pk_test_51GqFXwJAPfrV8kT4Tih5t5zX6T7KVorBovZAI108WBV20GkoOcRKDLQ03X1zv91wdeqV8tIeotpvxZBefL22Gsmw00qQrHXRzW"
 );
 
 function App() {
+  // const [ isLoading, setIsLoading ] = useState(true);
+
+  // function waitDom() {
+  //   return new Promise(resolve => setTimeout( () => resolve(), 2000));
+  // }
+
+  // useEffect( () => {
+  //   waitDom().then( () => {
+  //     const el = document.querySelector(".loader-container");
+  //     if (el) {
+  //       el.remove();
+  //       setIsLoading(!isLoading);
+  //     }
+  //   });
+  // }, []);
+
+  // if (isLoading) {
+  //   return null;
+  // }
+
   return (
     <>
       <Elements stripe={stripePromise}>
