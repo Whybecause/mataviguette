@@ -1,9 +1,10 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import { Box, Image, SimpleGrid, Text, Divider, Stack, Icon } from '@chakra-ui/react';
 
 import washingMashine from '../../assets/washing-machine.svg';
 import iron from '../../assets/iron.png';
-import {FaBed, FaParking, FaSwimmingPool, FaFireExtinguisher, FaThermometerThreeQuarters, FaSmokingBan, FaPaw} from 'react-icons/fa';
+import {FaBed, FaParking, FaSwimmingPool, FaFireExtinguisher, FaThermometerThreeQuarters} from 'react-icons/fa';
 import {IoIosBed} from 'react-icons/io';
 import { GiHanger, GiTransportationRings} from 'react-icons/gi';
 import { WiSmoke } from "react-icons/wi";
@@ -102,7 +103,10 @@ const EquipppementsIcons = () => {
                     </Stack>
 
                     <Stack direction={'row'}>
-                        <a className="a-color1" href="/equippements">Afficher les 23 équippements</a>
+                        <Link to="/equippements">
+                            <p className="a-color1">Afficher les 23 équippements
+                            </p>
+                            </Link>
                     </Stack>
 
                 </SimpleGrid>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from "react-hook-form";
 
 import {
@@ -20,15 +20,15 @@ import {
 
   const CustomModal = (props) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const { register, handleSubmit, reset, formState: { errors },} = useForm()
+    const { register, handleSubmit, formState: { errors },} = useForm()
 
 
     return (
       <>
               <Text>
-            <a onClick={onOpen}>
+            <Button variant="link" onClick={onOpen}>
             {props.buttonTitle}
-            </a>
+            </Button>
             </Text>
         <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />

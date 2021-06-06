@@ -28,7 +28,7 @@ const EditComment = (props) => {
             setText(res.data.text)
         })
         .catch(err => console.log(err))
-    }, []);
+    }, [props.commentId]);
 
     async function editComment(e) {
         e.preventDefault();

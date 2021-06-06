@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
+import { Link } from 'react-router-dom';
 import { Box, Center, useToast } from "@chakra-ui/react";
-import {ElementsConsumer, CardElement, useStripe, useElements} from '@stripe/react-stripe-js';
+import {CardElement, useStripe, useElements} from '@stripe/react-stripe-js';
 
 import { UserContext } from '../../../UserContext';
 import { useUnavailableDates } from '../../../hooks/useUnavailableDates';
@@ -16,7 +17,7 @@ const Reservation = () => {
   const stripe = useStripe();
   const elements = useElements();
   const toast = useToast()
-  const { loading, unavailableDates } = useUnavailableDates("/api/test/rentals/booked");
+  const { unavailableDates } = useUnavailableDates("/api/test/rentals/booked");
   const [ fetching, setFetching ] = useState(false);
   const [ startAt, setStartAt ] = useState(null);
   let [endAt, setEndAt] = useState(null);
@@ -102,7 +103,7 @@ useEffect(() => {
   if (!user.user) {
     ReservationContent = (
       <>
-        <a href="/login"><Center>Connectez-vous pour réserver</Center></a>
+        <Link to="/login"><Center>Connectez-vous pour réserver</Center></Link>
       </>
     );
 

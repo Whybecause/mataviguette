@@ -3,11 +3,6 @@ import {
     SimpleGrid,
     Image,
     Box,
-    Center,
-    Button,
-    Flex,
-    Grid,
-    GridItem,
     Stack,
   } from "@chakra-ui/react";
 

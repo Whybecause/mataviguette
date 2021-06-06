@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Avatar, Stack, HStack, SimpleGrid, Divider, Button } from "@chakra-ui/react";
+import { Box, Avatar, Stack, Divider, Button } from "@chakra-ui/react";
 import profil from "../../assets/profil-valerie.jpg";
 
 

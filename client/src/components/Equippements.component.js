@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import { Button, Icon, Box, Stack, Divider, Text } from '@chakra-ui/react';
 import { CloseIcon } from '@chakra-ui/icons';
 
@@ -8,9 +10,11 @@ const Equippements = () => {
             <Box p='10' mt='5' className="page-container">
                 <Box d='flex' alignItems='center' justifyContent='space-around'>
                     <h1>Équippements</h1>
-                    <Button><a href="/">
-                        <Icon as={CloseIcon} />
-                        </a></Button>
+                    <Link to="/">
+                        <Button>
+                            <Icon as={CloseIcon} />
+                        </Button>
+                    </Link>
                 </Box>
 
                 <h3>Standard</h3>

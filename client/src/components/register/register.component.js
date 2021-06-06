@@ -1,7 +1,7 @@
 import React, { useState } from "react";
+import { Link } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import {
-  Stack,
   useToast,
   Box,
   Button,
@@ -10,14 +10,13 @@ import {
   FormErrorMessage,
   Input,
   Center,
-  Divider,
   Spinner,
 } from "@chakra-ui/react";
 
 import authService from "../../services/auth.service";
 
 const Register = () => {
-  const { register, handleSubmit, reset, formState: { errors },} = useForm();
+  const { register, handleSubmit, formState: { errors },} = useForm();
   const toast = useToast();
   const [loading, setLoading] = useState(false);
   const mailRegex = new RegExp(
@@ -132,9 +131,11 @@ const Register = () => {
             Valider
           </Button>
         </form>
+          <Link to="login">
         <Button variant="outline" mt='5'>
-          <a href="login">Déjà inscris ? Se connecter</a>
+            Déjà inscris ? Se connecter
         </Button>
+            </Link>
       </Box>
     </>
   );

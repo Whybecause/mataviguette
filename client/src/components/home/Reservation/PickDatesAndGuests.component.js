@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import React from "react";
 import {
   Box,
   NumberInput,
@@ -7,7 +7,6 @@ import {
   NumberIncrementStepper,
   NumberDecrementStepper,
   SimpleGrid,
-  Text,
 } from "@chakra-ui/react";
 import DatePicker from "react-datepicker";
 import addDays from "date-fns/addDays";

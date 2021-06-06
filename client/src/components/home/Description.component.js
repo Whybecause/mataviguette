@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Box, Avatar, Stack, HStack, SimpleGrid, Divider, Button } from "@chakra-ui/react";
+import { Box, Stack, Divider, Button } from "@chakra-ui/react";
 
 
 const Description = ({ ContactModal }) => {

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import {Link} from 'react-router-dom';
 import {
   Stack,
   useToast,
@@ -19,7 +20,7 @@ import authService from "../../services/auth.service";
 import CustomModal from './CustomModal.component';
 
 const Login = () => {
-  const { register, handleSubmit, reset, formState: { errors }, } = useForm()
+  const { register, handleSubmit, formState: { errors }, } = useForm()
   const toast = useToast()
   const [ loading, setLoading ] = useState(false);
 
@@ -158,9 +159,13 @@ const Login = () => {
                 loading={loading}
                 handleConfirm={handleResendConfirm}
                 />
+                  <Link to="/register">                  
                 <Button variant="outline">
-                  <a href="/register">Créer un compte</a>
+                  <p>
+                    Créer un compte
+                  </p>
                   </Button>
+                    </Link>
                     </Stack>
                 </Box>
    

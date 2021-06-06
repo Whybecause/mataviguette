@@ -1,4 +1,6 @@
 import React, { useContext } from "react";
+import {Link} from 'react-router-dom';
+
 import {
   Icon,
   Box,
@@ -30,9 +32,9 @@ function Header() {
   if (!user.user) {
     UserContainer = (
       <>
-        <a href="/login">
+        <Link to="/login">
             <Button>Connexion</Button>
-        </a>
+        </Link>
       </>
     );
   }
@@ -46,12 +48,12 @@ function Header() {
               {user.user}
             </MenuButton>
             <MenuList>
-              <a href="/user">
+              <Link to="/user">
                 <MenuItem><Icon as={CalendarIcon}/> Mes réservations</MenuItem>
-              </a>
-              <a href="/profile">
+              </Link>
+              <Link to="/profile">
                 <MenuItem><Icon as={SettingsIcon}/>Profile</MenuItem>
-              </a>
+              </Link>
               <MenuItem onClick={() => logOut()}><Icon as={MdExitToApp}/>Déconnexion</MenuItem>
             </MenuList>
           </Menu>
@@ -69,13 +71,13 @@ function Header() {
               {user.user}
             </MenuButton>
             <MenuList>
-              <a href="/admin">
+              <Link to="/admin">
                 <MenuItem><Icon as={MdBuild}/>Admin Board</MenuItem>
-              </a>
+              </Link>
 
-              <a href="/profile">
+              <Link to="/profile">
                 <MenuItem><Icon as={SettingsIcon}/>Profile</MenuItem>
-              </a>
+              </Link>
               <MenuItem onClick={() => logOut()}><Icon as={MdExitToApp}/>Déconnexion</MenuItem>
             </MenuList>
           </Menu>
@@ -88,9 +90,9 @@ function Header() {
     <>
     <Box as='nav' p='2' className="nav-text-color" d='flex' justifyContent='space-between' bgGradient="linear(to-r,gray.300,yellow.400,pink.200)" >
         <Box>
-            <a href="/">
+            <Link to="/">
           <Heading size="md">Mataviguette</Heading>
-            </a>
+            </Link>
         </Box>
         {UserContainer}
     </Box>

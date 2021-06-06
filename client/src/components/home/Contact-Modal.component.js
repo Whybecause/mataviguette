@@ -22,7 +22,7 @@ import {
   import formContactService from '../../services/formContact.service';
 
   const ContactModal = () => {
-    const { register, handleSubmit, reset, formState: { errors }, } = useForm()
+    const { register, handleSubmit, formState: { errors }, } = useForm()
     const { isOpen, onOpen, onClose } = useDisclosure()
     const toast = useToast()
 

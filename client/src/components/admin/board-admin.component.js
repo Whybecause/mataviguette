@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Box } from '@chakra-ui/react';
 
+import history from '../../helpers/history';
+import { UserContext } from '../../UserContext';
 import bookingService from '../../services/booking.service';
 import DashboardNav from './dashboard/dashboard-nav';
 import Reservations from './dashboard/reservations/reservations';
@@ -9,6 +11,7 @@ import Historique from './dashboard/historique';
 import UpdateRental from './dashboard/updateRental';
 
 const BoardAdmin = () => {
+  const user = useContext(UserContext);
   const [showReservations, setShowReservations ] = useState(true);
   const [showCalendar, setShowCalendar ] = useState(false);
   const [showHistorique, setShowHistorique ] = useState(false);
@@ -16,6 +19,7 @@ const BoardAdmin = () => {
 
   let [ currentBookings, setCurrentBookings ] = useState([]);
   let [ allBookings, setAllBookings ] = useState([]);
+
 
   useEffect( () => {
     bookingService.getCurrentBookings()
@@ -36,6 +40,10 @@ const BoardAdmin = () => {
 }, [])
 
   let DashboardContent = null;
+
+  if (!user.isAdmin) {
+    history.push("/")
+  }
 
   if (showReservations) {
     DashboardContent = (

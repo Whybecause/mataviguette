@@ -13,7 +13,6 @@ class CommentService {
     async getAllComments(setComments) {
         try {
             const res = await axios.get("/api/test/comment");
-            console.log(res.data);
             setComments(res.data);
         } catch(error) {
             console.log(error);
