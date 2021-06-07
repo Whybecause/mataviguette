@@ -22,7 +22,7 @@ const Homepage = () => {
           <Center>
             <Stack p='2'>
             <h1>Maison - Charme et Campagne - Piscine- S.de sport</h1>
-            <p>Bajamont, Nouvelle-Acquitaine, France</p>
+            <p>Bajamont, Nouvelle-Aquitaine, France</p>
             </Stack>
           </Center>
 

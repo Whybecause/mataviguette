@@ -43,7 +43,7 @@ function App() {
                     />
                   <Route path="/reset/:token" component={ResetPassForm} />
                   <Route path="/photos" component={Caroussel} />
-                  <Route path="/equippements" component={Equippements}/>
+                  <Route path="/equipements" component={Equippements}/>
                 </Switch>
                 <Footer />
           </Router>

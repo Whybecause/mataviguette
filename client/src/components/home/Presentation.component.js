@@ -28,7 +28,7 @@ const Presentation = () => {
 
             <Stack mt='3'>
                 <h3>Pendant votre séjour</h3>
-                <p>J'échangerai avec vous par mail ou téléphone mais c'est Séverine qui vous accueillera. Je reste disponible cependant avant et tout au long de votre séjour pour répondre à vos interrogations.</p>
+                <p>J'échangerai avec vous par mail ou téléphone. Je reste disponible cependant avant et tout au long de votre séjour pour répondre à vos interrogations.</p>
             </Stack>
         </Box>
     )

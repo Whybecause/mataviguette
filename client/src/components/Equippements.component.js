@@ -8,7 +8,7 @@ const Equippements = () => {
     return (
             <Box p='10' mt='5' className="page-container">
                 <Box d='flex' alignItems='center' justifyContent='space-between'>
-                    <h1>Équippements</h1>
+                    <h1>Équipements</h1>
                     <Link to="/">
                             <CloseButton />
                     </Link>
@@ -41,7 +41,7 @@ const Equippements = () => {
                             </p>
                             <Divider />
                             <p>Piscine
-                                <span className="p-discret"> -Privée ou partagée</span>
+                                <span className="p-discret"> -Privée</span>
                             </p>
                             <Divider />
                         </Stack>
@@ -75,7 +75,7 @@ const Equippements = () => {
                     <h3>Accès des voyageurs</h3>
                     <Box p='3'>
                         <Stack mt='3'>
-                            <p>Clés remises par l'hôte</p>
+                            <p>Arrivée autonome possible ou sur rdv.</p>
                             <Divider />
                         </Stack>
                     </Box>
@@ -102,15 +102,9 @@ const Equippements = () => {
                     <h3>Non inclus</h3>
                     <Box p='3'>
                         <Stack mt='3'>
-                            <Text as='s'>Equippements de base</Text>
-                            <Divider />
                             <Text as='s'>Télévision</Text>
                             <Divider />
-                            <Text as='s'>Entrée privée</Text>
-                            <Divider />
                             <Text as='s'>Climatisation</Text>
-                            <Divider />
-                            <Text as='s'>Shampoing</Text>
                             <Divider />
                         </Stack>
                     </Box>   

@@ -51,8 +51,8 @@ const Reglement = () => {
                         </Stack>
                         <Stack>
                             <h4>Annulations</h4>
-                            <p>Annulation gratuite pendant <strong>48 heures</strong>.</p>
-                            <p>Au-delà, annulez jusqu'à 24h avant l'arrivée prévue pour obtenir un remboursement intégral, moins les frais de service.</p>
+                            <p>Annulation gratuite jusqu'à <strong>48 heures</strong>.</p>
+                            <p>Au-delà, annulez jusqu'à 24h avant l'arrivée prévue pour obtenir un remboursement intégral.</p>
                         </Stack>
                     </React.Fragment>
                 )}

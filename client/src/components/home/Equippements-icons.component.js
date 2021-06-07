@@ -53,7 +53,7 @@ const EquipppementsIcons = () => {
 
             <Box as='article' mt='5'>
                 <Divider />
-                <Box as='h3' mt='3'>Equippements</Box>
+                <Box as='h3' mt='3'>Equipements</Box>
 
                 <SimpleGrid columns={2} mt='5'>
 
@@ -88,7 +88,7 @@ const EquipppementsIcons = () => {
                     </Stack>
                     <Stack direction={'row'}>
                         <Icon as={GiTransportationRings} boxSize='20px' /> 
-                        <Text>Sport</Text>
+                        <Text>Salle de Sport</Text>
                     </Stack>
                     
                     <Stack direction={'row'}>
@@ -102,7 +102,7 @@ const EquipppementsIcons = () => {
                     </Stack>
 
                     <Stack direction={'row'}>
-                        <Link to="/equippements">
+                        <Link to="/equipements">
                             <p className="a-color1">Afficher les 23 équippements
                             </p>
                             </Link>
