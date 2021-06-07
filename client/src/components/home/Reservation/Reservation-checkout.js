@@ -17,6 +17,8 @@ import {
 import {CardElement} from '@stripe/react-stripe-js';
 import dayjs from 'dayjs';
 
+import { CloseButton } from '../../styledComponents/Button-Wrapper';
+
 const CARD_ELEMENT_OPTIONS = {
     style: {
       base: {
@@ -66,8 +68,7 @@ const ReservationCheckout = (props) => {
   
   return (
     <>
-      <Button onClick={() => validateFormFields()}
-      >Valider</Button>
+      <Button variant="solid" colorScheme="blackAlpha" onClick={validateFormFields}>Valider</Button>
       <Modal isOpen={isOpen} onClose={onClose} >
                 <ModalOverlay/>
                     <ModalContent>
@@ -90,6 +91,8 @@ const ReservationCheckout = (props) => {
                         <ModalFooter>
                             <Button
                                 disabled={props.disabled}
+                                colorScheme="teal"
+                                variant="outline"
                                 onClick={() => props.confirmBooking()}
                                 mr='2'
                                 >
@@ -98,8 +101,8 @@ const ReservationCheckout = (props) => {
                                         <Spinner size='xs'/>
                                       )}
                                       Payer {props.finalPrice}€</span>
-                            </Button>{' '}
-                            <Button onClick={onClose}>Fermer</Button>
+                            </Button>
+                            <CloseButton onClick={onClose} />
                         </ModalFooter>
                     </ModalContent>
             </Modal>

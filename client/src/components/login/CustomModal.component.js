@@ -17,6 +17,7 @@ import {
     Text,
     Spinner
   } from "@chakra-ui/react";
+  import { CloseButton } from '../styledComponents/Button-Wrapper';
 
   const CustomModal = (props) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -60,7 +61,7 @@ import {
                         <Spinner size='xs' />
                     )}
                     Valider</Button>
-                <Button onClick={onClose}>Fermer</Button>
+                <CloseButton onClick={onClose}/>
             </ModalFooter>
 
                 </form>

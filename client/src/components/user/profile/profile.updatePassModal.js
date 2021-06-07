@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
-import { useToast, Modal, Icon, useDisclosure, Button, Spinner,  Input, FormControl, FormLabel, FormErrorMessage, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody } from '@chakra-ui/react';
-import { CloseIcon } from '@chakra-ui/icons';
-
+import { useToast, Modal, useDisclosure, Button, Spinner,  Input, FormControl, FormLabel, FormErrorMessage, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody } from '@chakra-ui/react';
+import { CloseButton } from '../../styledComponents/Button-Wrapper';
 import authService from "../../../services/auth.service";
 
 const UpdatePassModal = () => {
@@ -106,7 +105,7 @@ const UpdatePassModal = () => {
                                 <Spinner size='xs'/>
                                 )}
                             Valider</Button>
-                        <Button colorScheme='red' onClick={onClose}><Icon as ={CloseIcon}/></Button>
+                        <CloseButton onClick={onClose} />
                     </ModalFooter>
                                 </form>
                 </ModalContent>

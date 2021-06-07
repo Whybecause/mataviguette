@@ -21,6 +21,7 @@
     "dayjs": "^1.10.5",
     "google-maps-react": "^2.0.6",
     "react": "^16.13.1",
+    "react-datepicker": "^4.1.1",
     "react-dom": "^16.13.1",
     "react-hook-form": "^7.7.1",
     "react-icons": "^3.10.0",

@@ -8,8 +8,7 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  Button,
-  Heading,
+  Button
 } from "@chakra-ui/react";
 import { ChevronDownIcon, SettingsIcon, CalendarIcon } from "@chakra-ui/icons";
 import { MdExitToApp, MdBuild} from 'react-icons/md';
@@ -91,7 +90,7 @@ function Header() {
     <Box as='nav' p='2' className="nav-text-color" d='flex' justifyContent='space-between' bgGradient="linear(to-r,gray.300,yellow.400,pink.200)" >
         <Box>
             <Link to="/">
-          <Heading size="md">Mataviguette</Heading>
+              <h2 className="logo">Mataviguette</h2>
             </Link>
         </Box>
         {UserContainer}

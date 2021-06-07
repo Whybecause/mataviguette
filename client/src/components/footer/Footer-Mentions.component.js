@@ -18,13 +18,13 @@ import {
 import { EmailIcon } from '@chakra-ui/icons';
 import { CloseButton } from '../styledComponents/Button-Wrapper';
 
-const FooterContact = () => {
+const FooterMentions = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <>
       <Button colorScheme="link" onClick={onOpen}>
-        Contact
+        Mentions légales
       </Button>
       <Modal isOpen={isOpen} onClose={onClose} size="full">
         <ModalOverlay />
@@ -56,4 +56,4 @@ const FooterContact = () => {
   );
 };
 
-export default FooterContact;
+export default FooterMentions;

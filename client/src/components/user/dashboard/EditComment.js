@@ -10,11 +10,11 @@ import {
     ModalBody,
     useDisclosure,
     Textarea,
-    Spinner,
-    Icon
+    Spinner
 } from "@chakra-ui/react";
-import { ChatIcon, CloseIcon } from '@chakra-ui/icons';
+import { ChatIcon } from '@chakra-ui/icons';
 
+import { CloseButton } from '../../styledComponents/Button-Wrapper';
 import commentService from '../../../services/comment.service';
 
 const EditComment = (props) => {
@@ -81,7 +81,7 @@ const EditComment = (props) => {
                             )}
                             Envoyer
                         </Button>
-                        <Button colorScheme='red' onClick={onClose}><Icon as={CloseIcon}/></Button>
+                        <CloseButton onClick={onClose} />
                     </ModalFooter>
                 </ModalContent>
             </form>

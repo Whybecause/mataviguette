@@ -13,12 +13,14 @@ import {
     Text,
     Box,
     SimpleGrid,
-    Icon
   } from "@chakra-ui/react";
-import { CloseIcon } from '@chakra-ui/icons';
 import dayjs from 'dayjs';
+import { ChatIcon } from '@chakra-ui/icons';
+
+import { CloseButton } from '../styledComponents/Button-Wrapper';
 import commentService from '../../services/comment.service';  
 import { authIcon } from '../../assets/auth-icon.png';
+
   const Comments = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [ comments, setComments ] = useState([]);
@@ -29,14 +31,14 @@ import { authIcon } from '../../assets/auth-icon.png';
 
     return (
         <>
-        <Button variant="link" className="pointer" onClick={onOpen}>Voir les commentaires ({comments.length})</Button>
+        <Button variant="link" className="pointer" onClick={onOpen} leftIcon={<ChatIcon/>}>Voir les commentaires ({comments.length})</Button>
         <Modal isOpen={isOpen} onClose={onClose} motionPreset="slideInBottom" size='full'>
             <ModalOverlay/>
             <ModalContent>
                 <ModalHeader>
-                    <Box d='flex' alignItems='center' justifyContent='space-around'>
+                    <Box d='flex' alignItems='center' justifyContent='space-between'>
                         Liste des commentaires
-                        <Button onClick={onClose}><Icon as={CloseIcon}/></Button>
+                        <CloseButton onClick={onClose} />
                     </Box>
                 </ModalHeader>
                     <ModalBody>
@@ -58,7 +60,7 @@ import { authIcon } from '../../assets/auth-icon.png';
                         </SimpleGrid>
                     </ModalBody>
                     <ModalFooter>
-                        <Button onClick={onClose}><Icon as={CloseIcon}/></Button>
+                        <CloseButton/>
                     </ModalFooter>
             </ModalContent>
         </Modal>

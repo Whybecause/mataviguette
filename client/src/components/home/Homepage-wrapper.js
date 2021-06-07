@@ -16,7 +16,7 @@ const Homepage = () => {
 
   return (
     <>      
-    <Box bgGradient="linear(to-r,gray.300,yellow.400,pink.200)">
+    <Box bgGradient="linear(to-r,gray.300,yellow.400,pink.200)" borderBottomRadius="xl">
       <Box className="page-container">
 
         <Center>

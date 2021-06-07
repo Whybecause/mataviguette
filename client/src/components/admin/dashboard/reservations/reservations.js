@@ -68,11 +68,13 @@ const Reservations = ({currentBookings, setCurrentBookings}) => {
                                     <Td>{r.guests}</Td> 
                                     <Td>{r.totalPrice}€</Td> 
                                     <Td>
-                                        <ContactBooker id={r._id} />
-                                        <DeleteBooking 
-                                        deleteBooking = {deleteBooking}
-                                        startAt = {r.startAt}
-                                        />
+                                        <Box d='flex' alignItems='center' justifyContent='space-around'>
+                                            <ContactBooker id={r._id} />
+                                            <DeleteBooking 
+                                            deleteBooking = {deleteBooking}
+                                            startAt = {r.startAt}
+                                            />
+                                        </Box>
                                     </Td>
                                 </Tr>
                             ))}

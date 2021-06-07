@@ -335,13 +335,13 @@ const Caroussel = () => {
 
   return (
     <>
-    <Box pr='5' pl='5' className="form-container">
+    <Box pr='5' pl='5' className="form-container small-page-height">
 
     <Carousel>
       {items.map( (item) => (
         <>
           <Box key={item.id}>
-            <Image src={item.src} className="slider-img" h={["200px", "400px", "600px", "750px"]}/>
+            <Image src={item.src} className="slider-img" h={["300px", "400px", "600px", "750px"]}/>
           <Box>{item.caption}</Box>
           </Box>
         </>

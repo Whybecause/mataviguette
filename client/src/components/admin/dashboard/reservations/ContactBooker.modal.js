@@ -1,7 +1,4 @@
 import React, { useState } from 'react';
-import { Icon } from '@iconify/react';
-import emailEdit from '@iconify/icons-mdi/email-edit';
-import { Button1, Button2 } from '../../../styledComponents/Button-Wrapper';
 
 import {
     useToast,
@@ -11,9 +8,16 @@ import {
     ModalHeader,
     ModalFooter,
     ModalBody,
-    useDisclosure
+    useDisclosure,
+    Icon,
+    Button,
+    FormControl,
+    FormLabel,
+    Textarea
   } from "@chakra-ui/react";
+import { EmailIcon } from '@chakra-ui/icons';
 
+import { CloseButton } from '../../../styledComponents/Button-Wrapper';
 import formContactService from '../../../../services/formContact.service';
 
 const ContactBooker = (props) => {
@@ -55,20 +59,19 @@ const ContactBooker = (props) => {
 
     return (
         <>
-            <Button1 onClick={onOpen}>
-                <Icon icon={emailEdit} />
-            </Button1>
+            <Button colorScheme="teal" onClick={onOpen}>
+                <Icon as={EmailIcon}/>
+            </Button>
             <Modal isOpen={isOpen} onClose={onClose} >
                 <ModalOverlay/>
                 <form>
                     <ModalContent>
                         <ModalHeader>Contacter le locataire</ModalHeader>
                         <ModalBody>
-                            <div className="form-group">
-                                <label htmlFor="message">Message</label>
-                                <textarea
+                            <FormControl>
+                                <FormLabel htmlFor="message">Message</FormLabel>
+                                <Textarea
                                     type="text"
-                                    className="form-control"
                                     name="message"
                                     id='message'
                                     value={message}
@@ -76,20 +79,23 @@ const ContactBooker = (props) => {
                                     placeholder="Message"
                                     required
                                     />
-                            </div>
+                            </FormControl>
                         </ModalBody>
                         <ModalFooter>
-                            <Button1
+                            <Button
                                 type='submit'
                                 onClick={(e) => contactBooker(e)}
+                                colorScheme="teal"
+                                variant="outline"
+                                mr='2'
                                 disabled={loading}
                                 >
                                 {loading && (
                                     <span className="spinner-border spinner-border-sm"></span>
                                     )}
                                     <span>Envoyer</span>
-                            </Button1>{' '}
-                            <Button2 onClick={onClose}>Fermer</Button2>
+                            </Button>
+                            <CloseButton onClick={onClose} />
                         </ModalFooter>
                     </ModalContent>
                 </form>

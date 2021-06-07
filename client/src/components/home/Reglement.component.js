@@ -12,7 +12,7 @@ const Reglement = () => {
         <>
         <Box as='article' p='5'>
             <Stack>
-                <h2>Points à retenir</h2>
+                <h3>Points à retenir</h3>
                 <p>Arrivée : 15:00 - 18:00</p>
                 <p>Départ : 10:00</p>
                 <Divider />
@@ -31,7 +31,7 @@ const Reglement = () => {
                     <p>Animaux de compagnie acceptés</p>
                 </Stack>
 
-                <Button variant="outline" onClick={handleToggle}>{isOpened ? 'Fermer' : 'Lire la totalité du règlement...'}</Button>
+                <Button variant="outline" colorScheme="orange" onClick={handleToggle}>{isOpened ? 'Fermer' : 'Lire la totalité du règlement...'}</Button>
                 {isOpened && (
                     <>
                         <h4>A savoir</h4>

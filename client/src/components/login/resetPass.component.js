@@ -101,6 +101,7 @@ const ResetPassForm = () => {
           </FormControl>
           <Button
             variant="outline"
+            colorScheme="teal"
             w="100%"
             type="submit"
             disabled={loading}

@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
-import { Box, Center, useToast } from "@chakra-ui/react";
+import { Box, Center, useToast, Icon } from "@chakra-ui/react";
+import { ExternalLinkIcon } from '@chakra-ui/icons';
 import {CardElement, useStripe, useElements} from '@stripe/react-stripe-js';
 
 import { UserContext } from '../../../UserContext';
@@ -103,7 +104,12 @@ useEffect(() => {
   if (!user.user) {
     ReservationContent = (
       <>
-        <Link to="/login"><Center>Connectez-vous pour réserver</Center></Link>
+        <Link to="/login">
+          <Center>
+            <Icon as={ExternalLinkIcon} />
+            Connectez-vous pour réserver
+          </Center>
+        </Link>
       </>
     );
 
@@ -142,7 +148,7 @@ useEffect(() => {
       <Box
         borderWidth="1px"
         borderRadius="xl"
-        p="2"
+        p="5"
         bgGradient="linear(to-r,yellow.400,pink.200)"
       >
         <Center>

@@ -54,7 +54,7 @@ const RegisterConfirm = () => {
                             {errors.email && errors.email.message}
                         </FormErrorMessage>
                     </FormControl>
-                    <Button variant="outline" w='100%' type="submit" disabled={loading} mt='5'>
+                    <Button variant="outline" colorScheme="teal" w='100%' type="submit" disabled={loading} mt='5'>
                         {loading && (
                         <Spinner size='xs' />
                         )}

@@ -1,13 +1,15 @@
 import React from "react";
-import { Button1, Button2 } from '../../../styledComponents/Button-Wrapper';
 import {
   Modal,
   ModalOverlay,
   ModalContent,
   ModalHeader,
   ModalFooter,
-  useDisclosure
+  useDisclosure,
+  Icon,
+  Button
 } from "@chakra-ui/react";
+import { DeleteIcon } from '@chakra-ui/icons';
 
 const DeleteBooking = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -15,22 +17,24 @@ const DeleteBooking = (props) => {
 
   return (
     <>
-      <Button2 onClick={onOpen}>
-        X
-      </Button2>
+      <Button colorScheme="red" onClick={onOpen} ml='2'>
+        <Icon as={DeleteIcon} />
+      </Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
         <ModalHeader >Êtes  vous sur de supprimer cette réservation?</ModalHeader>
             <ModalFooter>
-              <Button2
+              <Button
                 onClick={ () => props.deleteBooking(props.startAt)}
+                colorScheme="red"
+                mr="2"
                 >
                   Oui
-              </Button2>
-              <Button1 onClick={onClose}>
+              </Button>
+              <Button onClick={onClose} colorScheme="teal" variant="outline">
                 Non
-              </Button1>
+              </Button>
             </ModalFooter>
           </ModalContent>
       </Modal>

@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Router, Route, Switch } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 
-import ScrollToTopRoute from './components/ScrollTop';
+import ScrollToTop from './components/ScrollTop';
 import history from "./helpers/history";
 import Header from "./components/header/header.component";
 import Login from "./components/login/login.component";
@@ -24,35 +24,16 @@ const stripePromise = loadStripe(
 );
 
 function App() {
-  // const [ isLoading, setIsLoading ] = useState(true);
-
-  // function waitDom() {
-  //   return new Promise(resolve => setTimeout( () => resolve(), 2000));
-  // }
-
-  // useEffect( () => {
-  //   waitDom().then( () => {
-  //     const el = document.querySelector(".loader-container");
-  //     if (el) {
-  //       el.remove();
-  //       setIsLoading(!isLoading);
-  //     }
-  //   });
-  // }, []);
-
-  // if (isLoading) {
-  //   return null;
-  // }
-
   return (
     <>
       <Elements stripe={stripePromise}>
         <ChakraProvider>
           <Router history={history}>
+                <ScrollToTop />
                 <Header />
                 <Switch>
                   <Route exact path="/" component={Homepage} />
-                  <ScrollToTopRoute exact path="/login" component={Login} />
+                  <Route exact path="/login" component={Login} />
                   <Route exact path="/register" component={Register} />
                   <Route exact path="/profile" component={Profile} />
                   <Route path="/user" component={UserDashboard} />
@@ -63,7 +44,7 @@ function App() {
                     />
                   <Route path="/reset/:token" component={ResetPassForm} />
                   <Route path="/photos" component={Caroussel} />
-                  <ScrollToTopRoute path="/equippements" component={Equippements}/>
+                  <Route path="/equippements" component={Equippements}/>
                 </Switch>
                 <Footer />
           </Router>

@@ -18,7 +18,9 @@ import {
     Spinner,
     Center
   } from "@chakra-ui/react";
+  import { EmailIcon } from '@chakra-ui/icons';
 
+  import { CloseButton } from '../styledComponents/Button-Wrapper';
   import formContactService from '../../services/formContact.service';
 
   const ContactModal = () => {
@@ -56,7 +58,7 @@ import {
     return (
       <>
       <Center>
-        <Button onClick={onOpen}>Contacter Valérie</Button>
+        <Button colorScheme="" variant="outline" onClick={onOpen} leftIcon={<EmailIcon/>}>Contacter Valérie</Button>
       </Center>
         <Modal isOpen={isOpen} onClose={onClose} >
                 <ModalOverlay/>
@@ -115,13 +117,15 @@ import {
                                 type='submit'
                                 mr='2'
                                 disabled={loading}
+                                colorScheme="teal"
+                                variant="outline"
                                 >
                                 {loading && (
                                     <Spinner size='xs'/>
                                     )}
                                     <span>Envoyer</span>
-                            </Button>{' '}
-                            <Button colorScheme='red' onClick={onClose}>Fermer</Button>
+                            </Button>
+                            <CloseButton onClick={onClose} />
                         </ModalFooter>
                     </ModalContent>
                 </form>

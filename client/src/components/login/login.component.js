@@ -134,6 +134,8 @@ const Login = () => {
                   </FormErrorMessage>
                 </FormControl>
                 <Button
+                colorScheme="orange"
+                variant="outline"
                 disabled={loading}
                 mt='5'
                 type="submit"

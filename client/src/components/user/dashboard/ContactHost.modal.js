@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
 
-import { EmailIcon, CloseIcon } from '@chakra-ui/icons';
+import { EmailIcon } from '@chakra-ui/icons';
 import {
     useToast,
     Button,
@@ -16,10 +16,10 @@ import {
     FormLabel,
     FormErrorMessage,
     Spinner,
-    Textarea,
-    Icon
+    Textarea
 } from "@chakra-ui/react";
 
+import { CloseButton } from '../../styledComponents/Button-Wrapper';
 import formContactService from '../../../services/formContact.service';
 
 const ContactHost = (props) => {
@@ -88,6 +88,7 @@ const ContactHost = (props) => {
                                 mr="2"
                                 type='submit'
                                 variant="outline"
+                                colorScheme="teal"
                                 disabled={loading}
                                 >
                                 {loading && (
@@ -95,7 +96,7 @@ const ContactHost = (props) => {
                                     )}
                                 <span>Envoyer</span>
                             </Button>
-                            <Button colorScheme="red" onClick={onClose}><Icon as={CloseIcon}/></Button>
+                            <CloseButton onClick={onClose} />
                         </ModalFooter>
                     </ModalContent>
                 </form>
