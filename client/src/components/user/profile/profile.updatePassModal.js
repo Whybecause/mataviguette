@@ -39,79 +39,78 @@ const UpdatePassModal = () => {
     }
 
     return (
-        <>
+        <React.Fragment>
             <Button onClick={onOpen}>Modifiez votre mot de passe</Button>
-            <Modal isOpen={isOpen} onClose={onClose}>
-            <ModalOverlay />
-                <ModalContent>
-                    <ModalHeader>Modifiez votre mot de passe</ModalHeader>
-                        <form onSubmit={handleSubmit(handleUpdatePassword)}>
-                    <ModalBody>
-                            <FormControl id="oldPass">
-                                <FormLabel htmlFor="oldPass"></FormLabel>
-                                <Input
-                                    {...register("oldPass", {
-                                        required: true
-                                    })}
-                                    type="password"
-                                    id="oldPass"
-                                    name="oldPass"
-                                    placeholder="Votre mot de passe actuel"
-                                    required
-                                />
-                                <FormErrorMessage>
-                                    {errors.oldPass && errors.oldPass.message}
-                                </FormErrorMessage>
-                            </FormControl>
+                <Modal isOpen={isOpen} onClose={onClose}>
+                <ModalOverlay />
+                    <ModalContent>
+                        <ModalHeader>Modifiez votre mot de passe</ModalHeader>
+                            <form onSubmit={handleSubmit(handleUpdatePassword)}>
+                        <ModalBody>
+                                <FormControl id="oldPass">
+                                    <FormLabel htmlFor="oldPass"></FormLabel>
+                                    <Input
+                                        {...register("oldPass", {
+                                            required: true
+                                        })}
+                                        type="password"
+                                        id="oldPass"
+                                        name="oldPass"
+                                        placeholder="Votre mot de passe actuel"
+                                        required
+                                    />
+                                    <FormErrorMessage>
+                                        {errors.oldPass && errors.oldPass.message}
+                                    </FormErrorMessage>
+                                </FormControl>
 
-                            <FormControl id="password">
-                                <FormLabel htmlFor="password"></FormLabel>
-                                <Input
-                                    {...register("password", {
-                                        required: true
-                                    })}
-                                    type="password"
-                                    id="password"
-                                    name="password"
-                                    placeholder="Votre nouveau mot de passe"
-                                    required
-                                />
-                                <FormErrorMessage>
-                                    {errors.password && errors.password.message}
-                                </FormErrorMessage>
-                            </FormControl>
+                                <FormControl id="password">
+                                    <FormLabel htmlFor="password"></FormLabel>
+                                    <Input
+                                        {...register("password", {
+                                            required: true
+                                        })}
+                                        type="password"
+                                        id="password"
+                                        name="password"
+                                        placeholder="Votre nouveau mot de passe"
+                                        required
+                                    />
+                                    <FormErrorMessage>
+                                        {errors.password && errors.password.message}
+                                    </FormErrorMessage>
+                                </FormControl>
 
-                            <FormControl id="confirmNewPass">
-                                <FormLabel htmlFor="confirmNewPass"></FormLabel>
-                                <Input
-                                    {...register("confirmNewPass", {
-                                        required: true
-                                    })}
-                                    type="password"
-                                    id="confirmNewPass"
-                                    name="confirmNewPass"
-                                    placeholder="Confirmez votre nouveau mot de passe"
-                                    required
-                                />
-                                <FormErrorMessage>
-                                    {errors.confirmNewPass && errors.confirmNewPass.message}
-                                </FormErrorMessage>
-                            </FormControl>
+                                <FormControl id="confirmNewPass">
+                                    <FormLabel htmlFor="confirmNewPass"></FormLabel>
+                                    <Input
+                                        {...register("confirmNewPass", {
+                                            required: true
+                                        })}
+                                        type="password"
+                                        id="confirmNewPass"
+                                        name="confirmNewPass"
+                                        placeholder="Confirmez votre nouveau mot de passe"
+                                        required
+                                    />
+                                    <FormErrorMessage>
+                                        {errors.confirmNewPass && errors.confirmNewPass.message}
+                                    </FormErrorMessage>
+                                </FormControl>
 
-                    </ModalBody>
-                    <ModalFooter>
-                        <Button mr='2' colorScheme="teal" type="submit" variant="outline" disabled={loading} alignItems='center'>
-                            {loading && (
-                                <Spinner size='xs'/>
-                                )}
-                            Valider</Button>
-                        <CloseButton onClick={onClose} />
-                    </ModalFooter>
-                                </form>
-                </ModalContent>
-            </Modal>
-
-        </>
+                        </ModalBody>
+                        <ModalFooter>
+                            <Button mr='2' colorScheme="teal" type="submit" variant="outline" disabled={loading} alignItems='center'>
+                                {loading && (
+                                    <Spinner size='xs'/>
+                                    )}
+                                Valider</Button>
+                            <CloseButton onClick={onClose} />
+                        </ModalFooter>
+                                    </form>
+                    </ModalContent>
+                </Modal>
+        </React.Fragment>
     )
 }
 

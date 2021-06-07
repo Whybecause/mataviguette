@@ -7,7 +7,7 @@ import {
 
 const UserDashboardNav = (props) => {
     return (
-        <>
+        <React.Fragment>
             <Box
                 height='50px'
                 d="flex"
@@ -39,7 +39,7 @@ const UserDashboardNav = (props) => {
                     </Button>
                 </Box>
             </Box>
-        </>
+        </React.Fragment>
     )
 }
 

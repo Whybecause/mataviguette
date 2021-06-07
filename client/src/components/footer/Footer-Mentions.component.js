@@ -22,7 +22,7 @@ const FooterMentions = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <>
+    <React.Fragment>
       <Button colorScheme="link" onClick={onOpen}>
         Mentions légales
       </Button>
@@ -52,7 +52,7 @@ const FooterMentions = () => {
           </ModalFooter>
         </ModalContent>
       </Modal>
-    </>
+    </React.Fragment>
   );
 };
 

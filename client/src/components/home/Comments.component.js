@@ -30,7 +30,7 @@ import { authIcon } from '../../assets/auth-icon.png';
     }, []);
 
     return (
-        <>
+        <React.Fragment>
         <Button variant="link" className="pointer" onClick={onOpen} leftIcon={<ChatIcon/>}>Voir les commentaires ({comments.length})</Button>
         <Modal isOpen={isOpen} onClose={onClose} motionPreset="slideInBottom" size='full'>
             <ModalOverlay/>
@@ -43,7 +43,7 @@ import { authIcon } from '../../assets/auth-icon.png';
                 </ModalHeader>
                     <ModalBody>
                         <SimpleGrid columns={[1, 2, 2]}>
-                            {comments?.length && (
+                            {comments.length && (
                                 comments.map( (comment) => (
                                     <Box as='article' mt='5' key={comment._id}>
                                         <Stack direction='row'>
@@ -64,8 +64,7 @@ import { authIcon } from '../../assets/auth-icon.png';
                     </ModalFooter>
             </ModalContent>
         </Modal>
-
-        </>
+        </React.Fragment>
     )
 }
 

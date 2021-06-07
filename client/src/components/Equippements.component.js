@@ -6,7 +6,6 @@ import { CloseButton } from './styledComponents/Button-Wrapper';
 
 const Equippements = () => {    
     return (
-        <>
             <Box p='10' mt='5' className="page-container">
                 <Box d='flex' alignItems='center' justifyContent='space-between'>
                     <h1>Équippements</h1>
@@ -122,7 +121,6 @@ const Equippements = () => {
 
 
             </Box>
-        </>
     );
 };
 

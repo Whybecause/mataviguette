@@ -60,7 +60,7 @@ const EditComment = (props) => {
     }
 
     return (
-        <>
+        <React.Fragment>
         <Button colorScheme='teal' size='xs' onClick={onOpen}  variant='solid' leftIcon={<ChatIcon/>}>Modifier commentaire
         </Button>
         <Modal isOpen={isOpen} onClose={onClose} >
@@ -86,7 +86,7 @@ const EditComment = (props) => {
                 </ModalContent>
             </form>
         </Modal>
-        </>
+        </React.Fragment>
     )
 }
 

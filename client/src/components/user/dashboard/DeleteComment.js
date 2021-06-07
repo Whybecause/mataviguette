@@ -40,7 +40,7 @@ const DeleteComment = (props) => {
   }
 
   return (
-    <>
+    <React.Fragment>
       <Button2 onClick={onOpen}>
         Supprimer commentaire
       </Button2>
@@ -65,7 +65,7 @@ const DeleteComment = (props) => {
             </ModalFooter>
           </ModalContent>
       </Modal>
-    </>
+      </React.Fragment>
   );
 };
 

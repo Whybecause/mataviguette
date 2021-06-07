@@ -46,7 +46,6 @@ const UpdateRental = () => {
 
     }
     return (
-        <>
         <div className="small-container">
             <form onSubmit={updateRental}>
                 <FormControl id="dailyRate">
@@ -71,7 +70,6 @@ const UpdateRental = () => {
                 </FormControl>
             </form>
         </div>
-        </>
     )
 }
 

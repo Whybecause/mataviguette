@@ -9,7 +9,6 @@ const Reglement = () => {
     const handleToggle = () => setIsOpened(!isOpened)
 
     return (
-        <>
         <Box as='article' p='5'>
             <Stack>
                 <h3>Points à retenir</h3>
@@ -33,7 +32,7 @@ const Reglement = () => {
 
                 <Button variant="outline" colorScheme="orange" onClick={handleToggle}>{isOpened ? 'Fermer' : 'Lire la totalité du règlement...'}</Button>
                 {isOpened && (
-                    <>
+                    <React.Fragment>
                         <h4>A savoir</h4>
                         <Stack  direction={'row'}>
                             <Icon as={GiStairs} />
@@ -55,12 +54,10 @@ const Reglement = () => {
                             <p>Annulation gratuite pendant <strong>48 heures</strong>.</p>
                             <p>Au-delà, annulez jusqu'à 24h avant l'arrivée prévue pour obtenir un remboursement intégral, moins les frais de service.</p>
                         </Stack>
-
-                    </>
+                    </React.Fragment>
                 )}
             </Stack>
         </Box>
-        </>
     )
 }
 

@@ -15,7 +15,6 @@ const Profile = () => {
   }
   
   return (
-    <>
         <Box className="small-container small-page-height" p="5">
           <Center><h3>{user ? user.user : "Profile"}</h3></Center>
           <Box mt='10'>
@@ -29,7 +28,6 @@ const Profile = () => {
             </Stack>
           </Box>
         </Box>
-    </>
   )
 }
 

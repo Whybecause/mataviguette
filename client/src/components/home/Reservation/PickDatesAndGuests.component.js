@@ -13,7 +13,7 @@ import addDays from "date-fns/addDays";
 
 const PickDateAndGuests = (props) => {
   return (
-    <>
+    <React.Fragment>
       <Box d="flex" justifyContent="center" alignItems="center" p='5'>
         <SimpleGrid columns={[1, 1, 2]} spacing={10}>
         <Box>
@@ -51,7 +51,7 @@ const PickDateAndGuests = (props) => {
           value={props.guests}
           onChange={props.handleChangeGuests}
           maxW={170}
-          place
+          // place
         >
           <NumberInputField />
           <NumberInputStepper>
@@ -60,7 +60,8 @@ const PickDateAndGuests = (props) => {
           </NumberInputStepper>
         </NumberInput>
       </Box>
-    </>
+    </React.Fragment>
+
   );
 };
 

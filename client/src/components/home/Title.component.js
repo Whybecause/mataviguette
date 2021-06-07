@@ -4,7 +4,6 @@ import profil from "../../assets/profil-valerie.jpg";
 
 const Title = ({ Comments}) => {
   return (
-    <>
     <Center>
       <HStack p='5'>
         <Stack>
@@ -15,7 +14,6 @@ const Title = ({ Comments}) => {
         <Avatar src={profil} alt="Profil Valérie" />
       </HStack>
     </Center>
-    </>
   );
 };
 

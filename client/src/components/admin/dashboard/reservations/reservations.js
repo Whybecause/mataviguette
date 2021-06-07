@@ -42,7 +42,6 @@ const Reservations = ({currentBookings, setCurrentBookings}) => {
         )
     } else {
         Reservations = (
-            <>
                 <Box overflowX = "auto">
                     <Table variant="simple">
                         <Thead>
@@ -77,18 +76,15 @@ const Reservations = ({currentBookings, setCurrentBookings}) => {
                                         </Box>
                                     </Td>
                                 </Tr>
-                            ))}
+                            ))};
                         </Tbody>
                     </Table>
                 </Box>
-            </>
         )
     }
 
     return (
-        <>
-        {Reservations}
-        </>
+        Reservations
     )
 }
 

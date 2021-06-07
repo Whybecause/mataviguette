@@ -14,14 +14,11 @@ const BookingCard = ({ bookings, showCurrentBookings, showAllBookings, setRefres
 
   if (!bookings.length) {
     BookingCard = (
-      <>
         <Center><h4>Vous n'avez aucune réservation</h4></Center>
-      </>
     );
 
   } else {
     BookingCard = (
-      <>
       <SimpleGrid columns={[1, 2, 3 ]} spacing='20px' p='6'>
         {bookings.map((booking) => (
           <Box key={booking._id} maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
@@ -72,10 +69,9 @@ const BookingCard = ({ bookings, showCurrentBookings, showAllBookings, setRefres
           </Box>
         ))}
         </SimpleGrid>
-      </>
     );
   }
-  return <>{BookingCard}</>;
+  return BookingCard;
 };
 
 export default BookingCard;

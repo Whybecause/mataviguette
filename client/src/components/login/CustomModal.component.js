@@ -25,7 +25,7 @@ import {
 
 
     return (
-      <>
+      <React.Fragment>
               <Text>
             <Button variant="link" onClick={onOpen}>
             {props.buttonTitle}
@@ -67,8 +67,7 @@ import {
                 </form>
             </ModalContent>
         </Modal>
-
-      </>
+        </React.Fragment>
     )
   }
 

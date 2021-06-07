@@ -15,48 +15,49 @@ import Comments from './Comments.component';
 const Homepage = () => {
 
   return (
-    <>      
-    <Box bgGradient="linear(to-r,gray.300,yellow.400,pink.200)" borderBottomRadius="xl">
+    <React.Fragment>
+      <Box bgGradient="linear(to-r,gray.300,yellow.400,pink.200)" borderBottomRadius="xl">
+        <Box className="page-container">
+
+          <Center>
+            <Stack p='2'>
+            <h1>Maison - Charme et Campagne - Piscine- S.de sport</h1>
+            <p>Bajamont, Nouvelle-Acquitaine, France</p>
+            </Stack>
+          </Center>
+
+          <Gallery/>
+
+        </Box>
+      </Box>
+      
       <Box className="page-container">
 
-        <Center>
-          <Stack p='2'>
-          <h1>Maison - Charme et Campagne - Piscine- S.de sport</h1>
-          <p>Bajamont, Nouvelle-Acquitaine, France</p>
-          </Stack>
-        </Center>
+        <SimpleGrid columns={[1, 1, 2, 2]} mt='5' p='2' >
+          <Title Comments = {<Comments/>}/>
+          <Reservation />
+        </SimpleGrid>
 
-        <Gallery/>
+        <SimpleGrid columns={[1, 1, 2, 2]}>
+          <Description ContactModal={<ContactModal/>}/>
+          <EquipppementsIcons />
+        </SimpleGrid>
 
+        
+        <Box p='5'>
+          <AspectRatio ratio={16 / 9}>
+            <GoogleApiWrapper />
+          </AspectRatio>
+        </Box>
+
+        <SimpleGrid columns={[1, 1, 2, 2]}>
+          <Presentation />
+          <Reglement />
+        </SimpleGrid>
+        
       </Box>
-    </Box>
-    
-    <Box className="page-container">
+    </React.Fragment>
 
-      <SimpleGrid columns={[1, 1, 2, 2]} mt='5' p='2' >
-        <Title Comments = {<Comments/>}/>
-        <Reservation />
-      </SimpleGrid>
-
-      <SimpleGrid columns={[1, 1, 2, 2]}>
-        <Description ContactModal={<ContactModal/>}/>
-        <EquipppementsIcons />
-      </SimpleGrid>
-
-      
-      <Box p='5'>
-        <AspectRatio ratio={16 / 9}>
-          <GoogleApiWrapper />
-        </AspectRatio>
-      </Box>
-
-      <SimpleGrid columns={[1, 1, 2, 2]}>
-        <Presentation />
-        <Reglement />
-      </SimpleGrid>
-      
-    </Box>
-    </>
   );
 };
 

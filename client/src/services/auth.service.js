@@ -38,8 +38,7 @@ class AuthService {
 
   isValidAdmin = async (setIsAdmin) => {
     try {
-      const res = await axios.get("api/admin", { headers: authHeader() })
-      console.log(res.data);
+      await axios.get("api/admin", { headers: authHeader() })
       setIsAdmin(true);
     }
     catch (error) {

@@ -103,20 +103,18 @@ useEffect(() => {
 
   if (!user.user) {
     ReservationContent = (
-      <>
         <Link to="/login">
           <Center>
             <Icon as={ExternalLinkIcon} />
             Connectez-vous pour réserver
           </Center>
         </Link>
-      </>
     );
 
   } 
   else {
     ReservationContent = (
-      <>
+      <React.Fragment>
         <PickDateAndGuests 
             startAt={startAt}
             setStartAt={setStartAt}
@@ -139,12 +137,12 @@ useEffect(() => {
             confirmBooking={confirmBooking}
           />
         </Center>
-      </>
+      </React.Fragment>
+
     );
   }
 
   return (
-    <>
       <Box
         borderWidth="1px"
         borderRadius="xl"
@@ -158,7 +156,6 @@ useEffect(() => {
         {ReservationContent}
 
       </Box>
-    </>
   );
 };
 

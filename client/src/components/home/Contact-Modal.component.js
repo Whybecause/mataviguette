@@ -56,7 +56,7 @@ import {
     }
 
     return (
-      <>
+      <React.Fragment>
       <Center>
         <Button colorScheme="" variant="outline" onClick={onOpen} leftIcon={<EmailIcon/>}>Contacter Valérie</Button>
       </Center>
@@ -130,9 +130,7 @@ import {
                     </ModalContent>
                 </form>
             </Modal>
-
-
-      </>
+        </React.Fragment>
     )
   }
 

@@ -56,7 +56,7 @@ const AddComment = (props) => {
     }
 
     return (
-        <>
+        <React.Fragment>
         <Button colorScheme='teal' size='md' onClick={onOpen}  variant='solid' leftIcon={<ChatIcon/>}>Commenter
         </Button>
         <Modal isOpen={isOpen} onClose={onClose} >
@@ -92,7 +92,8 @@ const AddComment = (props) => {
                 </ModalContent>
             </form>
         </Modal>
-        </>
+    </React.Fragment>
+
     )
 }
 

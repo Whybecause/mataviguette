@@ -22,7 +22,7 @@ const FooterContact = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <>
+    <React.Fragment>
       <Button colorScheme="link" onClick={onOpen}>
         Contact
       </Button>
@@ -52,7 +52,7 @@ const FooterContact = () => {
           </ModalFooter>
         </ModalContent>
       </Modal>
-    </>
+    </React.Fragment>
   );
 };
 

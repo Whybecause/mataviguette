@@ -30,17 +30,14 @@ function Header() {
 
   if (!user.user) {
     UserContainer = (
-      <>
         <Link to="/login">
             <Button>Connexion</Button>
         </Link>
-      </>
     );
   }
 
   if (user.user && !user.isAdmin) {
     UserContainer = (
-      <>
         <Box>
           <Menu>
             <MenuButton as={Button} rightIcon={<ChevronDownIcon />} size="sm">
@@ -57,13 +54,11 @@ function Header() {
             </MenuList>
           </Menu>
         </Box>
-      </>
     );
   }
 
   if (user.user && user.isAdmin) {
     UserContainer = (
-      <>
         <Box>
           <Menu>
             <MenuButton as={Button} rightIcon={<ChevronDownIcon />} size="sm">
@@ -81,12 +76,10 @@ function Header() {
             </MenuList>
           </Menu>
         </Box>
-      </>
     );
   }
 
   return (
-    <>
     <Box as='nav' p='2' className="nav-text-color" d='flex' justifyContent='space-between' bgGradient="linear(to-r,gray.300,yellow.400,pink.200)" >
         <Box>
             <Link to="/">
@@ -95,7 +88,6 @@ function Header() {
         </Box>
         {UserContainer}
     </Box>
-    </>
   );
 }
 

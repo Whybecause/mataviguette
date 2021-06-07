@@ -11,7 +11,6 @@ import { WiSmoke } from "react-icons/wi";
 
 const EquipppementsIcons = () => {
   return (
-    <>
         <Box as='section' p='5'>
 
             <Divider />
@@ -115,12 +114,7 @@ const EquipppementsIcons = () => {
 
 
         </Box>
-
-
-
-
-
-    </>
+   
   );
 };
 

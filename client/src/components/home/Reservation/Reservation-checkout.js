@@ -67,7 +67,7 @@ const ReservationCheckout = (props) => {
   }
   
   return (
-    <>
+    <React.Fragment>
       <Button variant="solid" colorScheme="blackAlpha" onClick={validateFormFields}>Valider</Button>
       <Modal isOpen={isOpen} onClose={onClose} >
                 <ModalOverlay/>
@@ -106,7 +106,8 @@ const ReservationCheckout = (props) => {
                         </ModalFooter>
                     </ModalContent>
             </Modal>
-    </>
+        </React.Fragment>
+
   );
 };
 export default ReservationCheckout;

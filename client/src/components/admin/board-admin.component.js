@@ -1,5 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Box } from '@chakra-ui/react';
+import { Box,     Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td, } from '@chakra-ui/react';
+  import dayjs from 'dayjs';
+
 
 import history from '../../helpers/history';
 import { UserContext } from '../../UserContext';
@@ -67,7 +74,6 @@ const BoardAdmin = () => {
   }
   
   return (
-    <>
     <div className="small-page-height">
 
         <DashboardNav
@@ -81,7 +87,6 @@ const BoardAdmin = () => {
         </DashboardNav>
         <Box mt={[40, 20, 20, 20]}>{DashboardContent}</Box>
       </div>
-    </>
   )
 }
 

@@ -16,7 +16,7 @@ const DeleteBooking = (props) => {
 
 
   return (
-    <>
+    <React.Fragment>
       <Button colorScheme="red" onClick={onOpen} ml='2'>
         <Icon as={DeleteIcon} />
       </Button>
@@ -38,7 +38,7 @@ const DeleteBooking = (props) => {
             </ModalFooter>
           </ModalContent>
       </Modal>
-    </>
+     </React.Fragment>
   );
 };
 

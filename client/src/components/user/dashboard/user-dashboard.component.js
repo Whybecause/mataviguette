@@ -26,22 +26,17 @@ const UserDashboard = () => {
 
     if (showCurrentBookings) {
         DashboardContent = (
-            <>
                 <BookingCard setRefresh={setRefresh} bookings={currentBookings} showCurrentBookings={showCurrentBookings} />
-            </>
         )
     }
     if (showAllBookings) {
         DashboardContent = (
-            <>
                 <BookingCard setRefresh={setRefresh} bookings={allBookings} showAllBookings={showAllBookings} />
-            </>
         )
     }
 
 
     return (
-    <>
         <div className="small-page-height">
             <DashboardNav
                 setShowCurrentBookings = {setShowCurrentBookings}
@@ -51,7 +46,7 @@ const UserDashboard = () => {
                 ></DashboardNav>
             {DashboardContent}
         </div>
-    </>)
+    )
 }
 
 export default UserDashboard;

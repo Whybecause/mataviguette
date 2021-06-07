@@ -94,7 +94,6 @@ const Login = () => {
 }
 
   return (
-    <>
     <Box className="form-container small-page-height" mt='5' p='5'>
         <form onSubmit={handleSubmit(handleLogin)}>
                 <Center>
@@ -170,11 +169,8 @@ const Login = () => {
                     </Link>
                   </Stack>
                 </Box>
-   
             </form>
-            </Box>
-
-    </>
+          </Box>
   )
 }
 

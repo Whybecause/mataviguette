@@ -16,7 +16,6 @@ import salonext from "../../assets/salon-terrasse.jpg";
 
 const Gallery = () => {
   return (
-    <>
     <section onClick={() => history.push('/photos')} className="pointer">
       <SimpleGrid columns={[2, 2, 2]} p="5">
         <Box d="flex" mr="5px">
@@ -51,7 +50,6 @@ const Gallery = () => {
         </Box>
       </SimpleGrid>
        </section>
-    </>
   );
 };
 

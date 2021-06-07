@@ -25,7 +25,6 @@ const stripePromise = loadStripe(
 
 function App() {
   return (
-    <>
       <Elements stripe={stripePromise}>
         <ChakraProvider>
           <Router history={history}>
@@ -50,7 +49,6 @@ function App() {
           </Router>
         </ChakraProvider>
       </Elements>
-    </>
   );
 }
 

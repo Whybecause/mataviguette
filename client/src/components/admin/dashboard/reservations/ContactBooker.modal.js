@@ -58,7 +58,7 @@ const ContactBooker = (props) => {
     }
 
     return (
-        <>
+        <React.Fragment>
             <Button colorScheme="teal" onClick={onOpen}>
                 <Icon as={EmailIcon}/>
             </Button>
@@ -100,8 +100,7 @@ const ContactBooker = (props) => {
                     </ModalContent>
                 </form>
             </Modal>
-
-        </>
+        </React.Fragment>
     )
 }
 

@@ -57,8 +57,8 @@ const ContactHost = (props) => {
     }
     
     return (
-        <>
-            <Button colorScheme='teal' size='md' onClick={onOpen} leftIcon={<EmailIcon/>} variant='solid'>Contact
+        <React.Fragment>
+        <Button colorScheme='teal' size='md' onClick={onOpen} leftIcon={<EmailIcon/>} variant='solid'>Contact
             </Button>
             <Modal isOpen={isOpen} onClose={onClose} >
                 <ModalOverlay/>
@@ -102,7 +102,7 @@ const ContactHost = (props) => {
                 </form>
             </Modal>
 
-        </>
+        </React.Fragment>
     )
 }
 

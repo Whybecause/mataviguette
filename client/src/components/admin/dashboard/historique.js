@@ -16,15 +16,12 @@ const Historique = ({allBookings}) => {
 
     if (!allBookings.length) {
         Historique = (
-            <>
             <Box><Center>Aucune réversations à venir</Center></Box>
-            </>
         )
     }
 
     if (allBookings.length) {
         Historique = (
-            <>
                 <Box overflowX = "auto">
                     <Table>
                         <Thead>
@@ -53,15 +50,10 @@ const Historique = ({allBookings}) => {
                         </Tbody>
                     </Table>
                 </Box>
-            </>
         )
     }
 
-    return (
-        <>
-        {Historique}
-        </>
-    )
+    return ( Historique )
 }
 
 export default Historique;

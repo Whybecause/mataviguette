@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from "react-router-dom";
-
+import { BrowserRouter } from 'react-router-dom'
 import { UserProvider } from './UserContext';
 import "react-datepicker/dist/react-datepicker.css";
 import './styles/fonts.css';
@@ -14,9 +13,9 @@ import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <BrowserRouter>
-  <UserProvider>
-    <App />
-  </UserProvider>
+    <UserProvider>
+      <App />
+    </UserProvider>
   </BrowserRouter>,
   document.getElementById('root'),
 );

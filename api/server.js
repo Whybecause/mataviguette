@@ -4,7 +4,6 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const dbConfig = require("./config/db.config");
 const app = express();
-const moment = require("moment");
 const corsOptions = {
   origin: "http://localhost:8081" && "https://mataviguette.herokuapp.com",
 };
@@ -45,14 +44,24 @@ require("./routes/booking.routes")(app);
 require("./routes/formContact.routes")(app);
 require("./routes/payment.routes")(app);
 
-if (process.env.NODE_ENV === "production") {
-  const appPath = path.join(__dirname, "client", "build");
-  app.use(express.static(appPath));
+// Pour AWS
+// const appPath = path.join(__dirname, "../client/build");
+// app.use(express.static(appPath));
 
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(appPath, "index.html"));
-  });
-}
+// app.get("*", (req, res) => {
+//     res.sendFile(path.join(appPath, "index.html"));
+// });
+
+
+// Pour HEROKU : 
+// if (process.env.NODE_ENV === "production") {
+//   const appPath = path.join(__dirname, "client", "build");
+//   app.use(express.static(appPath));
+
+//   app.get("*", (req, res) => {
+//     res.sendFile(path.resolve(appPath, "index.html"));
+//   });
+// }
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
