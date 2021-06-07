@@ -19,7 +19,7 @@ import { ChatIcon } from '@chakra-ui/icons';
 
 import { CloseButton } from '../styledComponents/Button-Wrapper';
 import commentService from '../../services/comment.service';  
-import { authIcon } from '../../assets/auth-icon.png';
+import  authIcon  from '../../assets/auth-icon.png';
 
   const Comments = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()

@@ -45,12 +45,12 @@ require("./routes/formContact.routes")(app);
 require("./routes/payment.routes")(app);
 
 // Pour AWS
-// const appPath = path.join(__dirname, "../client/build");
-// app.use(express.static(appPath));
+const appPath = path.join(__dirname, "../client/build");
+app.use(express.static(appPath));
 
-// app.get("*", (req, res) => {
-//     res.sendFile(path.join(appPath, "index.html"));
-// });
+app.get("*", (req, res) => {
+    res.sendFile(path.join(appPath, "index.html"));
+});
 
 
 // Pour HEROKU : 
