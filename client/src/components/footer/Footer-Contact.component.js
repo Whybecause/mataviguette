@@ -38,13 +38,13 @@ const FooterContact = () => {
           <ModalBody>
                 <List>
                     <ListItem>
-                        <h4>Contacter le propriétaire de la Mataviguette</h4>
+                        <h4>Pour toute demande relative à une réservation</h4>
                         <ListIcon as={EmailIcon} color="orange.500"  />mataviguette@gmail.com
                     </ListItem>
                     <Divider mt='5'/>
                     <ListItem mt='5'>
-                        <h4>Pour toute demande ou problème relatif à l'utilisation du site</h4>
-                        <ListIcon as={EmailIcon} color="orange.500"  />dev@mataviguette.fr
+                        <h4>Pour toute demande relative au site www.lamataviguette.fr</h4>
+                        <ListIcon as={EmailIcon} color="orange.500"  />contact@lamataviguette.fr
                     </ListItem>
                 </List>
           </ModalBody>
