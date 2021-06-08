@@ -16,7 +16,8 @@ import {
     FormErrorMessage,
     Button,
     Spinner,
-    Center
+    Center,
+    Textarea
   } from "@chakra-ui/react";
   import { EmailIcon } from '@chakra-ui/icons';
 
@@ -47,6 +48,7 @@ import {
       }
       catch(error) {
         setLoading(false);
+        onClose();
         toast({
           position: 'top',
           title: error.response.data.message,
@@ -100,7 +102,7 @@ import {
 
                           <FormControl id="message">
                             <FormLabel htmlFor="message"></FormLabel>
-                            <Input
+                            <Textarea
                               {...register("message", { required: true})}
                               type="text"
                               id="message"

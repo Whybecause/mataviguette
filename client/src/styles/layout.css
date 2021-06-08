@@ -33,20 +33,22 @@ max-width: 400px;
     cursor: pointer;
 }
 
-
-
-  .datepicker-custom-input {
-    background: rgb(255, 255, 255);
-    height: 100%;
-    width: 100%;
-    border: 0.1rem solid white;	
-    border-radius: 5px;
-    padding: 5px 5px 5px 5px;
+.datepicker-custom-input {
+  background: rgb(255, 255, 255);
+  height: 100%;
+  width: 100%;
+  border: 0.1rem solid white;	
+  border-radius: 5px;
+  padding: 5px 5px 5px 5px;
 }
 
 .google-calendar {
-    width: 100%;
-    height: 800px;
-    padding: 0 1rem 0 1rem;
-    border: 0;
+  width: 100%;
+  height: 800px;
+  padding: 0 1rem 0 1rem;
+  border: 0;
 } 
+
+.img {
+  height: 100%;
+}

@@ -1,8 +1,8 @@
 import React from 'react';
-import {  Box, Image } from '@chakra-ui/react';
+import {  Box } from '@chakra-ui/react';
 
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { Carousel } from 'react-responsive-carousel';
+import "react-image-gallery/styles/css/image-gallery.css";
+import ImageGallery from 'react-image-gallery';
 
 import pic1 from '../../assets/pic1.jpg';
 import piscine from '../../assets/piscine.jpg';
@@ -50,302 +50,310 @@ import anes from '../../assets/anes.jpg';
 import batisse from '../../assets/batisse.jpg';
 import canal from '../../assets/canal.jpg';
 
-const items = [
+const images = [
   {
-      id: 1,
-      altText: 'La maison',
-      caption: 'La maison vue de la piscine',
-      src: pic1,
+      originalAlt: 'La maison',
+      description: 'La maison vue de la piscine',
+      original: pic1,
+      thumbnail: pic1,
   },
   {
-      id: 2,
-      altText: 'La piscine',
-      caption: 'La piscine',
-      src: piscine,
+      originalAlt: 'La piscine',
+      description: 'La piscine',
+      original: piscine,
+      thumbnail: piscine,
   },
   {
-      id: 3,
-      altText: 'Coin-repas dans la cuisine',
-      caption: 'Coin-repas dans la cuisine',
-      src: repas,
+      originalAlt: 'Coin-repas dans la cuisine',
+      description: 'Coin-repas dans la cuisine',
+      original: repas,
+      thumbnail: repas,
   },
   {
-    id: 4,
-    altText: 'Salle de sport du châlet',
-    caption: 'Salle de sport du châlet',
-    src: sport,
+    originalAlt: 'Salle de sport du châlet',
+    description: 'Salle de sport du châlet',
+    original: sport,
+    thumbnail: sport,
   },
   {
-    id: 5,
-    altText: "Petit salon d'été sur la terrasse couverte",
-    caption: "Petit salon d'été sur la terrasse couverte",
-    src: salonTerrasse,
+    originalAlt: "Petit salon d'été sur la terrasse couverte",
+    description: "Petit salon d'été sur la terrasse couverte",
+    original: salonTerrasse,
+    thumbnail: salonTerrasse,
   },
   {
-    id: 6,
-    altText: 'Cuisine équipée',
-    caption: 'Cuisine équipée',
-    src: cuisine,
+    originalAlt: 'Cuisine équipée',
+    description: 'Cuisine équipée',
+    original: cuisine,
+    thumbnail: cuisine,
   },
   {
-    id: 7,
-    altText: 'Vue de la cuisine sur le jardin',
-    caption: 'Vue de la cuisine sur le jardin',
-    src: cuisineVue,
+    originalAlt: 'Vue de la cuisine sur le jardin',
+    description: 'Vue de la cuisine sur le jardin',
+    original: cuisineVue,
+    thumbnail: cuisineVue,
   },
   {
-    id: 8,
-    altText: 'Grand réfrigérateur-congélateur',
-    caption: 'Grand réfrigérateur-congélateur',
-    src: frigo,
+    originalAlt: 'Grand réfrigérateur-congélateur',
+    description: 'Grand réfrigérateur-congélateur',
+    original: frigo,
+    originalHeight: '50px',
+    thumbnail: frigo,
   },
   {
-    id: 9,
-    altText: 'Placard à vaisselle caché dans le mur de la cuisine',
-    caption: 'Placard à vaisselle caché dans le mur de la cuisine',
-    src: vaisselle,
+    originalAlt: 'Placard à vaisselle caché dans le mur de la cuisine',
+    description: 'Placard à vaisselle caché dans le mur de la cuisine',
+    original: vaisselle,
+    thumbnail: vaisselle,
   },
   {
-    id: 10,
-    altText: 'Juste devant la maison- A droite, la porte de la cuisine',
-    caption: 'Juste devant la maison- A droite, la porte de la cuisine',
-    src: maisonDevant,
+    
+    originalAlt: 'Juste devant la maison- A droite, la porte de la cuisine',
+    description: 'Juste devant la maison- A droite, la porte de la cuisine',
+    original: maisonDevant,
+    thumbnail: maisonDevant,
   },
   {
-    id: 11,
-    altText: 'Salon lumineux - Chaîne Hifi (radio-CD-USB)',
-    caption: 'Salon lumineux - Chaîne Hifi (radio-CD-USB)',
-    src: salon,
+    
+    originalAlt: 'Salon lumineux - Chaîne Hifi (radio-CD-USB)',
+    description: 'Salon lumineux - Chaîne Hifi (radio-CD-USB)',
+    original: salon,
+    thumbnail: salon,
   },
   {
-    id: 12,
-    altText: 'Séjour - Grande cheminée',
-    caption: 'Séjour - Grande cheminée',
-    src: sejour,
+    
+    originalAlt: 'Séjour - Grande cheminée',
+    description: 'Séjour - Grande cheminée',
+    original: sejour,
+    thumbnail: sejour,
   },
   {
-    id: 13,
-    altText: 'Salon - Canapé moelleux',
-    caption: 'Salon - Canapé moelleux',
-    src: salonCanape,
+    
+    originalAlt: 'Salon - Canapé moelleux',
+    description: 'Salon - Canapé moelleux',
+    original: salonCanape,
+    thumbnail: salonCanape,
   },
   {
-    id: 14,
-    altText: 'Terrasse couverte - Table pour les jours de pluie ou les soirées fraîches',
-    caption: 'Terrasse couverte - Table pour les jours de pluie ou les soirées fraîches',
-    src: terrasseCouverte,
+    
+    originalAlt: 'Terrasse couverte - Table pour les jours de pluie ou les soirées fraîches',
+    description: 'Terrasse couverte - Table pour les jours de pluie ou les soirées fraîches',
+    original: terrasseCouverte,
+    thumbnail: terrasseCouverte,
   },
   {
-    id: 15,
-    altText: 'Terrasse couverte',
-    caption: 'Terrasse couverte',
-    src: terrasseCouverte2,
+    
+    originalAlt: 'Terrasse couverte',
+    description: 'Terrasse couverte',
+    original: terrasseCouverte2,
+    thumbnail: terrasseCouverte2,
   },
   {
-    id: 16,
-    altText: 'Chambre blanche',
-    caption: 'Chambre blanche',
-    src: chambreBlanche,
+    
+    originalAlt: 'Chambre blanche',
+    description: 'Chambre blanche',
+    original: chambreBlanche,
+    thumbnail: chambreBlanche,
   },
   {
-    id: 17,
-    altText: 'Chambre blanche et sa cheminée rangements + une armoire penderie-lingerie non visible',
-    caption: 'Chambre blanche et sa cheminée rangements + une armoire penderie-lingerie non visible',
-    src: chambreCheminee,
+    
+    originalAlt: 'Chambre blanche et sa cheminée rangements + une armoire penderie-lingerie non visible',
+    description: 'Chambre blanche et sa cheminée rangements + une armoire penderie-lingerie non visible',
+    original: chambreCheminee,
+    thumbnail: chambreCheminee,
   },
   {
-    id: 18,
-    altText: 'Chambre blanche avec vue sur le parc',
-    caption: 'Chambre blanche avec vue sur le parc',
-    src: chambreVue,
+    
+    originalAlt: 'Chambre blanche avec vue sur le parc',
+    description: 'Chambre blanche avec vue sur le parc',
+    original: chambreVue,
+    thumbnail: chambreVue,
   },
   {
-    id: 19,
-    altText: "Chambre rose - Armoire de rangement - Accès à l'extérieur à l'arrière de la maison",
-    caption: "Chambre rose - Armoire de rangement - Accès à l'extérieur à l'arrière de la maison",
-    src: chambreRose,
+    
+    originalAlt: "Chambre rose - Armoire de rangement - Accès à l'extérieur à l'arrière de la maison",
+    description: "Chambre rose - Armoire de rangement - Accès à l'extérieur à l'arrière de la maison",
+    original: chambreRose,
+    thumbnail: chambreRose,
   },
   {
-    id: 20,
-    altText: 'Chambre rose - Un coin toilette',
-    caption: 'Chambre rose - Un coin toilette',
-    src: chambreWC,
+    
+    originalAlt: 'Chambre rose - Un coin toilette',
+    description: 'Chambre rose - Un coin toilette',
+    original: chambreWC,
+    thumbnail: chambreWC,
   },
   {
-    id: 21,
-    altText: 'Chambre rose - 2 lits à serrer ou à espacer...',
-    caption: 'Chambre rose - 2 lits à serrer ou à espacer...',
-    src: chambreLits,
+    
+    originalAlt: 'Chambre rose - 2 lits à serrer ou à espacer...',
+    description: 'Chambre rose - 2 lits à serrer ou à espacer...',
+    original: chambreLits,
+    thumbnail: chambreLits,
   },
   {
-    id: 22,
-    altText: 'Détails du mur',
-    caption: 'Détails du mur',
-    src: chambreMurs,
+    
+    originalAlt: 'Détails du mur',
+    description: 'Détails du mur',
+    original: chambreMurs,
+    thumbnail: chambreMurs,
   },
   {
-    id: 23,
-    altText: 'Salle de bain',
-    caption: 'Salle de bain',
-    src: sdb,
+    
+    originalAlt: 'Salle de bain',
+    description: 'Salle de bain',
+    original: sdb,
+    thumbnail: sdb,
   },
   {
-    id: 24,
-    altText: 'Baignoire et pare-douche',
-    caption: 'Baignoire et pare-douche',
-    src: baignoire,
+    
+    originalAlt: 'Baignoire et pare-douche',
+    description: 'Baignoire et pare-douche',
+    original: baignoire,
+    thumbnail: baignoire,
   },
   {
-    id: 25,
-    altText: "WC indépendant à l'étage des deux chambres et du séjour",
-    caption: "WC indépendant à l'étage des deux chambres et du séjour",
-    src: wcEtage,
+    
+    originalAlt: "WC indépendant à l'étage des deux chambres et du séjour",
+    description: "WC indépendant à l'étage des deux chambres et du séjour",
+    original: wcEtage,
+    thumbnail: wcEtage,
   },
   {
-    id: 26,
-    altText: 'Au RDC, "dortoir" 4 couchages',
-    caption: 'Au RDC, "dortoir" 4 couchages',
-    src: dortoir,
+    
+    originalAlt: 'Au RDC, "dortoir" 4 couchages',
+    description: 'Au RDC, "dortoir" 4 couchages',
+    original: dortoir,
+    thumbnail: dortoir,
   },
   {
-    id: 27,
-    altText: 'Derrière le mur blanc, un cabinet de toilette...',
-    caption: 'Derrière le mur blanc, un cabinet de toilette...',
-    src: dortoirWC,
+    
+    originalAlt: 'Derrière le mur blanc, un cabinet de toilette...',
+    description: 'Derrière le mur blanc, un cabinet de toilette...',
+    original: dortoirWC,
+    thumbnail: dortoirWC,
   },
   {
-    id: 28,
-    altText: '2 lits superposés et 2 lits gigogne',
-    caption: '2 lits superposés et 2 lits gigogne',
-    src: dortoirLits,
+    originalAlt: '2 lits superposés et 2 lits gigogne',
+    description: '2 lits superposés et 2 lits gigogne',
+    original: dortoirLits,
+    thumbnail: dortoirLits,
   },
   {
-    id: 29,
-    altText: 'Spacieux - un placard de rangement - Accès direct aux terasses',
-    caption: 'Spacieux - un placard de rangement - Accès direct aux terasses',
-    src: dortoirPlacard,
+    originalAlt: 'Spacieux - un placard de rangement - Accès direct aux terasses',
+    description: 'Spacieux - un placard de rangement - Accès direct aux terasses',
+    original: dortoirPlacard,
+    thumbnail: dortoirPlacard,
   },
   {
-    id: 30,
-    altText: 'Petit cabinet de toilette attenant au "dortoir"',
-    caption: 'Petit cabinet de toilette attenant au "dortoir"',
-    src: dortoirWC2,
+    originalAlt: 'Petit cabinet de toilette attenant au "dortoir"',
+    description: 'Petit cabinet de toilette attenant au "dortoir"',
+    original: dortoirWC2,
+    thumbnail: dortoirWC2,
   },
   {
-    id: 31,
-    altText: "Cabinet de toilette - il y a un autre WC indépendant à l'étage des 2 autres chambres",
-    caption: "Cabinet de toilette - il y a un autre WC indépendant à l'étage des 2 autres chambres",
-    src: wcRdc,
+    originalAlt: "Cabinet de toilette - il y a un autre WC indépendant à l'étage des 2 autres chambres",
+    description: "Cabinet de toilette - il y a un autre WC indépendant à l'étage des 2 autres chambres",
+    original: wcRdc,
+    thumbnail: wcRdc,
   },
   {
-    id: 32,
-    altText: 'Porte du dortoir-A droite, le cabinet de toilette',
-    caption: 'Porte du dortoir-A droite, le cabinet de toilette',
-    src: dortoirPorte,
+    originalAlt: 'Porte du dortoir-A droite, le cabinet de toilette',
+    description: 'Porte du dortoir-A droite, le cabinet de toilette',
+    original: dortoirPorte,
+    thumbnail: dortoirPorte,
   },
   {
-    id: 33,
-    altText: 'De la cuisine au séjour',
-    caption: 'De la cuisine au séjour',
-    src: cuisineEscalier,
+    originalAlt: 'De la cuisine au séjour',
+    description: 'De la cuisine au séjour',
+    original: cuisineEscalier,
+    thumbnail: cuisineEscalier,
   },
   {
-    id: 34,
-    altText: 'Terrasse de la cuisine',
-    caption: 'Terrasse de la cuisine',
-    src: cuisineTerrasse,
+    originalAlt: 'Terrasse de la cuisine',
+    description: 'Terrasse de la cuisine',
+    original: cuisineTerrasse,
+    thumbnail: cuisineTerrasse,
   },
   {
-    id: 35,
-    altText: "l'escalier menant au séjour",
-    caption: "l'escalier menant au séjour",
-    src: sejourEscalier,
+    originalAlt: "l'escalier menant au séjour",
+    description: "l'escalier menant au séjour",
+    original: sejourEscalier,
+    thumbnail: sejourEscalier,
   },
   {
-    id: 36,
-    altText: 'Chalet salle de "sport"',
-    caption: 'Chalet salle de "sport"',
-    src: chalet,
+    originalAlt: 'Chalet salle de "sport"',
+    description: 'Chalet salle de "sport"',
+    original: chalet,
+    thumbnail: chalet,
   },
   {
-    id: 37,
-    altText: 'En haut du parc',
-    caption: 'En haut du parc',
-    src: parcHaut,
+    originalAlt: 'En haut du parc',
+    description: 'En haut du parc',
+    original: parcHaut,
+    thumbnail: parcHaut,
   },
   {
-    id: 38,
-    altText: 'Haut du jardin',
-    caption: 'Haut du jardin',
-    src: jardinHaut,
+    originalAlt: 'Haut du jardin',
+    description: 'Haut du jardin',
+    original: jardinHaut,
+    thumbnail: jardinHaut,
   },
   {
-    id: 39,
-    altText: 'Le canal du Midi',
-    caption: 'Le canal du Midi',
-    src: canal,
+    originalAlt: 'Le canal du Midi',
+    description: 'Le canal du Midi',
+    original: canal,
+    thumbnail: canal,
   },
   {
-    id: 40,
-    altText: 'Les alentours - Chapelle sur la route',
-    caption: 'Les alentours - Chapelle sur la route',
-    src: chapelleAlentours,
+    originalAlt: 'Les alentours - Chapelle sur la route',
+    description: 'Les alentours - Chapelle sur la route',
+    original: chapelleAlentours,
+    thumbnail: chapelleAlentours,
   },
   {
-    id: 41,
-    altText: 'Verso de la chapelle',
-    caption: 'Verso de la chapelle',
-    src: chapelleVerso,
+    originalAlt: 'Verso de la chapelle',
+    description: 'Verso de la chapelle',
+    original: chapelleVerso,
+    thumbnail: chapelleVerso,
   },
   {
-    id: 42,
-    altText: 'Champ de tournesols',
-    caption: 'Champ de tournesols',
-    src: tournseol,
+    originalAlt: 'Champ de tournesols',
+    description: 'Champ de tournesols',
+    original: tournseol,
+    thumbnail: tournseol,
   },
   {
-    id: 43,
-    altText: '',
-    caption: '',
-    src: fleur,
+    originalAlt: 'Tournesol',
+    description: 'Tournesol',
+    original: fleur,
+    thumbnail: fleur,
   },
   {
-    id: 44,
-    altText: 'Ânes rencontrés lors de balades',
-    caption: 'Ânes rencontrés lors de balades',
-    src: anes,
+    originalAlt: 'Ânes rencontrés lors de balades',
+    description: 'Ânes rencontrés lors de balades',
+    original: anes,
+    thumbnail: anes,
   },
   {
-    id: 45,
-    altText: 'Superbe bâtisse dominant la colline',
-    caption: 'Superbe bâtisse dominant la colline',
-    src: batisse,
+    originalAlt: 'Superbe bâtisse dominant la colline',
+    description: 'Superbe bâtisse dominant la colline',
+    original: batisse,
+    thumbnail: batisse,
   },
   {
-    id: 46,
-    altText: 'Le lac saint-Arnaud',
-    caption: 'Le lac saint-Arnaud',
-    src: canal,
-  },
-
-
+    originalAlt: 'Le lac saint-Arnaud',
+    description: 'Le lac saint-Arnaud',
+    original: canal,
+    thumbnail: canal,
+  }
 ];
 
 const Caroussel = () => {
 
   return (
     <Box pr='5' pl='5' className="form-container small-page-height">
-    <Carousel>
-      {items.map( (item) => (
-        <React.Fragment>
-          <Box key={item.id}>
-              <Image src={item.src} className="slider-img" h={["300px", "400px", "600px", "750px"]}/>
-              <Box>{item.caption}</Box>
-          </Box>
-        </React.Fragment>
-      ))}
-    </Carousel>
-      </Box>
+        <ImageGallery items={images} showIndex={true} />
+    </Box>
   )
 }
 
