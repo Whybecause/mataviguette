@@ -7,10 +7,8 @@ const {
 } = require("../helpers/mongoose");
 const moment = require('moment');
 const Validator = require('validator');
-const isEmpty = require('is-empty');
 const daysController = require('./days.controller');
 const googleFunc = require('../middlewares/googleCalendarValidator');
-const sendEmail = require('../middlewares/automaticEmail');
 const dayjs = require('dayjs');
 
 exports.createBooking = async (req, res) => {
@@ -211,10 +209,10 @@ exports.deleteBookingWhenPaymentFails = async (req, res) => {
     if (foundBooking.user._id != user) {
     return console.log('You are not the booking owner');
     } 
-    const bookingDelete = await Booking.deleteOne({ _id: foundBooking._id})
-    const googleDelete = await googleFunc.deleteGoogleCalEvent(bookingStart);
-    const userUpdate = await User.updateOne({ _id : foundBooking.user._id}, {$pull: {bookings: foundBooking._id}})
-    const rentalUpdate = await Rental.updateOne({ _id : foundBooking.rental._id}, {$pull: {bookings: foundBooking._id}})
+    await Booking.deleteOne({ _id: foundBooking._id})
+    await googleFunc.deleteGoogleCalEvent(bookingStart);
+    await User.updateOne({ _id : foundBooking.user._id}, {$pull: {bookings: foundBooking._id}})
+    await Rental.updateOne({ _id : foundBooking.rental._id}, {$pull: {bookings: foundBooking._id}})
     console.log('Event Removed from DB');
     return res.send({message: 'Event removed from DB and from Google Calendar'})
   }

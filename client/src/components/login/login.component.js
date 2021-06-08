@@ -20,7 +20,7 @@ import authService from "../../services/auth.service";
 import CustomModal from './CustomModal.component';
 
 const Login = () => {
-  const { register, handleSubmit, formState: { errors }, } = useForm()
+  const { register, handleSubmit, reset, formState: { errors }, } = useForm()
   const toast = useToast()
   const [ loading, setLoading ] = useState(false);
 
@@ -48,21 +48,23 @@ const Login = () => {
     try {
       const res = await authService.sendMailResetPass(data)
       setLoading(false);
+      reset();
       toast({
           position: 'top',
           title: res.data.message,
           status: "success",
-          duration: 3000,
+          duration: 5000,
           isClosable: true,
       })
     }
     catch(error) {
         setLoading(false);
+        reset();
         toast({
           position: 'top',
           title: error.response.data.message,
           status: "error",
-          duration: 3000,
+          duration: 5000,
           isClosable: true,
       })
     }
@@ -73,21 +75,23 @@ const Login = () => {
     try {
       const res = await authService.resendConfirmAccount(data)
       setLoading(false);
+      reset();
       toast({
           position: 'top',
           title: res.data.message,
           status: "success",
-          duration: 3000,
+          duration: 5000,
           isClosable: true,
       })
     }
     catch(error) {
         setLoading(false);
+        reset();
         toast({
           position: 'top',
           title: error.response.data.message,
           status: "error",
-          duration: 3000,
+          duration: 5000,
           isClosable: true,
       })
     }

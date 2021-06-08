@@ -10,9 +10,6 @@ import {
   Button,
   Center,
   Divider,
-  List,
-  ListItem,
-  ListIcon,
   Stack,
   Box,
   Icon

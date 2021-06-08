@@ -36,7 +36,9 @@ const ContactBooker = (props) => {
         .then(res => {
             setLoading(false);
             resetForm();
+            onClose();
             toast({
+                position: 'top',
                 title: res.data.message,
                 status: "success",
                 duration: 2000,

@@ -21,8 +21,10 @@ const Homepage = () => {
 
           <Center>
             <Stack p='2'>
-            <h1>Maison - Charme et Campagne - Piscine- S.de sport</h1>
-            <p>Bajamont, Nouvelle-Aquitaine, France</p>
+            <h1>Maison - Charme et Campagne - Piscine- Salle de sport</h1>
+            <Center>
+            <p className="color1">Bajamont, Nouvelle-Aquitaine, France</p>
+            </Center>
             </Stack>
           </Center>
 

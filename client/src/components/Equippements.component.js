@@ -41,7 +41,7 @@ const Equippements = () => {
                             </p>
                             <Divider />
                             <p>Piscine
-                                <span className="p-discret"> -Privée</span>
+                                <span className="p-discret"> - Privée</span>
                             </p>
                             <Divider />
                         </Stack>
@@ -50,24 +50,30 @@ const Equippements = () => {
                     <h3>Restauration</h3>
                     <Box p='3'>
                         <Stack mt='3'>
+                            <p>Cuisine</p>
+                            <Divider />
                             <p>Four à micro-onde</p>
                             <Divider />
                             <p>Four</p>
                             <Divider />
-                            <p>Vaisselle et couverts</p>
+                            <p>Réfrigérateur</p>
+                            <Divider />
+                            <p>Congélateur</p>
                             <Divider />
                             <p>Lave-vaisselle</p>
                             <Divider />
-                            <p>Cuisinière</p>
+                            <p>Vaisselle et couverts</p>
                             <Divider />
-                            <p>Cuisine</p>
+                            <p>Plaque vitro-céramique</p>
                             <Divider />
-                            <p>Cafetière</p>
+                            <p>Cafetière Nespresso</p>
+                            <Divider />
+                            <p>Bouilloire électrique</p>
+                            <Divider />
+                            <p>Grille-pain</p>
                             <Divider />
                             <p>Ustensiles de cuisine de base</p>
                             <p className="p-discret">Casseroles et poêles, huile sel et poivre</p>
-                            <Divider />
-                            <p>Réfrigérateur</p>
                             <Divider />
                         </Stack>
                     </Box>

@@ -31,8 +31,7 @@ exports.getSecret = async (req, res) => {
         N'hésitez pas à revenir vers moi pour toute information complémentaire,
         Valérie`
         const intent = await stripe.paymentIntents.create({
-          // amount: totalPrice * 100,
-          amount: totalPrice,
+          amount: totalPrice *100,
           currency: 'eur',
           payment_method_types: ['card'],
           receipt_email: userEmail,

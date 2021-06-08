@@ -337,12 +337,12 @@ const Caroussel = () => {
     <Box pr='5' pl='5' className="form-container small-page-height">
     <Carousel>
       {items.map( (item) => (
-    <React.Fragment>
-    <Box key={item.id}>
-            <Image src={item.src} className="slider-img" h={["300px", "400px", "600px", "750px"]}/>
-          <Box>{item.caption}</Box>
+        <React.Fragment>
+          <Box key={item.id}>
+              <Image src={item.src} className="slider-img" h={["300px", "400px", "600px", "750px"]}/>
+              <Box>{item.caption}</Box>
           </Box>
-          </React.Fragment>
+        </React.Fragment>
       ))}
     </Carousel>
       </Box>

@@ -1,0 +1,68 @@
+ [
+        {
+            "id": 1,
+            "author": "Olivier",
+            "text": "Nous avons passé un très agréable week-end dans la maison de Valérie. La maison est grande et confortable. L'extérieur est vaste et très calme, alors que toutes les commodités sont à quelques minutes de voiture. Les départs de randonnées sont très proches et la campagne alentours est vraiment préservée et, en cette saison, luxuriante. Le baby foot et la table de ping-pong ont ravi les petits et les grands. Nous reviendrons à coup sûr.",
+            "createdAt" : "05/2021"
+        },
+        {
+            "id": 2,
+            "author": "Stéphanie",
+            "text": "Bel havre de paix en pleine nature. Calme et deconnexion assurés!!!",
+            "createdAt" : "08/2020"
+        },
+        {
+            "id": 3,
+            "author": "Maylis",
+            "text": "Maison de campagne comme on les rêve. Authenticité, bucolique, pleins de recoins où se prélasser. La déconnexion fait un bien fou, notamment aux enfants qui sortent de leurs écrans pour jouer au ping pong, babyfoot, piscine et jeux de sociétés. Un vrai bonheur!",
+            "createdAt" : "07/2020"
+        },
+        {
+            "id": 4,
+            "author": "Lucile",
+            "text": "La maison a tout pour plaire. Tout est conforme à la description mais rien de mieux que d'y aller pour découvrir son charme exceptionnel. Il n'y a absolument aucun bruit, ce séjour fut un pur moment de bonheur. Valérie est extremement réactive, elle nous a proposé des lieux à visiter, des ballades à faire... elle répond avec gentillesse et sympathie à la moindre question. Encore merci à elle pour tout.",
+            "createdAt" : "07/2020"
+        },
+        {
+            "id": 5,
+            "author": "Mickael",
+            "text": "Valérie a tout fait pour que notre week-end se passe à merveille. Résultat: notre week-end c'est passé à merveille !",
+            "createdAt" : "02/2020"
+        },
+        {
+            "id": 6,
+            "author": "Laura",
+            "text": "Excellent séjour chez Valérie la maison est très agréable.",
+            "createdAt" : "08/2018"
+        },
+        {
+            "id": 7,
+            "author": "Laurent",
+            "text": "Un séjour de tranquillité que seule la nature peut perturber !",
+            "createdAt" : "08/2018"
+        },
+        {
+            "id": 8,
+            "author": "Cédric",
+            "text": "Le gîte est parfait pour se reposer au calme, se couper du monde et se déconnecter complètement. La piscine et le jardin sont très agréables. la région est très sympa à découvrir. Le gîte est parfaitement équipé et l'accueil chaleureux.",
+            "createdAt" : "07/2018"
+        },
+        {
+            "id": 9,
+            "author": "Jo",
+            "text": "If you are looking for peace and relaxation in a charming and rustic French house, then you will love Valérie's place. We so enjoyed the house and the garden... there are so many lovely places to relax outside and it was great to be able to cool off in the swimming pool. Our kids loved the swimming pool, the table tennis table, the foosball table, petanque and the gym. You definitely need a car because the house is in a rural location - but there is a supermarket 7 minutes drive away and we enjoyed exploring the local area, it is beautiful countryside. Everything else you could want is in the city of Agen, 15 minutes away. There is no wifi in the house, but we actually enjoyed being 'unplugged' and we could get 3G on our phones in the garden when we needed to search information online.",
+            "createdAt" : "07/2018"
+        },
+        {
+            "id": 10,
+            "author": "Nicolas",
+            "text": "Super accueil, le parc et les terrasses sont superbes, vraiment un endroit agréable pour se couper du monde à 5 minutes d Agen.",
+            "createdAt" : "05/2018"
+        },
+        {
+            "id": 11,
+            "author": "François",
+            "text": "De passage près d'Agen avec une famille très élargie pour disputer une compétition d'échecs, nous avons passé une semaine formidable dans la maison de Valérie. Située au calme en pleine campagne, authentique, décorée avec soin et parfaitement équipée, tant en électroménager qu'en vaisselle, la maison s'est révélée parfaite pour nous et nos 5 champions. Ces derniers ont pu se défouler dans le très vaste jardin, profitant de la table de ping pong, du baby-foot, etc. Et pour le repos des adultes, mention spéciale au salon d'été, très agréable. Enfin, nous avons été accueillis de façon très sympathique. Du coup, nous n'hésiterons pas à relouer cette maison si nous repassons par la région d'Agen... et nous vous engageons à faire de même.",
+            "createdAt" : "04/2018"
+        }
+    ]

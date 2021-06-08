@@ -1,11 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Box,     Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td, } from '@chakra-ui/react';
-  import dayjs from 'dayjs';
+import { Box } from '@chakra-ui/react';
 
 
 import history from '../../helpers/history';

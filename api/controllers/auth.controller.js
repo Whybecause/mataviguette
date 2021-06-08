@@ -1,21 +1,10 @@
+const crypto = require('crypto');
+
+const { emailTemplate } = require('../emails/emailTemplate');
+const { transporter } = require('../emails/transporter');
 const config = require("../config/auth.config");
 const validateLoginInput = require('../middlewares/login');
 const Validator = require('validator');
-const isEmpty = require('is-empty');
-const crypto = require('crypto');
-const nodemailer = require('nodemailer');
-const { google } = require('googleapis');
-const OAuth2 = google.auth.OAuth2;
-const oauth2Client = new OAuth2 (
-  process.env.OAUTH2_ID,
-  process.env.OAUTH2_CODE,
-  "https://developers.google.com/oauthplayground"
-);
-oauth2Client.setCredentials({
-  refresh_token: process.env.OAUTH2_REFRESH_TOKEN
-});
-const accessToken = oauth2Client.getAccessToken();
-
 const db = require("../models");
 const User = db.user;
 const Role = db.role;
@@ -97,35 +86,28 @@ exports.signup = (req, res) => {
       // });
 
       const token = new Token ({ _userId: user.id, token: crypto.randomBytes(16).toString('hex')});
-      token.save(function (err) {
+      token.save( async function (err) {
         if (err) {
           return res.status(500).send({ message: err.message});
         }
-        const transporter = nodemailer.createTransport({
-          service: "gmail",
-          auth: {
-            type: "OAuth2",
-            user: process.env.ADMIN_EMAIL,
-            clientId: process.env.OAUTH2_ID,
-            clientSecret: process.env.OAUTH2_CODE,
-            refreshToken: process.env.OAUTH2_REFRESH_TOKEN,
-            accessToken: accessToken
-          },
-          tls: {
-              rejectUnauthorized: false
-          }
-          });
+          const header = "Bienvenue à la Mataviguette !"
+          const message = "Veuillez valider votre compte en cliquant sur le bouton"
+          const buttonText = "Valider votre compte"
+          const buttonLink = `${process.env.CLIENT_ORIGIN}` + "/confirmation/" + `${token.token}`
+          const html = await emailTemplate(header, message, buttonText, buttonLink)
+
           const mailOptions = {
-            from : process.env.ADMIN_EMAIL,
+            from : process.env.DOMAIN_EMAIL,
             to : user.email,
             subject: 'Vérification de votre compte',
-            text: `Bonjour, veuillez valider votre compte en cliquant sur ce lien : \n` + process.env.CLIENT_ORIGIN + '\/confirmation\/' + token.token
+            html: html
             };
-            transporter.sendMail(mailOptions, function(error, info) {
+
+            transporter.sendMail(mailOptions, function(error) {
               if (error) {
                   return res.status(500).send({ message: error.message });
               } else {
-                  return res.status(200).send({ message: 'Un email de validation a été envoyé à ' + user.email + '.' });
+                  return res.status(200).send({ message: 'Un email de validation a été envoyé à ' + user.email + '. (Vérifiez vos spams)' });
               }
               });
       })
@@ -177,35 +159,30 @@ exports.resendTokenPost = (req, res, next) => {
     if (!user) return res.status(400).send({ message: "We are unable to find a user with that email"});
     if (user.isVerified) return res.status(400).send({ message: 'Ce compte a déjà été validé'});
     const token = new Token ({ _userId: user.id, token: crypto.randomBytes(16).toString('hex')});
-    token.save(function (err) {
+    token.save( async function (err) {
       if (err) { return res.status(500).send({ message: err.message}); }
-      const transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-          type: "OAuth2",
-          user: process.env.ADMIN_EMAIL,
-          clientId: process.env.OAUTH2_ID,
-          clientSecret: process.env.OAUTH2_CODE,
-          refreshToken: process.env.OAUTH2_REFRESH_TOKEN,
-          accessToken: accessToken
-        },
-        tls: {
-            rejectUnauthorized: false
+
+      const header = "Bienvenue à la Mataviguette !"
+      const message = "Veuillez valider votre compte en cliquant sur le bouton"
+      const buttonText = "Valider votre compte"
+      const buttonLink = `${process.env.CLIENT_ORIGIN}` + "/confirmation/" + `${token.token}`
+      const html = await emailTemplate(header, message, buttonText, buttonLink)
+      
+
+      const mailOptions = {
+        from : process.env.DOMAIN_EMAIL,
+        to : user.email,
+        subject: 'Validez votre compte',
+        html: html
+      };
+
+      transporter.sendMail(mailOptions, function(error) {
+        if (error) {
+            return res.status(500).send({ message: error.message });
+        } else {
+            return res.status(200).send({ message: 'Un email de validation a été envoyé à ' + user.email + '. (Vérifiez vos spams)' });
         }
         });
-        const mailOptions = {
-          from : process.env.ADMIN_EMAIL,
-          to : user.email,
-          subject: 'Validez votre compte',
-          text: `Bonjour, bienvenue sur la mataviguette ! Validez votre compte en cliquant sur ce lien: \n` + process.env.CLIENT_ORIGIN + '\/confirmation\/' + token.token
-          };
-          transporter.sendMail(mailOptions, function(error, info) {
-            if (error) {
-                return res.status(500).send({ message: error.message });
-            } else {
-                return res.status(200).send({ message: 'Un email de validation a été envoyé à ' + user.email + '.' });
-            }
-            });
 
     })
   })
@@ -341,35 +318,28 @@ exports.sendEmailResetPassword = (req, res) => {
     }
     else {
       const token = new Token ({ _userId: user.id, token: crypto.randomBytes(16).toString('hex')});
-      token.save(function (err) {
+      token.save(async function (err) {
         if (err) {
           return res.status(500).send({ message: err.message});
         }
-        const transporter = nodemailer.createTransport({
-          service: "gmail",
-          auth: {
-            type: "OAuth2",
-            user: process.env.ADMIN_EMAIL,
-            clientId: process.env.OAUTH2_ID,
-            clientSecret: process.env.OAUTH2_CODE,
-            refreshToken: process.env.OAUTH2_REFRESH_TOKEN,
-            accessToken: accessToken
-          },
-          tls: {
-              rejectUnauthorized: false
-          }
-          });
+
+        const header = "Votre demande de réinitialisation de mot de passe !"
+        const message = "Bonjour, vous pouvez changer votre mot de passe en cliquant sur ce bouton"
+        const buttonText = "Réinitialiser mon mot de passe"
+        const buttonLink = `${process.env.CLIENT_ORIGIN}` + "/reset/" + `${token.token}`
+        const html = await emailTemplate(header, message, buttonText, buttonLink)
+
         const mailOptions = {
-          from : process.env.ADMIN_EMAIL,
+          from : process.env.DOMAIN_EMAIL,
           to : user.email,
           subject: 'Changement de mot de passe',
-          text: `Bonjour, vous pouvez changer votre mot de passe en cliquant sur ce lien: \n` + process.env.CLIENT_ORIGIN + '\/reset\/' + token.token
+          html: html
           };
-        transporter.sendMail(mailOptions, function(error, info) {
+        transporter.sendMail(mailOptions, function(error) {
           if (error) {
               return res.status(500).send({ message: error.message });
           } else {
-              return res.status(200).send({ message: 'Changez votre mot de passe en cliquant sur le lien envoyé à ' + user.email + '.' });
+              return res.status(200).send({ message: 'Changez votre mot de passe en cliquant sur le lien envoyé à ' + user.email + '. (Vérifiez vos spams)' });
           }
         });
       })

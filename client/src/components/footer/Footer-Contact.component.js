@@ -39,13 +39,9 @@ const FooterContact = () => {
                 <List>
                     <ListItem>
                         <h4>Pour toute demande relative à une réservation</h4>
-                        <ListIcon as={EmailIcon} color="orange.500"  />mataviguette@gmail.com
-                    </ListItem>
-                    <Divider mt='5'/>
-                    <ListItem mt='5'>
-                        <h4>Pour toute demande relative au site www.lamataviguette.fr</h4>
                         <ListIcon as={EmailIcon} color="orange.500"  />contact@lamataviguette.fr
                     </ListItem>
+                    <Divider mt='5'/>
                 </List>
           </ModalBody>
           <ModalFooter>

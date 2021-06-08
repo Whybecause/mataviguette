@@ -56,7 +56,7 @@ import {
                 </FormControl>
             </ModalBody>
             <ModalFooter>
-                <Button type="submit" disabled={props.loading}>
+                <Button mr='2' colorScheme="teal" variant="outline" type="submit" disabled={props.loading}>
                     {props.loading && (
                         <Spinner size='xs' />
                     )}
