@@ -8,14 +8,14 @@ const { transporter } = require('../emails/transporter')
 exports.sendContactForm = (req, res) => {
     (async function() {
         try {
-            const { name, email, message } =  req.body;
+            const { name, email, message, emailObject } =  req.body;
             const header = `Message de ${name} (${email})`
             const html = await emailTemplate(header, message);
 
             const mailOptions = {
             from : name,
             to : process.env.ADMIN_EMAIL,
-            subject: 'Nouveau message depuis le formulaire de contact',
+            subject: emailObject,
             html: html
             };
 

@@ -252,6 +252,26 @@ exports.signin = (req, res) => {
     });
 };
 
+exports.changeEmail = async (req, res) => {
+  const userId = req.userId;
+  const {email, confirmNewEmail } = req.body;
+
+  try {
+    if (email.length === 0 || confirmNewEmail.length === 0) { return res.status(400).send({ message: 'Veuillez renseigner tous les champs'})}
+    if (email !== confirmNewEmail) { return res.status(400).send({ message: 'Les emails sont différents'})}
+
+    const user = await User.findById({ _id: userId })
+    user.set({ email: email})
+    user.save(err => {
+      if(err) { return res.status(400).send({ message: 'Impossible de modifier l"email, réessayez ultérieurement'})}
+      return res.status(200).send({ message: 'Votre email a été mis à jour !'})
+    })
+
+  } catch(error) {
+    return res.status(400).send({ message: error})
+  }
+}
+
 exports.changePassword = async (req, res) => {
   const userId = req.userId;
   const oldPass = req.body.oldPass;
@@ -302,9 +322,6 @@ exports.isValidAdmin = async (req, res) => {
     console.log(e);
   }
 }
-
-
-
 exports.sendEmailResetPassword = (req, res) => {
   User.findOne({ email : req.body.email}, function (err, user) {
     if (req.body.email === undefined) {
@@ -390,5 +407,17 @@ exports.resetPassword = (req, res) => {
       });
     });
   });
+}
+
+exports.deleteUser = async (req, res) => {
+  const userId = req.userId;
+  try {
+    await User.deleteOne({ _id : userId})
+    return res.status(200).send({ message: 'Désolé de vous voir partir ! Votre compte a été supprimé'}); 
+  }
+  catch (error) {
+    return res.status(400).send({ message: 'Une erreur est survenue, veuillez réessayer plus tard'});
+  }
+
 }
 

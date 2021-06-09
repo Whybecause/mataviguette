@@ -4,6 +4,8 @@ import { Box, Center, useToast, Icon } from "@chakra-ui/react";
 import { ExternalLinkIcon } from '@chakra-ui/icons';
 import {CardElement, useStripe, useElements} from '@stripe/react-stripe-js';
 
+import history from '../../../helpers/history';
+import { dateLang } from '../../../helpers/dateLanguage';
 import { UserContext } from '../../../UserContext';
 import { useUnavailableDates } from '../../../hooks/useUnavailableDates';
 import { getRangeOfDates } from "../../../helpers/index";
@@ -12,6 +14,7 @@ import ReservationCheckout from './Reservation-checkout';
 import rentalCRUDService from "../../../services/rentalCRUD.service";
 import bookingService from "../../../services/booking.service";
 import paymentService from "../../../services/payment.service";
+import formContactService from "../../../services/formContact.service";
 
 const Reservation = () => {
   const user = useContext(UserContext);
@@ -70,7 +73,7 @@ const Reservation = () => {
             duration: 3000,
             isClosable: true,
           }) 
-          const del = await bookingService.deleteBooking(bookingStart);
+          const del = await bookingService.deleteBookingWhenPaymentFails(bookingStart);
           console.log(del.data.message);
           return; 
         }
@@ -85,6 +88,15 @@ const Reservation = () => {
             duration: 3000,
             isClosable: true,
           }) 
+          // envoi d'un mail à la mataviguette pour avoir l'info sur les résa
+          const emailObject = "Nouvelle réservation";
+          const emailData = {
+            name: user.user,
+            email: user.email,
+            message: `Du ${dateLang(startAt, 'DD MMM YYYY')} au ${dateLang(endAt, 'DD MMM YYYY')}`
+          }
+          await formContactService.sendFormContact(emailData, emailObject)
+          history.push("/user");
         }
 
       } catch(error) {

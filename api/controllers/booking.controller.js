@@ -10,6 +10,7 @@ const Validator = require('validator');
 const daysController = require('./days.controller');
 const googleFunc = require('../middlewares/googleCalendarValidator');
 const dayjs = require('dayjs');
+const { google } = require('googleapis');
 
 exports.createBooking = async (req, res) => {
   const {
@@ -218,6 +219,24 @@ exports.deleteBookingWhenPaymentFails = async (req, res) => {
   }
   catch(e) {
     return res.send({message: e})
+  }
+}
+
+exports.deleteBooking = async (req, res) => {
+  try {
+    const booking = await Booking.findOne({ _id: req.params.id }).populate('rental').populate('user')
+
+    await googleFunc.deleteGoogleCalEvent(booking.startAt);
+    await Booking.deleteOne({ _id : booking._id });
+    await Rental.updateOne({ _id : booking.rental._id}, {$pull: {bookings: booking._id}} )
+    if (booking.user) {
+      await User.updateOne({ _id: booking.user._id}, {$pull: {bookings: booking._id }} )
+    }
+    
+    return res.status(200).send({ message: 'Réservation supprimée'})
+
+  } catch(error) {
+    return res.status(400).send({ message: 'Impossible de supprimer la réservation' + error})
   }
 }
 

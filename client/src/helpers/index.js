@@ -32,19 +32,3 @@ export const flatten = (arr) => {
     return flat.concat(Array.isArray(toFlatten) ? flatten(toFlatten) : toFlatten);
   }, []);
 }
-
-// export const getFirstDateAvailable = async (arr, setStartAt) => {
-//   let startAt = new Date();
-
-//   let bookedDates = [];
-//   for (let i=0; i<arr.length; i++ ) {
-//     bookedDates.push(dayjs(arr[i]).format('DD MM YYYY'))
-//   }
-
-//   while (bookedDates.includes(dayjs(startAt).format('DD MM YYYY'))) {
-//     startAt = addDays(startAt, 1)
-//   }
-
-//   return setStartAt(startAt);
-
-// }

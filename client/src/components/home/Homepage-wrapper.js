@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Center, Stack, AspectRatio, SimpleGrid, Text } from "@chakra-ui/react";
+import { Box, Stack, AspectRatio, SimpleGrid } from "@chakra-ui/react";
 
 import Gallery from './Gallery.component';
 import Description from './Description.component';

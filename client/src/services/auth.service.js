@@ -80,6 +80,14 @@ class AuthService {
     return axios.patch("api/auth/password/update", (data), { headers: authHeader() } );
   }
 
+  async updateEmail(data) {
+    return await axios.patch("/api/auth/email/update", (data), {headers: authHeader()});
+  }
+
+  async deleteUser() {
+    return await axios.delete("/api/v1/user/delete", {headers: authHeader()});
+  }
+
 }
 
 export default new AuthService();

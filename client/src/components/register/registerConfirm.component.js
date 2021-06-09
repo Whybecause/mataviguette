@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useParams } from 'react-router-dom';
 import { useForm } from "react-hook-form";
-import { useToast, Button, Spinner, Box, Center, Input, FormControl, FormLabel, FormErrorMessage, useRadio} from '@chakra-ui/react';
+import { useToast, Button, Spinner, Box, Center, Input, FormControl, FormLabel, FormErrorMessage} from '@chakra-ui/react';
 
 import history from "../../helpers/history";
 import authService from "../../services/auth.service";

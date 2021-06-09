@@ -16,7 +16,7 @@ import {
 import authService from "../../services/auth.service";
 
 const Register = () => {
-  const { register, handleSubmit, formState: { errors },} = useForm();
+  const { register, handleSubmit, reset, formState: { errors },} = useForm();
   const toast = useToast();
   const [loading, setLoading] = useState(false);
   const mailRegex = new RegExp(
@@ -28,6 +28,7 @@ const Register = () => {
     try {
       const res = await authService.register(data)
       setLoading(false);
+      reset();
       toast({
         position: 'top',
         title: res.data.message,
@@ -50,7 +51,7 @@ const Register = () => {
 
   return (
       <Box className="small-container small-page-height" mt="5" p="5">
-        <Box borderWidth="1px" borderRadius="xl" p='5' d='flex' alignItems="center" justifyContent="center">
+        <Box borderWidth="1px" borderRadius="xl" p='5' >
           <form onSubmit={handleSubmit(handleRegister)}>
 
             <Center mb='5'>

@@ -20,4 +20,6 @@ module.exports = function(app) {
   app.get("/api/token", [authJwt.verifyToken], controller.isValidToken);
   app.get("/api/admin", [authJwt.verifyToken, authJwt.isAdmin], controller.isValidAdmin);
   app.patch("/api/auth/password/update", [authJwt.verifyToken], controller.changePassword);
+  app.patch("/api/auth/email/update", [authJwt.verifyToken], controller.changeEmail);
+  app.delete("/api/v1/user/delete", [authJwt.verifyToken], controller.deleteUser)
 };

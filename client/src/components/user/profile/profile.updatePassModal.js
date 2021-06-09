@@ -40,11 +40,11 @@ const UpdatePassModal = () => {
 
     return (
         <React.Fragment>
-            <Button onClick={onOpen}>Modifiez votre mot de passe</Button>
+            <Button onClick={onOpen}>Modifier mon mot de passe</Button>
                 <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                     <ModalContent>
-                        <ModalHeader>Modifiez votre mot de passe</ModalHeader>
+                        <ModalHeader>Modifier mon mot de passe</ModalHeader>
                             <form onSubmit={handleSubmit(handleUpdatePassword)}>
                         <ModalBody>
                                 <FormControl id="oldPass">
@@ -56,7 +56,7 @@ const UpdatePassModal = () => {
                                         type="password"
                                         id="oldPass"
                                         name="oldPass"
-                                        placeholder="Votre mot de passe actuel"
+                                        placeholder="Mot de passe actuel"
                                         required
                                     />
                                     <FormErrorMessage>
@@ -73,7 +73,7 @@ const UpdatePassModal = () => {
                                         type="password"
                                         id="password"
                                         name="password"
-                                        placeholder="Votre nouveau mot de passe"
+                                        placeholder="Nouveau mot de passe"
                                         required
                                     />
                                     <FormErrorMessage>
@@ -90,7 +90,7 @@ const UpdatePassModal = () => {
                                         type="password"
                                         id="confirmNewPass"
                                         name="confirmNewPass"
-                                        placeholder="Confirmez votre nouveau mot de passe"
+                                        placeholder="Confirmer nouveau mot de passe"
                                         required
                                     />
                                     <FormErrorMessage>

@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Image, SimpleGrid, Center } from "@chakra-ui/react";
-import dayjs from 'dayjs';
 
+import { dateLang } from '../../../helpers/dateLanguage';
 import pic1 from "../../../assets/pic1.jpg";
 import ContactHost from './ContactHost.modal';
 import AddComment from './AddComment';
@@ -33,7 +33,7 @@ const BookingCard = ({ bookings, showCurrentBookings, showAllBookings, setRefres
                   textTransform="uppercase"
                   ml="2"
                 >
-                  {dayjs(booking.startAt).format('D MMM YYYY')} &bull; {dayjs(booking.endAt).format('D MMM YYYY')} | {booking.days} jours
+                  {dateLang(booking.startAt, 'D MMM YYYY')} &bull; {dateLang(booking.endAt, 'D MMM YYYY')} | {booking.days} jours
                 </Box>
               </Box>
 

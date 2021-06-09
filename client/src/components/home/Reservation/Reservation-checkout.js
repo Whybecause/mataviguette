@@ -1,41 +1,49 @@
 import React from "react";
 import {
+  Icon,
   useToast,
-  FormControl,
-  FormLabel,
   Modal,
   ModalOverlay,
   ModalContent,
-  ModalHeader,
   ModalFooter,
   ModalBody,
   useDisclosure,
   Button,
-  Stack,
-  Spinner
+  Spinner,
+  Flex,
+  Spacer,
+  Divider,
+  Box
 } from "@chakra-ui/react";
+import { UnlockIcon } from '@chakra-ui/icons';
 import {CardElement} from '@stripe/react-stripe-js';
-import dayjs from 'dayjs';
 
+import {dateLang} from '../../../helpers/dateLanguage'
 import { CloseButton } from '../../styledComponents/Button-Wrapper';
 
 const CARD_ELEMENT_OPTIONS = {
-    style: {
-      base: {
-        color: "#32325d",
-        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-        fontSmoothing: "antialiased",
-        fontSize: "16px",
-        "::placeholder": {
-          color: "#aab7c4",
-        },
+  iconStyle: "solid",
+  style: {
+    base: {
+      iconColor: "#E6885C",
+      color: "black",
+      fontWeight: 500,
+      fontFamily: "Roboto, Open Sans, Segoe UI, sans-serif",
+      fontSize: "16px",
+      fontSmoothing: "antialiased",
+      ":-webkit-autofill": {
+        color: "#fce883"
       },
-      invalid: {
-        color: "#fa755a",
-        iconColor: "#fa755a",
-      },
+      "::placeholder": {
+        color: "#7D7163"
+      }
     },
-  };
+    invalid: {
+      iconColor: "#fa755a",
+      color: "#fa755a"
+    }
+  }
+};
 
 const ReservationCheckout = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -69,24 +77,43 @@ const ReservationCheckout = (props) => {
   return (
     <React.Fragment>
       <Button variant="solid" colorScheme="blackAlpha" onClick={validateFormFields}>Valider</Button>
-      <Modal isOpen={isOpen} onClose={onClose} >
+      <Modal isOpen={isOpen} onClose={onClose} size="xl" >
                 <ModalOverlay/>
                     <ModalContent>
-                        <ModalHeader>Récapitulatif et paiement</ModalHeader>
+                        <Box as='h2' mb='2' mt='2' align="center">Récapitulatif et paiement</Box>
                         <ModalBody>
-                            <Stack>
-                                <p>Du {dayjs(props.startAt).format('D MMM YYYY')} au {dayjs(props.endAt).format('D MMM YYYY')}</p>
-                                <p>{props.guests} {props.guests > 1 ? " voyageurs" : "voyageur"}</p>
-                                <p>{props.days} jours</p>
-                                <p>{props.finalPrice}€</p>
-                            </Stack>
-                              <FormControl>
-                            <FormLabel>
-                                Paiement par carte
-                                <CardElement options={CARD_ELEMENT_OPTIONS} onChange={(e) => {props.setError(e.error); props.setCardComplete(e.complete)}} />
-                            </FormLabel>
-                              </FormControl>
-                              
+                          <Flex>
+                            <p>Dates</p>
+                            <Spacer />
+                            <p><strong>Du {dateLang(props.startAt, 'D MMM YYYY')} au {dateLang(props.endAt, 'D MMM YYYY')}</strong></p>
+                          </Flex>
+                          <Divider mt='2' mb='2' />
+                          <Flex>
+                            <p>Durée</p>
+                            <Spacer />
+                            <p><strong>{props.days} jours</strong></p>
+                          </Flex>
+                          <Divider mt='2' mb='2' />
+                          <Flex>
+                            <p>Voyageur(s)</p>
+                            <Spacer />
+                            <p><strong>{props.guests} {props.guests > 1 ? " voyageurs" : "voyageur"}</strong></p>
+                          </Flex>
+                          <Divider mt='2' mb='2' />
+                          <Flex>
+                            <p>Prix TTC</p>
+                            <Spacer />
+                            <p><strong>{props.finalPrice}€</strong></p>
+                          </Flex>
+                          <Divider mt='2' mb='5' />
+                          <Box mt='2' borderWidth='1px' borderColor="teal" borderRadius="lg" p='2'>
+                            <CardElement options={CARD_ELEMENT_OPTIONS} onChange={(e) => {props.setError(e.error); props.setCardComplete(e.complete)}} />
+                          </Box>
+                          <Box as='p' p='2' className="p-discret">
+                            <Icon as={UnlockIcon}/>
+                            Paiement sécurisé - 
+                            Nous ne conservons pas vos informations bancaires
+                          </Box>
                         </ModalBody>
                         <ModalFooter>
                             <Button

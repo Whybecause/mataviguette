@@ -26,7 +26,7 @@ const DeleteBooking = (props) => {
         <ModalHeader >Êtes  vous sur de supprimer cette réservation?</ModalHeader>
             <ModalFooter>
               <Button
-                onClick={ () => props.deleteBooking(props.startAt)}
+                onClick={ () => props.deleteBooking(props.id)}
                 colorScheme="red"
                 mr="2"
                 >

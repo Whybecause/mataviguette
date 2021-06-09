@@ -14,4 +14,5 @@ module.exports = function(app) {
       app.get("/api/test/bookings/all", [authJwt.verifyToken, authJwt.isAdmin], controller.getAllBookings);
       app.get("/api/test/bookings/current", [authJwt.verifyToken, authJwt.isAdmin], controller.getCurrentBookings);
       app.delete("/api/test/booking/delete/:id", [authJwt.verifyToken], controller.deleteBookingWhenPaymentFails);
+      app.delete("/api/test/booking/delete/admin/:id", [authJwt.verifyToken, authJwt.isAdmin], controller.deleteBooking);
 }

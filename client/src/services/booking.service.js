@@ -29,12 +29,16 @@ class BookingService {
       throw new Error(error.message)
     }
   }
-  async deleteBooking(startAt) {
+  async deleteBookingWhenPaymentFails(startAt) {
       try {
         return await axios.delete(`api/test/booking/delete/${startAt}`, {headers: authHeader()} )
       } catch (error) {
         throw new Error(error.message)
       }
+    }
+
+    async deleteBooking(id) {
+      return await axios.delete(`/api/test/booking/delete/admin/${id}`, {headers: authHeader() });
     }
 }
 

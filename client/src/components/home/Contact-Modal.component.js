@@ -34,7 +34,8 @@ import {
     async function handleFormContact(data) {
       setLoading(true);
       try {
-        const res = await formContactService.sendFormContact(data);
+        const emailObject = 'Nouveau message depuis le formulaire de contact';
+        const res = await formContactService.sendFormContact(data, emailObject);
         setLoading(false);
         toast({
             position: 'top',

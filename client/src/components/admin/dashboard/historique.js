@@ -1,5 +1,6 @@
 import React from 'react';
-import dayjs from 'dayjs';
+import {dateLang} from '../../../helpers/dateLanguage';
+
 import {
     Table,
     Thead,
@@ -38,10 +39,10 @@ const Historique = ({allBookings}) => {
                         <Tbody>
                             {allBookings.map((r) => (
                                 <Tr key={r._id}>
-                                    <Th scope='row'>{r.user.username} ({r.user.email})</Th>
-                                    <Td>{dayjs(r.createDate).format('D MMM YYYY H:m')}</Td> 
-                                    <Td>{dayjs(r.startAt).format('D MMM YYYY')}</Td> 
-                                    <Td>{dayjs(r.endAt).format('D MMM YYYY')}</Td> 
+                                    <Th scope='row'>{r.user ? r.user.username : "Supprimé"} ({r.user ? r.user.email : "Supprimé"})</Th>
+                                    <Td>{dateLang(r.createDate,'D MMM YYYY H:m')}</Td> 
+                                    <Td>{dateLang(r.startAt,'D MMM YYYY')}</Td> 
+                                    <Td>{dateLang(r.endAt,'D MMM YYYY')}</Td> 
                                     <Td>{r.days}</Td> 
                                     <Td>{r.guests}</Td> 
                                     <Td>{r.totalPrice}€</Td> 

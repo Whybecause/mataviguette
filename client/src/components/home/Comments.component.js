@@ -15,9 +15,10 @@ import {
     SimpleGrid,
     Divider
   } from "@chakra-ui/react";
-import dayjs from 'dayjs';
-import { ChatIcon } from '@chakra-ui/icons';
-
+  
+  import { ChatIcon } from '@chakra-ui/icons';
+  
+  import {dateLang} from '../../helpers/dateLanguage';
 import { CloseButton } from '../styledComponents/Button-Wrapper';
 import commentService from '../../services/comment.service';  
 import  authIcon  from '../../assets/auth-icon.png';
@@ -53,10 +54,10 @@ import airbnbComments from '../../airbnb-comments.json';
                                         <Divider mb='5'/>
                                         <Stack direction='row'>
                                             <Avatar size='xs' src={authIcon} alt="cover" />
-                                            <Text>{comment.author.username ? comment.author.username : 'Supprimé'}</Text>
+                                            <Text>{comment.author ? comment.author.username : 'Supprimé'}</Text>
                                         </Stack>
                                         <Stack>
-                                            <p className="p-discret">{dayjs(comment.updatedAt).format('MM/YYYY ')}</p>
+                                            <p className="p-discret">{dateLang(comment.updatedAt, 'MM/YYYY')}</p>
                                             <Text>{comment.text}</Text>
                                         </Stack>
                                     </Box>

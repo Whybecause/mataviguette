@@ -5,10 +5,11 @@ import { EmailIcon } from '@chakra-ui/icons';
 import history from "../../../helpers/history";
 import { UserContext } from '../../../UserContext';
 import UpdatePassModal from './profile.updatePassModal';
+import UpdateEmailModal from './profile.updateEmailModal';
+import DeleteAccountModal from './profile.deleteAccountModal';
 
 const Profile = () => {
   const user = useContext(UserContext);
-
 
   if (!user.user) {
     history.push("/");
@@ -16,15 +17,17 @@ const Profile = () => {
   
   return (
         <Box className="small-container small-page-height" p="5">
-          <Center><h3>{user ? user.user : "Profile"}</h3></Center>
+          <Center><h2>{user ? user.user : "Profile"}</h2></Center>
           <Box mt='10'>
             <Stack>
               <Stack direction = {'row'} alignItems='center'>
                 <Icon as={EmailIcon}/>
                 <p>{user ? user.email : null}</p>
+                <UpdateEmailModal setUserEmail={user.setUserEmail}/>
               </Stack>
                 <Divider mt='5'/>
                 <UpdatePassModal />
+                <DeleteAccountModal email={user.email} setUser={user.setUser}/>
             </Stack>
           </Box>
         </Box>

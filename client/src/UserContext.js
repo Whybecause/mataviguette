@@ -30,6 +30,7 @@ export const UserProvider = ({ children }) => {
                 email,
                 isAdmin,
                 setUser,
+                setUserEmail,
                 setIsAdmin
             }}
         >

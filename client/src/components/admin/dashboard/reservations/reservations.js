@@ -1,5 +1,6 @@
 import React from 'react';
-import dayjs from 'dayjs';
+import {dateLang} from '../../../../helpers/dateLanguage';
+
 import {
     Table,
     Thead,
@@ -17,15 +18,15 @@ import bookingService from '../../../../services/booking.service';
 
 const Reservations = ({currentBookings, setCurrentBookings}) => {
 
-    const deleteBooking = (startAt) => {
-        const i = currentBookings.findIndex(c => c.startAt === startAt);
+    const deleteBooking = (id) => {
+        const i = currentBookings.findIndex(c => c._id === id);
         const data = [
             ...currentBookings.slice(0, i),
             ...currentBookings.slice(i + 1),
         ];
         setCurrentBookings(data);
     
-        bookingService.deleteBooking(startAt)
+        bookingService.deleteBooking(id)
         .then (res => {
            console.log(res.data.message);  
         })
@@ -59,10 +60,10 @@ const Reservations = ({currentBookings, setCurrentBookings}) => {
                         <Tbody>
                             {currentBookings.map((r) => (
                                 <Tr key={r._id}>
-                                    <Th>{r.user.username} ({r.user.email})</Th>
-                                    <Td>{dayjs(r.createDate).format('D MMM YYYY H:m')}</Td> 
-                                    <Td>{dayjs(r.startAt).format('D MMM YYYY')}</Td> 
-                                    <Td>{dayjs(r.endAt).format('D MMM YYYY')}</Td> 
+                                    <Th>{r.user ? r.user.username : "Supprimé"} ({r.user ? r.user.email : "Supprimé"})</Th>
+                                    <Td>{dateLang(r.createDate, 'D MMM YYYY H:m')}</Td> 
+                                    <Td>{dateLang(r.startAt, 'D MMM YYYY')}</Td> 
+                                    <Td>{dateLang(r.endAt, 'D MMM YYYY')}</Td> 
                                     <Td>{r.days}</Td> 
                                     <Td>{r.guests}</Td> 
                                     <Td>{r.totalPrice}€</Td> 
@@ -71,7 +72,7 @@ const Reservations = ({currentBookings, setCurrentBookings}) => {
                                             <ContactBooker id={r._id} />
                                             <DeleteBooking 
                                             deleteBooking = {deleteBooking}
-                                            startAt = {r.startAt}
+                                            id = {r._id}
                                             />
                                         </Box>
                                     </Td>
