@@ -78,7 +78,7 @@ import airbnbComments from '../../airbnb-comments.json';
                         </SimpleGrid>
                     </ModalBody>
                     <ModalFooter>
-                        <CloseButton/>
+                        <CloseButton onClick={onClose}/>
                     </ModalFooter>
             </ModalContent>
         </Modal>

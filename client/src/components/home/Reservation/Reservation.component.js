@@ -17,8 +17,12 @@ const Reservation = () => {
   const user = useContext(UserContext);
   const stripe = useStripe();
   const elements = useElements();
+  const [ cardError, setError ] = useState('');
+  const [ cardComplete, setCardComplete ] = useState('');
   const toast = useToast()
+
   const { unavailableDates } = useUnavailableDates("/api/test/rentals/booked");
+  
   const [ fetching, setFetching ] = useState(false);
   const [ startAt, setStartAt ] = useState(null);
   let [endAt, setEndAt] = useState(null);
@@ -36,6 +40,7 @@ const Reservation = () => {
     if (!stripe || !elements) {
       return;
     }
+
     setFetching(true);
     try {
       const response = await paymentService.getSecret(startAt, endAt, user.email, guests);
@@ -45,12 +50,15 @@ const Reservation = () => {
       const bookingStart = await booking.data.startAt;
 
       const paiement = await stripe.confirmCardPayment((clientSecret),
-        { payment_method: {
+        { 
+          receipt_email: user.email,
+          payment_method: {
             card: elements.getElement(CardElement),
             billing_details: {
               name: user.user,
               email: user.email
-            }}
+            }
+          }
         })
 
         if (paiement.error) {
@@ -68,6 +76,7 @@ const Reservation = () => {
         }
         
         if (paiement.paymentIntent.status === 'succeeded') {
+          console.log(paiement)
           setFetching(false);
           toast({
             position: 'top-right',
@@ -132,9 +141,11 @@ useEffect(() => {
             days={days}
             guests={guests}
             finalPrice={finalPrice}
-            disabled={!stripe}
+            disabled={!stripe || cardError || !cardComplete}
             loading={fetching}
             confirmBooking={confirmBooking}
+            setError={setError}
+            setCardComplete={setCardComplete}
           />
         </Center>
       </React.Fragment>

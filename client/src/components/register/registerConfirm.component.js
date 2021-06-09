@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { useParams } from 'react-router-dom';
 import { useForm } from "react-hook-form";
-import { useToast, Button, Spinner, Box, Center, Input, FormControl, FormLabel, FormErrorMessage} from '@chakra-ui/react';
+import { useToast, Button, Spinner, Box, Center, Input, FormControl, FormLabel, FormErrorMessage, useRadio} from '@chakra-ui/react';
+
+import history from "../../helpers/history";
 import authService from "../../services/auth.service";
 
 const RegisterConfirm = () => {
     const { token } = useParams();
-    const { register, handleSubmit, formState: { errors }, } = useForm()
+    const { register, handleSubmit, reset, formState: { errors }, } = useForm()
     const toast = useToast()
     const [ loading, setLoading ] = useState(false);
 
@@ -15,6 +17,7 @@ const RegisterConfirm = () => {
         try {
             const res = await authService.confirmAccount(token, data.email)
             setLoading(false);
+            history.push("/login")
             toast({
                 position: 'top',
                 title: res.data.message,
@@ -25,6 +28,7 @@ const RegisterConfirm = () => {
         }
         catch(error) {
             setLoading(false);
+            reset();
             toast({
               position: 'top',
               title: error.response.data.message,

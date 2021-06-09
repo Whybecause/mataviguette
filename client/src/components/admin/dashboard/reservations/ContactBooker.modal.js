@@ -13,7 +13,8 @@ import {
     Button,
     FormControl,
     FormLabel,
-    Textarea
+    Textarea,
+    Spinner
   } from "@chakra-ui/react";
 import { EmailIcon } from '@chakra-ui/icons';
 
@@ -93,7 +94,7 @@ const ContactBooker = (props) => {
                                 disabled={loading}
                                 >
                                 {loading && (
-                                    <span className="spinner-border spinner-border-sm"></span>
+                                    <Spinner size='xs' />
                                     )}
                                     <span>Envoyer</span>
                             </Button>

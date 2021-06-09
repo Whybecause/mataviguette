@@ -12,41 +12,7 @@ import salonext from "../../assets/salon-terrasse.jpg";
 const Gallery = () => {
   return (
     <section onClick={() => history.push('/photos')} className="pointer">
-      {/* <SimpleGrid columns={[2, 2, 2]} p="5">
-        <Box d="flex" mr="5px">
-          <Image
-            src={pic1}
-            className="img"
-            borderTopLeftRadius='xl'
-            borderBottomLeftRadius='xl'
-            alt="Accueil de la maison"
-            />
-        </Box>
-        <Box>
-          <SimpleGrid columns={2}>
-            <Stack direction="row" pb="5px">
-              <Image className="img" src={piscine} alt="La piscine" />
-              <Image
-                className="img"
-                src={repas}
-                alt="Coin repas"
-                borderTopRightRadius="xl"
-                />
-            </Stack>
-          </SimpleGrid>
-          <SimpleGrid columns={2}>
-            <Stack direction="row">
-              <Image className="img" src={sport} alt="Salle de sport" />
-              <Image className="img"
-                src={salonext}
-                alt="Salon de jardin"
-                borderBottomRightRadius="xl"
-                />
-            </Stack>
-          </SimpleGrid>
-        </Box>
-      </SimpleGrid> */}
-      <Box d='flex' alignItems="center" justifyContent="center" p={[1, 2, 3, 4]}>
+      <Box d='flex' alignItems="center" justifyContent="center" pb='5'>
           <Image boxSize={['146px', '206px', '366px', '506px']} mr='2' src={pic1} alt="La maison" className="img"  borderTopLeftRadius='xl' borderBottomLeftRadius='xl'/>
           <Box>
               <Stack direction="row">

@@ -2,6 +2,11 @@
 
 .logo {
     font-family: 'Dancing Script', cursive!important;
+    font-size: 2.3rem!important;
+}
+
+.main-font {
+    font-family: 'Dancing Script', cursive!important;
 }
 
 h1, h2, h3, h4 {

@@ -83,7 +83,7 @@ const ReservationCheckout = (props) => {
                               <FormControl>
                             <FormLabel>
                                 Paiement par carte
-                                <CardElement options={CARD_ELEMENT_OPTIONS} />
+                                <CardElement options={CARD_ELEMENT_OPTIONS} onChange={(e) => {props.setError(e.error); props.setCardComplete(e.complete)}} />
                             </FormLabel>
                               </FormControl>
                               

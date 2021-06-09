@@ -49,92 +49,93 @@ const Register = () => {
   }
 
   return (
-      <Box className="form-container small-page-height" mt="5" p="5">
+      <Box className="small-container small-page-height" mt="5" p="5">
+        <Box borderWidth="1px" borderRadius="xl" p='5' d='flex' alignItems="center" justifyContent="center">
+          <form onSubmit={handleSubmit(handleRegister)}>
 
-        <form onSubmit={handleSubmit(handleRegister)}>
+            <Center mb='5'>
+              <h2>Créer un compte</h2>
+            </Center>
 
-          <Center>
-            <h3>Créer un compte</h3>
-          </Center>
+            <FormControl id="username">
+              <FormLabel htmlFor="username"></FormLabel>
+              <Input
+                {...register("username", {
+                  required: true,
+                })}
+                type="text"
+                id="username"
+                name="username"
+                placeholder="Nom d'utilisateur"
+                required
+              />
+              <FormErrorMessage>
+                {errors.email && errors.email.message}
+              </FormErrorMessage>
+            </FormControl>
 
-          <FormControl id="username">
-            <FormLabel htmlFor="username"></FormLabel>
-            <Input
-              {...register("username", {
-                required: true,
-              })}
-              type="text"
-              id="username"
-              name="username"
-              placeholder="Nom d'utilisateur"
-              required
-            />
-            <FormErrorMessage>
-              {errors.email && errors.email.message}
-            </FormErrorMessage>
-          </FormControl>
+            <FormControl id="email">
+              <FormLabel htmlFor="email"></FormLabel>
+              <Input
+                {...register("email", {
+                  required: true,
+                  pattern: mailRegex,
+                })}
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Adresse email"
+                required
+              />
+              <FormErrorMessage>
+                {errors.email && errors.email.message}
+              </FormErrorMessage>
+            </FormControl>
 
-          <FormControl id="email">
-            <FormLabel htmlFor="email"></FormLabel>
-            <Input
-              {...register("email", {
-                required: true,
-                pattern: mailRegex,
-              })}
-              type="email"
-              id="email"
-              name="email"
-              placeholder="Adresse email"
-              required
-            />
-            <FormErrorMessage>
-              {errors.email && errors.email.message}
-            </FormErrorMessage>
-          </FormControl>
+            <FormControl id="password" mt={4}>
+              <FormLabel htmlFor="password"></FormLabel>
+              <Input
+                {...register("password", { required: true, minLength: 5 })}
+                type="password"
+                id="password"
+                name="password"
+                autoComplete="current-password"
+                required
+                minLength={5}
+                placeholder="Mot de passe"
+              />
+              <FormErrorMessage>
+                {errors.password && errors.password.message}
+              </FormErrorMessage>
+            </FormControl>
 
-          <FormControl id="password" mt={4}>
-            <FormLabel htmlFor="password"></FormLabel>
-            <Input
-              {...register("password", { required: true, minLength: 5 })}
-              type="password"
-              id="password"
-              name="password"
-              autoComplete="current-password"
-              required
-              minLength={5}
-              placeholder="Mot de passe"
-            />
-            <FormErrorMessage>
-              {errors.password && errors.password.message}
-            </FormErrorMessage>
-          </FormControl>
-
-          <FormControl id="password2" mt={4}>
-            <FormLabel htmlFor="password2"></FormLabel>
-            <Input
-              {...register("password2", { required: true, minLength: 5 })}
-              type="password"
-              id="password2"
-              name="password2"
-              autoComplete="current-password"
-              required
-              minLength={5}
-              placeholder="Confirmez votre mot de passe"
-            />
-            <FormErrorMessage>
-              {errors.password && errors.password.message}
-            </FormErrorMessage>
-          </FormControl>
-          <Button disabled={loading} colorScheme="orange" variant="outline" mt="5" type="submit" width="100%">
-            {loading && <Spinner size="xs" />}
-            Valider
+            <FormControl id="password2" mt={4}>
+              <FormLabel htmlFor="password2"></FormLabel>
+              <Input
+                {...register("password2", { required: true, minLength: 5 })}
+                type="password"
+                id="password2"
+                name="password2"
+                autoComplete="current-password"
+                required
+                minLength={5}
+                placeholder="Confirmez votre mot de passe"
+              />
+              <FormErrorMessage>
+                {errors.password && errors.password.message}
+              </FormErrorMessage>
+            </FormControl>
+            <Button disabled={loading} colorScheme="orange" variant="outline" mt="5" type="submit" width="100%">
+              {loading && <Spinner size="xs" />}
+              Valider
+            </Button>
+          </form>
+        </Box>
+        <Link to="login">
+          <Button variant="outline" mt='5'>
+              Déjà inscris ? Se connecter
           </Button>
-        </form>
-          <Link to="login">
-        <Button variant="outline" mt='5'>
-            Déjà inscris ? Se connecter
-        </Button>
-            </Link>
+        </Link>
       </Box>
   );
 };

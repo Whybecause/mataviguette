@@ -98,10 +98,11 @@ const Login = () => {
 }
 
   return (
-    <Box className="form-container small-page-height" mt='5' p='5'>
+    <Box className="small-container small-page-height" mt='5' p='5'>
+      <Box borderWidth="1px" borderRadius="xl" p='5' d='flex' alignItems="center" justifyContent="center">
         <form onSubmit={handleSubmit(handleLogin)}>
-                <Center>
-                  <h3>Se connecter</h3>
+                <Center mb='5'>
+                  <h2>Se connecter</h2>
                   </Center>
                 <FormControl id="email">
                   <FormLabel htmlFor="email"></FormLabel>
@@ -174,7 +175,10 @@ const Login = () => {
                   </Stack>
                 </Box>
             </form>
-          </Box>
+
+
+      </Box>
+    </Box>
   )
 }
 

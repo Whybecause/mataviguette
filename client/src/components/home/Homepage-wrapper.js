@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Center, Stack, AspectRatio, SimpleGrid } from "@chakra-ui/react";
+import { Box, Center, Stack, AspectRatio, SimpleGrid, Text } from "@chakra-ui/react";
 
 import Gallery from './Gallery.component';
 import Description from './Description.component';
@@ -19,14 +19,10 @@ const Homepage = () => {
       <Box bgGradient="linear(to-r,gray.300,yellow.400,pink.200)" borderBottomRadius="xl">
         <Box className="page-container">
 
-          <Center>
-            <Stack p='2'>
-            <h1>Maison - Charme et Campagne - Piscine- Salle de sport</h1>
-            <Center>
+          <Stack p='2' align="center">
+            <h1>Maison - Charme et Campagne - Piscine - Salle de sport</h1>
             <p className="color1">Bajamont, Nouvelle-Aquitaine, France</p>
-            </Center>
-            </Stack>
-          </Center>
+          </Stack>
 
           <Gallery/>
 
@@ -35,7 +31,7 @@ const Homepage = () => {
       
       <Box className="page-container">
 
-        <SimpleGrid columns={[1, 1, 2, 2]} mt='5' p='2' >
+        <SimpleGrid columns={[1, 1, 2, 2]} p='2' >
           <Title Comments = {<Comments/>}/>
           <Reservation />
         </SimpleGrid>
