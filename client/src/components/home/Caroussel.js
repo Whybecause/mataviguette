@@ -15,6 +15,7 @@ import frigo from '../../assets/frigo.jpg';
 import vaisselle from '../../assets/placard-vaisselle.jpg';
 import maisonDevant from '../../assets/maison-devant.jpg';
 import salon from '../../assets/salon.jpg';
+import coiffeuse from '../../assets/coiffeuse.jpg';
 import sejour from '../../assets/sejour.jpg';
 import salonCanape from '../../assets/salon-canape.jpg';
 import terrasseCouverte from '../../assets/terrasse-couverte.jpg';
@@ -114,7 +115,6 @@ const images = [
     thumbnail: maisonDevant,
   },
   {
-    
     originalAlt: 'Salon lumineux - Chaîne Hifi (radio-CD-USB)',
     description: 'Salon lumineux - Chaîne Hifi (radio-CD-USB)',
     original: salon,
@@ -163,12 +163,18 @@ const images = [
     thumbnail: chambreCheminee,
   },
   {
-    
-    originalAlt: 'Chambre blanche avec vue sur le parc',
-    description: 'Chambre blanche avec vue sur le parc',
-    original: chambreVue,
-    thumbnail: chambreVue,
+    originalAlt: 'Chambre blanche - Coiffeuse et vue sur le parc',
+    description: 'Chambre blanche - Coiffeuse et vue sur le parc',
+    original: coiffeuse,
+    thumbnail: coiffeuse,
   },
+  // {
+    
+  //   originalAlt: 'Chambre blanche avec vue sur le parc',
+  //   description: 'Chambre blanche avec vue sur le parc',
+  //   original: chambreVue,
+  //   thumbnail: chambreVue,
+  // },
   {
     
     originalAlt: "Chambre rose - Armoire de rangement - Accès à l'extérieur à l'arrière de la maison",
