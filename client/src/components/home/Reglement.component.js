@@ -50,9 +50,11 @@ const Reglement = () => {
                             <Divider />
                         </Stack>
                         <Stack>
-                            <h4>Annulations</h4>
-                            <p>Annulation gratuite jusqu'à <strong>48 heures</strong>.</p>
-                            <p>Au-delà, annulez jusqu'à 24h avant l'arrivée prévue pour obtenir un remboursement intégral.</p>
+                            <h4>Politique d'annulation</h4>
+                            <p>Les réservations annulées au moins 60 jours avant le début du séjour pourront être remboursées intégralement.</p>
+                            <p>Les réservations annulées au moins 30 jours avant le début du séjour pourront être remboursées à hauteur de 50%.</p>
+                            <p><strong>Délais des annulations</strong></p>
+                            <p>Les annulations doivent être effectuées avant 23 h 59 du jour défini, en fonction du fuseau horaire de la</p>
                         </Stack>
                     </React.Fragment>
                 )}

@@ -16,32 +16,32 @@ const PickDateAndGuests = (props) => {
     <React.Fragment>
       <Box d="flex" justifyContent="center" alignItems="center" p='5'>
         <SimpleGrid columns={[1, 1, 2]} spacing={10}>
-        <Box>
-        <DatePicker
-          dateFormat="dd / MM / yy"
-          selected={props.startAt}
-          onChange={(date) => {
-            props.setStartAt(date);
-          }}
-          excludeDates={props.unavailableDates}
-          minDate={new Date()}
-          placeholderText="Date de début"
-          className="datepicker-custom-input"
-          />
-          </Box>
-        <Box>
-        <DatePicker
-          dateFormat="dd / MM / yy"
-          selected={props.endAt}
-          onChange={(date) => props.setEndAt(date)}
-          excludeDates={props.unavailableDates}
-          minDate={props.startAt ? addDays(props.startAt, 1) : new Date()}
-          placeholderText="Date de fin"
-          className="datepicker-custom-input"
-          />
-        </Box>
+            <Box>
+                <DatePicker
+                  dateFormat="dd / MM / yy"
+                  selected={props.startAt}
+                  onChange={(date) => {
+                    props.setStartAt(date);
+                  }}
+                  excludeDates={props.unavailableDates}
+                  minDate={new Date()}
+                  placeholderText="Date de début"
+                  className="datepicker-custom-input"
+                  />
+            </Box>
+            <Box>
+                <DatePicker
+                  dateFormat="dd / MM / yy"
+                  selected={props.endAt}
+                  onChange={(date) => props.setEndAt(date)}
+                  excludeDates={props.unavailableDates}
+                  minDate={props.startAt ? addDays(props.startAt, 1) : new Date()}
+                  placeholderText="Date de fin"
+                  className="datepicker-custom-input"
+                  />
+            </Box>
           </SimpleGrid>
-      </Box>
+        </Box>
       <Box d="flex" alignItems="center" justifyContent="center" p='2'>
         <Box as='span' mr='2'>Voyageur(s)</Box>
         <NumberInput
